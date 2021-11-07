@@ -1,0 +1,74 @@
+
+.body, .main, .menu {
+    display: flex;
+    justify-content:left;
+    align-items: center;
+}
+.main {
+    margin-left: -20px;
+    position: relative;
+    background-color: rgba(39, 115, 113, 0.45);
+    padding: 0;
+    transition: 0.5s;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 8px 15px rgba(0,0,0,.2);
+}
+.menu {
+    margin: 0;
+    padding: 0;
+    width: 0;
+    overflow: hidden;
+    transition: 0.5s;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.main input:checked ~ .menu {
+    width: 300px;
+}
+
+.menu a {
+    padding: 5px;
+    text-decoration: none;
+    color: #666;
+    font-weight: 600;
+    transition: 0.5s;
+    margin: 0 10px;
+}
+.menu a:hover {
+    color: #161919;
+}
+.main input {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    opacity: 0;
+}
+.main span {
+    position: absolute;
+    left: 25px;
+    width: 20px;
+    height: 4px;
+    border-radius: 50px;
+    background-color: #666;
+    pointer-events: none;
+    transition: 0.5s;
+}
+.main input:checked ~ span {
+    background-color: #FF4D50;
+}
+.main span:nth-child(2) {
+    transform: translateY(-8px);
+}
+.main input:checked ~ span:nth-child(2) {
+    transform: translateY(0) rotate(-45deg);
+}
+.main span:nth-child(3) {
+    transform: translateY(8px);
+}
+.main input:checked ~ span:nth-child(3) {
+    transform: translateY(0) rotate(45deg);
+}
+.main input:checked ~ span:nth-child(4) {
+    display: none;
+}

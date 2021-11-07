@@ -1,24 +1,17 @@
 import React from 'react';
 import './App.css';
-import SuperCheckbox from "./components/checkbox/SuperCheckbox";
-import SuperButton from "./components/button/SuperButton";
-import SuperInput from "./components/input/SuperInput";
-import SuperEditableSpan from "./components/editableSpan/SuperEditableSpan";
-import SuperRadio from "./components/radioButton/SuperRadio";
-import SuperSelect from "./components/select/SuperSelect";
-import Preloader from "./components/preloader/Preloader";
+import {HashRouter} from "react-router-dom";
+import Header from './components/header/header';
+import CardDeckRoutes from './components/routes/cardDeckRoutes';
 
 
 function App() {
   return (
     <div>
-        <SuperCheckbox/>
-        <SuperButton>Hello</SuperButton>
-        <SuperInput />
-        <SuperEditableSpan />
-        <SuperRadio options={['']} onChangeOption={() => {}} />
-        <SuperSelect options={['']} onChangeOption={() => {}} />
-        <Preloader />
+        <HashRouter>
+            <Header/>
+            <CardDeckRoutes/>
+        </HashRouter>
     </div>
   );
 }
