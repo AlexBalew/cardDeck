@@ -3,7 +3,7 @@
     background-color: rgb(144,142,105);
     border-radius: 15px;
     color: black;
-    padding: 3px 6px;
+    padding: 10px;
     font-size: 12px;
     cursor: pointer;
     box-shadow:
@@ -38,7 +38,6 @@
     display: block;
     content: '';
     position: absolute;
-
     left: -100vh;
     top: 0;
     height: 100vh;

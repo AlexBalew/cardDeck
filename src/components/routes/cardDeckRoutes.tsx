@@ -21,24 +21,15 @@ export const PATH = {
 function CardDeckRoutes() {
     return (
         <div>
-            {/*Switch выбирает первый подходящий роут*/}
             <Routes>
-
-                {/*в начале мы попадаем на страницу '/' и переходим сразу на страницу PRE_JUNIOR*/}
-                {/*exact нужен чтоб указать полное совпадение (что после '/' ничего не будет)*/}
                 <Route path={'/'} element={<Navigate to={PATH.LOGIN}/>}/>
-
                 <Route path={PATH.LOGIN} element={<Login/>}/>
                 <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
                 <Route path={PATH.RESTORE_PASSWORD} element={<PasswordRestore/>}/>
                 <Route path={PATH.NEW_PASSWORD} element={<NewPassword/>}/>
                 <Route path={PATH.TEST} element={<TestComps/>}/>
-                // add routes
-
-                {/*у этого роута нет пути, он отрисуется если пользователь захочет попасть на несуществующую страницу*/}
-                <Route element={<Error404/>}/>
-
+                <Route path={'*'} element={<Error404/>}/>
             </Routes>
 
         </div>

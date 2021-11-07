@@ -25,7 +25,7 @@
     white-space: nowrap;
 }
 .main input:checked ~ .menu {
-    width: 660px;
+    width: 600px;
 }
 
 .menu a {
