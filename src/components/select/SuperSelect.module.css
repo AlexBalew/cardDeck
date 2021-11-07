@@ -1,0 +1,30 @@
+.select {
+    width: 100px;
+    height: 80%;
+    padding: 3px;
+    cursor: pointer;
+    margin-left: 10px;
+    background: rgba(39, 115, 113, 0.45);
+    color: #454857;
+    box-shadow: 0 1px 1px #0000002e;
+    text-shadow: 0 1px 0 #79485f7a;
+    transition: all 100ms linear ;
+    outline: none;
+}
+
+.select:hover {
+
+}
+
+.option {
+    background-color: #454857;
+    color: gray;
+    height: 40px;
+    cursor: pointer;
+}
+
+.option:hover {
+    width: 100px;
+    color: darkred;
+    background-color: darkred;
+}
