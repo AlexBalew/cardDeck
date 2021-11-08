@@ -3,7 +3,7 @@
     display: flex;
     justify-content:left;
     align-items: center;
-
+    background-color: transparent;
 }
 .main {
     margin-left: -20px;
