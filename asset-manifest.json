@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/cardDeck/static/css/main.5ac0b4cf.chunk.css",
-    "main.js": "/cardDeck/static/js/main.28c94ebb.chunk.js",
-    "main.js.map": "/cardDeck/static/js/main.28c94ebb.chunk.js.map",
+    "main.css": "/cardDeck/static/css/main.7c17a1b4.chunk.css",
+    "main.js": "/cardDeck/static/js/main.9824a6dc.chunk.js",
+    "main.js.map": "/cardDeck/static/js/main.9824a6dc.chunk.js.map",
     "runtime-main.js": "/cardDeck/static/js/runtime-main.17924ab2.js",
     "runtime-main.js.map": "/cardDeck/static/js/runtime-main.17924ab2.js.map",
     "static/js/2.88648d2f.chunk.js": "/cardDeck/static/js/2.88648d2f.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.56098cfd.chunk.js": "/cardDeck/static/js/3.56098cfd.chunk.js",
     "static/js/3.56098cfd.chunk.js.map": "/cardDeck/static/js/3.56098cfd.chunk.js.map",
     "index.html": "/cardDeck/index.html",
-    "static/css/main.5ac0b4cf.chunk.css.map": "/cardDeck/static/css/main.5ac0b4cf.chunk.css.map",
+    "static/css/main.7c17a1b4.chunk.css.map": "/cardDeck/static/css/main.7c17a1b4.chunk.css.map",
     "static/js/2.88648d2f.chunk.js.LICENSE.txt": "/cardDeck/static/js/2.88648d2f.chunk.js.LICENSE.txt",
     "static/media/Preloader Gif.69136ec1.gif": "/cardDeck/static/media/Preloader Gif.69136ec1.gif"
   },
   "entrypoints": [
     "static/js/runtime-main.17924ab2.js",
     "static/js/2.88648d2f.chunk.js",
-    "static/css/main.5ac0b4cf.chunk.css",
-    "static/js/main.28c94ebb.chunk.js"
+    "static/css/main.7c17a1b4.chunk.css",
+    "static/js/main.9824a6dc.chunk.js"
   ]
 }
