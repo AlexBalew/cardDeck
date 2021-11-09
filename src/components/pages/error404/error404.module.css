@@ -4,13 +4,12 @@
 
 * {
     margin: 0;
-    padding: 0;
-    -webkit-text-size-adjust: none;
+    padding: 0;-webkit-text-size-adjust: none;
 }
 
 html, body {
-    height: 100%;
-    overflow: auto;
+    min-height: 100vh;
+    overflow: hidden;
 }
 
 body {

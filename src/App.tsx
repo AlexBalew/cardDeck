@@ -1,20 +1,25 @@
 import React from 'react';
 import './App.css';
-import {HashRouter} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import Header from './components/header/header';
 import CardDeckRoutes from './components/routes/cardDeckRoutes';
-import './App.css'
-
 
 function App() {
-  return (
-    <div className='appStyle'>
-        <HashRouter>
-            <Header/>
-            <CardDeckRoutes/>
-        </HashRouter>
-    </div>
-  );
+const location = useLocation()
+
+    console.log(location.pathname)
+        return (
+            <div className='appStyle'>
+                {
+                   !(location.pathname === "/404") && <Header/>
+                }
+                <CardDeckRoutes/>
+            </div>
+
+        )
+
+
+
 }
 
 export default App;

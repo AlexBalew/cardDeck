@@ -8,9 +8,9 @@ function Header() {
             <div className={s.main}>
                 <input type="checkbox"/>
                 <div>
-                    <span className="first"></span>
-                    <span className="second"></span>
-                    <span className="third"></span>
+                    <span></span>
+                    <span ></span>
+                    <span ></span>
                 </div>
                 <nav className={s.menu}>
                     <NavLink to='/login'>login</NavLink>

@@ -6,7 +6,7 @@ type Error404PropsType = {}
 export const Error404 = (props: Error404PropsType) => {
     return (
         <div style={{background: 'black'}}>
-            <a href="" target="_self">
+            <a href="" target="_parent">
                 <header className={s.topHeader}>
                 </header>
 
@@ -47,7 +47,7 @@ export const Error404 = (props: Error404PropsType) => {
                                 take a look at our.</p>
                         </div>
                         <div className={s.errorNav}>
-                            <a href="" target="_self" className={s.eNavLink}></a>
+                            <a href="" target="_parent" className={s.eNavLink}></a>
                         </div>
                     </div>
 
