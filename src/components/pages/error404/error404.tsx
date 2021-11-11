@@ -9,19 +9,14 @@ export const Error404 = (props: Error404PropsType) => {
             <a href="" target="_parent">
                 <header className={s.topHeader}>
                 </header>
-
                 {/*dust particel*/}
-
                 <div>
                     <div className={s.starSec}></div>
                     <div className={s.starThird}></div>
                     <div className={s.starFourth}></div>
                     <div className={s.starFifth}></div>
                 </div>
-
                 {/* Dust particle end*/}
-
-
                 <div className={s.lampWrap}>
                     <div className={s.lamp}>
                         <div className={s.cable}></div>
@@ -32,13 +27,9 @@ export const Error404 = (props: Error404PropsType) => {
                         <div className={s.light}></div>
                     </div>
                 </div>
-
                 {/*END Lamp*/}
-
                 <section className={s.error}>
-
                     {/*Content*/}
-
                     <div className={s.errorContent}>
                         <div className={s.errorMessage}>
                             <h1 className={s.messageTitle}>Page Not Found</h1>
@@ -50,11 +41,8 @@ export const Error404 = (props: Error404PropsType) => {
                             <a href="" target="_parent" className={s.eNavLink}></a>
                         </div>
                     </div>
-
                     {/*END Content*/}
-
                 </section>
-
             </a>
         </div>
     )

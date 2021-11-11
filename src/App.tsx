@@ -7,7 +7,6 @@ import CardDeckRoutes from './components/routes/cardDeckRoutes';
 function App() {
 const location = useLocation()
 
-    console.log(location.pathname)
         return (
             <div className='appStyle'>
                 {
@@ -15,11 +14,7 @@ const location = useLocation()
                 }
                 <CardDeckRoutes/>
             </div>
-
         )
-
-
-
 }
 
 export default App;

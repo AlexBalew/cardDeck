@@ -1,13 +1,12 @@
 import React from 'react'
 import {Navigate, Route, Routes} from 'react-router-dom'
-import { Error404 } from '../pages/error404/error404'
+import {Error404} from '../pages/error404/error404'
 import {Login} from '../pages/login/login'
-import { Profile } from '../pages/profile/profile'
-import { Registration } from '../pages/registration/registration'
+import {Profile} from '../pages/profile/profile'
+import {Registration} from '../pages/registration/registration'
 import {PasswordRestore} from "../pages/password/passwordRestore";
 import {NewPassword} from "../pages/password/newPassword";
 import {TestComps} from "../pages/test/testCompsPage";
-
 
 export const PATH = {
     LOGIN: '/login',
@@ -30,11 +29,8 @@ function CardDeckRoutes() {
                 <Route path={PATH.NEW_PASSWORD} element={<NewPassword/>}/>
                 <Route path={PATH.TEST} element={<TestComps/>}/>
                 <Route path={"/404"} element={<Error404/>}/>
-                <Route path={'*'} element={  <Navigate to={"/404"}/>} />
-
-
+                <Route path={'*'} element={<Navigate to={"/404"}/>}/>
             </Routes>
-
         </div>
     )
 }
