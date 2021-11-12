@@ -184,7 +184,7 @@ button {
 
 .errorMessage {
     text-align: center;
-    color: black;
+    color: rgba(8,16,23,0.96);
 }
 
 .messageTitle {
