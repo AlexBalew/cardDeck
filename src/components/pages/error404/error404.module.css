@@ -374,7 +374,7 @@ button {
     max-height: 100vh;
 }
 
-@media (max-width: 1400px) {
+/*@media (max-width: 1400px) {
     .lamp {
         zoom: .5;
     }
@@ -386,9 +386,9 @@ button {
     .messageTitle {
         font-size: 3.5rem;
     }
-}
+}*/
 
-@media (max-width: 900px) {
+/*@media (max-width: 900px) {
 
     .messageTitle {
         font-size: 34px;
@@ -398,15 +398,15 @@ button {
     .errorContent {
         top: 55%;
     }
-}
+}*/
 
-@media (max-width: 950px) {
+/*@media (max-width: 950px) {
     .lampWrap {
         max-height: 100vh;
         overflow: hidden;
         max-width: 100vw;
     }
-}
+}*/
 
 @media (max-width: 750px) {
     body, html {
