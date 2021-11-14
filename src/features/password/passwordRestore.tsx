@@ -1,16 +1,16 @@
 import React, {ChangeEvent, useState} from "react";
 import s from './passwordRestore.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import {sendCurrentEmailTC} from "../../../reducers/restorePassReducer";
-import {AppStateType} from "../../../store/store";
+import { AppStateType } from "../../bll/store";
 import { SuccessfulRequestMessage } from "./successfulRequestMessage";
+import { sendCurrentEmailTC } from "./password-reducer";
 
 type PasswordRestorePropsType = {}
 
 export const PasswordRestore = (props: PasswordRestorePropsType) => {
 
     let dispatch = useDispatch()
-    let requestStatus = useSelector<AppStateType, boolean>(state => state.restorePass.successfulRequest)
+    let requestStatus = useSelector<AppStateType, boolean>(state => state.password.successfulRequest)
 
     const [value, setValue] = useState<string>('')
 

@@ -1,13 +1,13 @@
 import {Action, applyMiddleware, combineReducers, createStore} from "redux";
 import thunk, {ThunkAction} from "redux-thunk";
-import {passwordReducer} from "../features/password/password-reducer";
+import {restorePassReducer} from "../features/password/password-reducer";
 import {loginReducer} from "../features/login/login-reducer";
 import {profileReducer} from "../features/profile/profile-reducer";
 import {registrationReducer} from "../features/registration/registration-reducer";
 
 
 const rootReducer = combineReducers({
-    password: passwordReducer,
+    password: restorePassReducer,
     login: loginReducer,
     profile: profileReducer,
     registration: registrationReducer,
