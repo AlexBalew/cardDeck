@@ -41,7 +41,7 @@ export const PasswordRestore = (props: PasswordRestorePropsType) => {
                            onChange={onSetCurrentEmail}
                            style={{border: '1px solid black'}}
                     />
-                    {error && <div>{error}</div>}
+                    {error && <div style={{color: 'red', marginTop: '5px'}}>{error}</div>}
                 </div>
                 <div>
                     <button name='sendCurrentEmail'
