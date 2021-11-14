@@ -119,14 +119,14 @@ fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, 
 }
 
 
-button {
+/*button {
     border: none;
     padding: 0;
     font-size: 0;
     line-height: 0;
     background: none;
     cursor: pointer;
-}
+}*/
 
 :focus {
     outline: 0;
