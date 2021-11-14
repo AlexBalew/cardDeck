@@ -6,7 +6,7 @@ export const SuccessfulRequestMessage = () => {
         <div className={s.mainContainer}>
             <div className={s.formContainer}>
 
-                <img src='https://icon-library.com/images/e-mail-icon-png/e-mail-icon-png-28.jpg' style={{width: '200px'}}/>
+                <img src='https://icon-library.com/images/e-mail-icon-png/e-mail-icon-png-28.jpg' style={{width: '200px'}} alt='letter'/>
                 <div>
                     Check E-mail
                 </div>

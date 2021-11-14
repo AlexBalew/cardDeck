@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { AppStateType } from "../../bll/store";
 import { SuccessfulRequestMessage } from "./successfulRequestMessage";
 import { sendCurrentEmailTC } from "./password-reducer";
+import {Nullable} from "../../types";
 
 type PasswordRestorePropsType = {}
 
@@ -11,6 +12,7 @@ export const PasswordRestore = (props: PasswordRestorePropsType) => {
 
     let dispatch = useDispatch()
     let requestStatus = useSelector<AppStateType, boolean>(state => state.password.successfulRequest)
+    let error = useSelector<AppStateType, Nullable<string>>(state => state.password.error)
 
     const [value, setValue] = useState<string>('')
 
@@ -39,6 +41,7 @@ export const PasswordRestore = (props: PasswordRestorePropsType) => {
                            onChange={onSetCurrentEmail}
                            style={{border: '1px solid black'}}
                     />
+                    {error && <div>{error}</div>}
                 </div>
                 <div>
                     <button name='sendCurrentEmail'
