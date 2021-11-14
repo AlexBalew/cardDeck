@@ -1,0 +1,28 @@
+.radioInput {
+    width: auto;
+    height: 90%;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 4px 8px;
+    margin: 5px;
+    background: #545457;
+    color: rgba(252, 251, 251, 0.74);
+    font-size: 14px;
+    font-family: system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
+}
+
+.radioInput:checked {
+    background: rgb(196, 217, 229);
+    color: #454857;
+    box-shadow: 0 1px 1px #0000002e;
+    text-shadow: 0 1px 0 #bf7b7b;
+}
+
+.radioInput:before {
+    content: attr(value);
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
