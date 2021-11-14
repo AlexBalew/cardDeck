@@ -1,13 +1,16 @@
 import React, {ChangeEvent, useState} from "react";
 import s from './passwordRestore.module.css'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {sendCurrentEmailTC} from "../../../reducers/restorePassReducer";
+import {AppStateType} from "../../../store/store";
+import { SuccessfulRequestMessage } from "./successfulRequestMessage";
 
 type PasswordRestorePropsType = {}
 
 export const PasswordRestore = (props: PasswordRestorePropsType) => {
 
     let dispatch = useDispatch()
+    let requestStatus = useSelector<AppStateType, boolean>(state => state.restorePass.successfulRequest)
 
     const [value, setValue] = useState<string>('')
 
@@ -19,6 +22,9 @@ export const PasswordRestore = (props: PasswordRestorePropsType) => {
         dispatch(sendCurrentEmailTC(value))
     }
 
+    if(requestStatus) {
+        return <SuccessfulRequestMessage/>
+    }
 
     return (
         <div className={s.mainContainer}>

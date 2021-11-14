@@ -3,6 +3,8 @@ import thunk from "redux-thunk";
 import {firstReducer} from "../reducers/firstReducer";
 import {restorePassReducer} from "../reducers/restorePassReducer";
 
+export type AppStateType = ReturnType<typeof appState>
+
 const appState = combineReducers({
     first: firstReducer,
     restorePass: restorePassReducer
