@@ -24,7 +24,7 @@ function CardDeckRoutes() {
     return (
         <div>
             <Routes>
-                <Route path={'/'} element={<Navigate to={PATH.LOGIN}/>}/>
+                <Route path={'/cardDeck'} element={<Navigate to={PATH.LOGIN}/>}/>
                 <Route path={PATH.LOGIN} element={<Login/>}/>
                 <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
