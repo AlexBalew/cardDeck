@@ -1,13 +1,13 @@
 import React from 'react'
 import {Navigate, Route} from 'react-router-dom'
 import {Error404} from '../common/components/error404/error404'
-import {Login} from '../features/login/login'
 import {Profile} from '../features/profile/profile'
 import {Registration} from '../features/registration/registration'
 import {PasswordRestore} from "../features/password/passwordRestore";
 import {NewPassword} from "../features/password/newPassword";
 import {TestComps} from "../tresh/test/testCompsPage";
 import {Routes} from "react-router-dom";
+import {Login} from "../features/login/login";
 export const PATH = {
     LOGIN: '/login',
     REGISTRATION: '/registration',
