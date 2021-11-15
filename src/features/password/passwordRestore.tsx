@@ -6,12 +6,11 @@ import { SuccessfulRequestMessage } from "./successfulRequestMessage";
 import { sendCurrentEmailTC } from "./password-reducer";
 import {Nullable} from "../../types";
 
-type PasswordRestorePropsType = {}
 
-export const PasswordRestore = (props: PasswordRestorePropsType) => {
+export const PasswordRestore = () => {
 
     let dispatch = useDispatch()
-    let requestStatus = useSelector<AppStateType, boolean>(state => state.password.successfulRequest)
+    let requestStatus = useSelector<AppStateType, boolean>(state => state.password.isSuccessfulRequest)
     let error = useSelector<AppStateType, Nullable<string>>(state => state.password.error)
 
     const [value, setValue] = useState<string>('')

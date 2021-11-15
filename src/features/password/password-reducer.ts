@@ -2,14 +2,13 @@ import {Dispatch} from "redux";
 import {restoreAPI} from "../../api/password-api";
 import {Nullable} from "../../types";
 
-
 type stateType = {
-    successfulRequest: boolean
+    isSuccessfulRequest: boolean
     error: Nullable<string>
 }
 
 let initState: stateType = {
-    successfulRequest: false,
+    isSuccessfulRequest: false,
     error: null
 }
 
@@ -17,7 +16,7 @@ let initState: stateType = {
 export const restorePassReducer = (state = initState, action: AllACType): stateType => {
     switch (action.type) {
         case 'restore/SET_SUCCESSFUL_REQUEST' : {
-            return {...state, successfulRequest: action.successfulRequest}
+            return {...state, isSuccessfulRequest: action.isSuccessfulRequest}
         }
         case 'restore/SET_ERROR' : {
             return {...state, error: action.error}
@@ -29,12 +28,12 @@ export const restorePassReducer = (state = initState, action: AllACType): stateT
 
 type AllACType = restorePassACType | setErrorACType
 
-type restorePassACType = ReturnType<typeof restorePassAC>
+type restorePassACType = ReturnType<typeof setRequestResultAC>
 
-export const restorePassAC = (successfulRequest: boolean) => {
+export const setRequestResultAC = (isSuccessfulRequest: boolean) => {
     return {
         type: 'restore/SET_SUCCESSFUL_REQUEST',
-        successfulRequest
+        isSuccessfulRequest
     } as const
 }
 
@@ -47,10 +46,26 @@ export const setErrorAC = (error: string) => {
     } as const
 }
 
+
+
 export const sendCurrentEmailTC = (email: string) => async (dispatch: Dispatch<AllACType>) => {
     try {
         await restoreAPI.forgot(email)
-        dispatch(restorePassAC(true))
+        dispatch(setRequestResultAC(true))
+    } catch (e: any) {
+        const error = e.response
+            ? e.response.data.error
+            : (e.message + ', more details in the console');
+        console.log('Error: ', {...e})
+        dispatch(setErrorAC(error))
+    }
+
+}
+
+export const setNewPasswordTC = (newPassword: string, token: string) => async (dispatch: Dispatch<AllACType>) => {
+    try {
+        await restoreAPI.newPassword(newPassword, token)
+        dispatch(setRequestResultAC(true))
     } catch (e: any) {
         const error = e.response
             ? e.response.data.error
