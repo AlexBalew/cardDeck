@@ -10,57 +10,90 @@
     height: 500px;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 7px;
-    margin: 50px auto 0;
-    padding: 30px;
+    margin: 30px auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
 }
+
 .content {
+    width: 80%;
+    height: 80%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    align-items: flex-start;
 }
+
 .formContent {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
-    padding: 20px;
+    margin: 20px 0;
 }
 
-.formContent label{
+.formContent label {
     align-self: flex-start;
     opacity: 0.5;
-
+    margin: 5px 0;
 }
 
 .fromBlockTitle {
-}
-.formSignUp {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    color: #21268F;
+    margin: 0 auto;
 }
 
-
-.formEmailInput {
-}
-.formPasswordInput {
-}
-.formLink {
-    font-weight: 600;
-    line-height: 24px;
-
+.formInputBox {
 }
 
+.formInput {
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid rgba(36, 37, 74, 0.2);
+}
+
+.inputPasswordView {
+    width: 15px;
+    transition: all 0.3s ease-in-out;
+}
 
 .formButtonBlock {
+
 }
+
 .btn {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #b83333;
+    border: none;
 }
+
+
+.textBlock {
+    display: flex;
+    flex-direction: column;
+}
+
 .formBlockText {
+    line-height: 20px;
+    opacity: 0.8;
+    font-size: 12px;
 }
+
+.formLink {
+    font-weight: 600;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.formLink:hover {
+    color: #bf7b7b;
+}
+
+
+
