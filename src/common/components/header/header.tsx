@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import s from './header.module.css'
 import {useDispatch} from "react-redux";
 import {logOutTC} from "../../../features/login/login-reducer";
+import SuperButton from "../../elements/button/SuperButton";
 
 function Header() {
 
@@ -30,7 +31,8 @@ function Header() {
                     <Link to='/test'>test elements</Link>
                 </nav>
             </div>
-            <div style={{position: "absolute", marginLeft: '90%'}} onClick={onLogOut}><button>Log out</button></div>
+            <div style={{position: "absolute", marginLeft: '90%'}} ><SuperButton onClick={onLogOut}>Log out</SuperButton></div>
+
         </div>
     )
 }
