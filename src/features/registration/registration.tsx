@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {FormEvent, useState} from "react";
 import styles from "./registration.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
@@ -15,7 +15,7 @@ export const Registration = () => {
 
     const dispatch = useDispatch()
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
 
         if (confirm !== password) {
@@ -24,7 +24,7 @@ export const Registration = () => {
         dispatch(registryTC(email, password))
     }
 
-    const onCancelHandle = (e: any) => {
+    const onCancelHandle = (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
 
         dispatch(setError(''))
