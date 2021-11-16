@@ -1,14 +1,14 @@
-import { instance } from "./api";
+import { instance_local } from "./api";
 
 export const restoreAPI = {
     forgot(eMail: string) {
-        return instance.post<{ info: string, error: string }>('/auth/forgot', {
+        return instance_local.post<{ info: string, error: string }>('/auth/forgot', {
             email: eMail,
             from: `test-front-admin <${eMail}>`,
             message: `<div style="background-color: lime; padding: 15px">password recovery link: <a href='http://localhost:3000/new-password/$token$'>link</a></div>`
         }, {})
     },
     newPassword(newPassword: string, token: string) {
-        return instance.post<{ info: string, error: string }>('/auth/set-new-password', {password: newPassword, resetPasswordToken: token}, {})
+        return instance_local.post<{ info: string, error: string }>('/auth/set-new-password', {password: newPassword, resetPasswordToken: token}, {})
     }
 }
