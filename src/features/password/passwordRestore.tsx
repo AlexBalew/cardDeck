@@ -6,6 +6,8 @@ import {SuccessfulRequestMessage} from "./successfulRequestMessage";
 import {sendCurrentEmailTC} from "./password-reducer";
 import {Nullable} from "../../types";
 import {RequestStatusType} from "../../app/app-reducer";
+import SuperButton from "../../common/elements/button/SuperButton";
+import SuperInput from "../../common/elements/input/SuperInput";
 
 
 export const PasswordRestore = () => {
@@ -36,7 +38,7 @@ export const PasswordRestore = () => {
                     Failed to remember your password?
                 </div>
                 <div>
-                    <input type='email'
+                    <SuperInput type='email'
                            name='currentEmail'
                            placeholder='your e-mail'
                            onChange={onSetCurrentEmail}
@@ -45,14 +47,17 @@ export const PasswordRestore = () => {
                     {error && <div style={{color: 'red', marginTop: '5px'}}>{error}</div>}
                 </div>
                 <div>
-                    <button name='sendCurrentEmail'
+                    <SuperButton name='sendCurrentEmail'
                             onClick={onSendCurrentEmail}
                             disabled={appStatus === 'loading'}
                     >Send
-                    </button>
+                    </SuperButton>
                 </div>
                 <div>
-                    <a href={'/login'}>Remembered password? Try to log in</a>
+                    Remembered password? Try to <a href={'/login'}>log in<svg viewBox="0 0 70 36">
+                    <path d="M6.9739 30.8153H63.0244C65.5269 30.8152 75.5358 -3.68471 35.4998 2.81531C-16.1598
+                    11.2025 0.894099 33.9766 26.9922 34.3153C104.062 35.3153 54.5169 -6.68469 23.489 9.31527" />
+                </svg></a>
                 </div>
             </div>
         </div>

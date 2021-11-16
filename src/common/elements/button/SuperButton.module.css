@@ -1,7 +1,7 @@
 
 .default {
     font-size: 14px;
-    padding: 13px 18px;
+    padding: 5px 8px;
     border-radius: 5px;
     cursor: pointer;
     background-color: #cbe0e7;
@@ -24,7 +24,6 @@
 
 .button {
     position: relative;
-    margin: 10px;
     overflow: hidden;
     cursor: pointer;
 }
