@@ -1,5 +1,5 @@
 import s from "./Preloader.module.css";
-import Preloader3 from './Preloader Gif.gif';
+import preloader from '../../../assets/preloader/preloader.gif'
 import React from "react";
 
 
@@ -7,7 +7,7 @@ const Preloader = () => {
 
     return (
         <>
-            <img className={s.preloader} src={Preloader3} alt={'preloader'}/>
+            <img className={s.preloader} src={preloader} alt={'preloader'}/>
         </>
 
     )
