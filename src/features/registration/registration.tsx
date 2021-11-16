@@ -1,31 +1,33 @@
-import React, {useState} from "react";
+import React, {FormEvent, useState} from "react";
 import styles from "./registration.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
 import {Navigate} from "react-router-dom";
-import {registryTC} from "./registration-reducer";
+import {registryTC, setError} from "./registration-reducer";
 
 export const Registration = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirm, setConfirm] = useState('')
-    const [isMatchPassword, setIsMatchPassword] = useState('')
 
     const backError = useSelector<AppStateType, string>((state) => state.registration.backError)
     const isRegistry = useSelector<AppStateType, boolean>((state) => state.registration.isRegistry)
 
     const dispatch = useDispatch()
 
-    const handleSubmit = () => {
+    const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+
         if (confirm !== password) {
-            setIsMatchPassword('Passwords don\'t match')
             return
         }
         dispatch(registryTC(email, password))
     }
 
+    const onCancelHandle = (e: FormEvent<HTMLButtonElement>) => {
+        e.preventDefault()
 
-    const onCancelHandle = () => {
+        dispatch(setError(''))
         setEmail('')
         setPassword('')
         setConfirm('')
@@ -41,23 +43,24 @@ export const Registration = () => {
             </div>
             <div className={styles.form}>
 
-                <form onSubmit={handleSubmit}>
-                    <label>Email   <input type={"email"} value={email} onChange={(e) => {
-                            setEmail(e.currentTarget.value)
-                        }}/>
+                <form>
+                    <label>Email <input type={"email"} value={email} onChange={(e) => {
+                        dispatch(setError(''))
+                        setEmail(e.currentTarget.value)
+                    }}/>
                     </label><br/>
-                    <label>Password   <input type={"password"} value={password} onChange={(e) => {
-                            setPassword(e.currentTarget.value)
-                        }}/><br/>
+                    <label>Password <input type={"password"} value={password} onChange={(e) => {
+                        setPassword(e.currentTarget.value)
+                    }}/><br/>
                     </label>
-                    <label>Confirm password   <input type={"password"} value={confirm} onChange={(e) => {
-                            setConfirm(e.currentTarget.value)
-                        }}/><br/>
+                    <label>Confirm password <input type={"password"} value={confirm} onChange={(e) => {
+                        setConfirm(e.currentTarget.value)
+                    }}/><br/>
                     </label>
-                    <input type={"button"} value={'Cancel'} onClick={onCancelHandle}/>
-                    <input type={"submit"} value={'Register'}/>
+                    <button onClick={onCancelHandle}>Cancel</button>
+                    <button onClick={handleSubmit}>Registry</button>
 
-                    {password !== confirm ? <div>{isMatchPassword}</div> : ''}
+                    {password !== confirm ? <div>{'Passwords don\'t match'}</div> : ''}
                     {backError ? <div>{backError}</div> : ''}
                 </form>
             </div>
