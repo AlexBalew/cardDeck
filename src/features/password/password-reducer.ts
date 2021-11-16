@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {restoreAPI} from "../../api/password-api";
 import {Nullable} from "../../types";
+import {setAppStatusAC, setAppStatusACType} from "../../app/app-reducer";
 
 type stateType = {
     isSuccessfulRequest: boolean
@@ -26,7 +27,7 @@ export const restorePassReducer = (state = initState, action: AllACType): stateT
     }
 }
 
-type AllACType = restorePassACType | setErrorACType
+type AllACType = restorePassACType | setErrorACType | setAppStatusACType
 
 type restorePassACType = ReturnType<typeof setRequestResultAC>
 
@@ -47,31 +48,36 @@ export const setErrorAC = (error: string) => {
 }
 
 
-
 export const sendCurrentEmailTC = (email: string) => async (dispatch: Dispatch<AllACType>) => {
     try {
+        dispatch(setAppStatusAC("loading"))
         await restoreAPI.forgot(email)
         dispatch(setRequestResultAC(true))
+        dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         const error = e.response
             ? e.response.data.error
             : (e.message + ', more details in the console');
         console.log('Error: ', {...e})
         dispatch(setErrorAC(error))
+        dispatch(setAppStatusAC("succeeded"))
     }
 
 }
 
 export const setNewPasswordTC = (newPassword: string, token: string) => async (dispatch: Dispatch<AllACType>) => {
     try {
+        dispatch(setAppStatusAC("loading"))
         await restoreAPI.newPassword(newPassword, token)
         dispatch(setRequestResultAC(true))
+        dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         const error = e.response
             ? e.response.data.error
             : (e.message + ', more details in the console');
         console.log('Error: ', {...e})
         dispatch(setErrorAC(error))
+        dispatch(setAppStatusAC("succeeded"))
     }
 
 }

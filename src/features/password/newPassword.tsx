@@ -4,12 +4,14 @@ import {useDispatch, useSelector} from "react-redux";
 import s from "./passwordRestore.module.css";
 import {AppStateType} from "../../bll/store";
 import {Navigate, useParams} from "react-router-dom";
+import {RequestStatusType} from "../../app/app-reducer";
 
 
 export const NewPassword = () => {
 
     let dispatch = useDispatch()
     let requestStatus = useSelector<AppStateType, boolean>(state => state.password.isSuccessfulRequest)
+    let appStatus = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
 
     const {token} = useParams<'token'>();
 
@@ -24,8 +26,8 @@ export const NewPassword = () => {
         dispatch(setNewPasswordTC(value, token!))
     }
 
-    if(requestStatus) {
-       return <Navigate to={'/login'}/>
+    if (requestStatus) {
+        return <Navigate to={'/login'}/>
     }
 
     return (
@@ -40,7 +42,9 @@ export const NewPassword = () => {
                            style={{border: '1px solid black'}}
                     />
                     <button name='sendCurrentEmail'
-                            onClick={onSendNewPassword}>Send
+                            onClick={onSendNewPassword}
+                            disabled={appStatus === 'loading'}
+                    >Send
                     </button>
                 </div>
             </div>
