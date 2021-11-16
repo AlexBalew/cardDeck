@@ -1,10 +1,11 @@
 import React, {ChangeEvent, useState} from "react";
 import s from './passwordRestore.module.css'
 import {useDispatch, useSelector} from "react-redux";
-import { AppStateType } from "../../bll/store";
-import { SuccessfulRequestMessage } from "./successfulRequestMessage";
-import { sendCurrentEmailTC } from "./password-reducer";
+import {AppStateType} from "../../bll/store";
+import {SuccessfulRequestMessage} from "./successfulRequestMessage";
+import {sendCurrentEmailTC} from "./password-reducer";
 import {Nullable} from "../../types";
+import {RequestStatusType} from "../../app/app-reducer";
 
 
 export const PasswordRestore = () => {
@@ -12,6 +13,7 @@ export const PasswordRestore = () => {
     let dispatch = useDispatch()
     let requestStatus = useSelector<AppStateType, boolean>(state => state.password.isSuccessfulRequest)
     let error = useSelector<AppStateType, Nullable<string>>(state => state.password.error)
+    let appStatus = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
 
     const [value, setValue] = useState<string>('')
 
@@ -23,7 +25,7 @@ export const PasswordRestore = () => {
         dispatch(sendCurrentEmailTC(value))
     }
 
-    if(requestStatus) {
+    if (requestStatus) {
         return <SuccessfulRequestMessage/>
     }
 
@@ -44,7 +46,9 @@ export const PasswordRestore = () => {
                 </div>
                 <div>
                     <button name='sendCurrentEmail'
-                            onClick={onSendCurrentEmail}>Send
+                            onClick={onSendCurrentEmail}
+                            disabled={appStatus === 'loading'}
+                    >Send
                     </button>
                 </div>
                 <div>
