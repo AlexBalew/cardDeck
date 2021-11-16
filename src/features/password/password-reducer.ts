@@ -38,7 +38,7 @@ export const setRequestResultAC = (isSuccessfulRequest: boolean) => {
     } as const
 }
 
-type setErrorACType = ReturnType<typeof setErrorAC>
+export type setErrorACType = ReturnType<typeof setErrorAC>
 
 export const setErrorAC = (error: string) => {
     return {
