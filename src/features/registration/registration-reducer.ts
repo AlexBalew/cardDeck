@@ -27,13 +27,13 @@ type actionsTypes =
     | ReturnType<typeof setError>
 
 const registrated = () => ({type: 'registry/REGISTRATED'} as const)
-const setError = (error: string) => ({type: 'registry/BACKEND-ERROR', error } as const)
+export const setError = (error: string) => ({type: 'registry/BACKEND-ERROR', error } as const)
 
 
 export const registryTC = (email: string, password: string) => (dispatch: ThunkDispatch<AppStateType, unknown, actionsTypes>) => {
     registApi.register(email, password)
         .then((res) => {
-            if (res.data) {dispatch(registrated())}
+            if (res.status) {dispatch(registrated())}
         })
         .catch(e => {
             dispatch(setError(e.response.data.error))

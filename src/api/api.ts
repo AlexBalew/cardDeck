@@ -13,6 +13,6 @@ export const instance_local = axios.create({
 
 
 export const instance_release = axios.create({
-    baseURL: BaseURLs.release,
+    baseURL: BaseURLs.local,
     withCredentials: true,
 })
