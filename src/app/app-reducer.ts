@@ -1,26 +1,29 @@
 
-//* Type --------------------------------------------------------------->
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
+export type InitialStateType = {
+    status: RequestStatusType
+}
 
+const initialState: InitialStateType = {
+    status: 'idle',
+}
 
-
-
-
-//* Initial state --------------------------------------------------------------->
-
-
-
-
-export const appReducer = (state: any, action: any)=> {
+export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-
+        case 'APP/SET_STATUS':
+            return {...state, status: action.status}
         default:
             return state
     }
 }
 
-//* Action creators --------------------------------------------------------------->
+export type ActionsType = setAppStatusACType
+export type setAppStatusACType = ReturnType<typeof setAppStatusAC>
 
-
-//* Thunk creators --------------------------------------------------------------->
-
+export const setAppStatusAC = (status: RequestStatusType) => {
+    return {
+        type: 'APP/SET_STATUS',
+        status
+    } as const
+}
