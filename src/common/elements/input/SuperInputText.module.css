@@ -60,39 +60,3 @@
     background-color: darkred;
 }
 
-:root {
-    --text: #2b3044;
-    --line: #bbc1e1;
-    --line-active: #C7A5A5;
-}
-
-
-a {
-    display: inline-block;
-    position: relative;
-    text-decoration: none;
-    color: inherit;
-    margin: 0 var(--spacing, 0px);
-    transition: margin 0.25s;
-}
-a svg {
-    width: 76px;
-    height: 25px;
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translate(-50%, 7px) translateZ(0);
-    fill: none;
-    stroke: var(--stroke, var(--line));
-    stroke-linecap: round;
-    stroke-width: 2px;
-    stroke-dasharray: var(--offset, 69px) 278px;
-    stroke-dashoffset: 361px;
-    transition: stroke 0.25s ease var(--stroke-delay, 0s), stroke-dasharray 0.35s;
-}
-a:hover {
-    --spacing: 4px;
-    --stroke: var(--line-active);
-    --stroke-delay: 0.1s;
-    --offset: 180px;
-}
