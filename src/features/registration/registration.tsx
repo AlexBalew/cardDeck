@@ -1,9 +1,12 @@
 import React, {FormEvent, useState} from "react";
-import styles from "./registration.module.css"
+import s from "./registration.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
 import {Navigate} from "react-router-dom";
-import {registryTC, setError} from "./registration-reducer";
+import {registryTC, setErrorAC} from "./registration-reducer";
+import {RequestStatusType} from "../../app/app-reducer";
+import SuperButton from "../../common/elements/button/SuperButton";
+import SuperInput from "../../common/elements/input/SuperInput";
 
 export const Registration = () => {
     const [email, setEmail] = useState('')
@@ -12,22 +15,21 @@ export const Registration = () => {
 
     const backError = useSelector<AppStateType, string>((state) => state.registration.backError)
     const isRegistry = useSelector<AppStateType, boolean>((state) => state.registration.isRegistry)
+    const appStatus = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
 
     const dispatch = useDispatch()
 
     const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
 
-        if (confirm !== password) {
-            return
-        }
+        if (confirm !== password) return
         dispatch(registryTC(email, password))
     }
 
     const onCancelHandle = (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
 
-        dispatch(setError(''))
+        dispatch(setErrorAC(''))
         setEmail('')
         setPassword('')
         setConfirm('')
@@ -35,33 +37,53 @@ export const Registration = () => {
 
     if (isRegistry) return <Navigate to='/login'/>
 
-    return <div className={styles.wrapper}>
-        <div className={styles.box}>
-            <div className={styles.title}>
+    return <div className={s.mainContainer}>
+        <div className={s.formContainer}>
+            <div className={s.title}>
                 <h2>it-incubator</h2>
                 <h2>Sign Up</h2>
             </div>
-            <div className={styles.form}>
+            <div className={s.form}>
 
                 <form>
-                    <label>Email <input type={"email"} value={email} onChange={(e) => {
-                        dispatch(setError(''))
-                        setEmail(e.currentTarget.value)
-                    }}/>
-                    </label><br/>
-                    <label>Password <input type={"password"} value={password} onChange={(e) => {
-                        setPassword(e.currentTarget.value)
-                    }}/><br/>
-                    </label>
-                    <label>Confirm password <input type={"password"} value={confirm} onChange={(e) => {
-                        setConfirm(e.currentTarget.value)
-                    }}/><br/>
-                    </label>
-                    <button onClick={onCancelHandle}>Cancel</button>
-                    <button onClick={handleSubmit}>Registry</button>
+                    <div>Email <SuperInput type={"email"}
+                                           value={email}
+                                           id={"email"}
+                                           onChange={(e) => {
+                                               dispatch(setErrorAC(''))
+                                               setEmail(e.currentTarget.value)
+                                           }}
+                                           style={{border: '1px solid black'}}/>
+                    </div>
+                    <div className={s.password}>Password <SuperInput type={"password"}
+                                              value={password}
+                                              id={"password"}
+                                              onChange={(e) => {
+                                                  setPassword(e.currentTarget.value)
+                                              }}
+                                              style={{border: '1px solid black'}}/><br/>
+                    </div>
+
+                    <div>Confirm password <SuperInput type={"password"}
+                                                      value={confirm}
+                                                      id={confirm}
+                                                      onChange={(e) => {
+                                                          setConfirm(e.currentTarget.value)
+                                                      }}
+                                                      style={{border: '1px solid black'}}/><br/>
+                    </div>
+                    <SuperButton name='sendCurrentEmail'
+                                 onClick={onCancelHandle}>
+                        Cancel
+                    </SuperButton>
+                    <SuperButton name='sendCurrentEmail'
+                                 onClick={handleSubmit}
+                                 disabled={appStatus === 'loading'}>
+                        Registry
+                    </SuperButton>
 
                     {password !== confirm ? <div>{'Passwords don\'t match'}</div> : ''}
-                    {backError ? <div>{backError}</div> : ''}
+                    {backError && <div style={{color: 'red', marginTop: '5px'}}>{backError}</div>}
                 </form>
             </div>
 
