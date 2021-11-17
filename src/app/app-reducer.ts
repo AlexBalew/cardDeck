@@ -1,3 +1,7 @@
+import {Dispatch} from "redux";
+import {loginAPI} from "../api/login-api";
+import {setErrorAC} from "../features/password/password-reducer";
+import {isLoggedInAC} from "../features/login/login-reducer";
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
@@ -26,4 +30,21 @@ export const setAppStatusAC = (status: RequestStatusType) => {
         type: 'APP/SET_STATUS',
         status
     } as const
+}
+
+export const initializeAppTC = () => async (dispatch: Dispatch) => {
+    try {
+        dispatch(setAppStatusAC("loading"))
+        await loginAPI.authMe()
+        dispatch(isLoggedInAC(true))
+        dispatch(setAppStatusAC("succeeded"))
+    } catch (e: any) {
+        const error = e.response
+            ? e.response.data.error
+            : (e.message + ', more details in the console');
+        console.log('Error: ', {...e})
+        dispatch(setErrorAC(error))
+        dispatch(setAppStatusAC("succeeded"))
+    }
+
 }
