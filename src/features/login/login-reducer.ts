@@ -1,4 +1,5 @@
 import {Dispatch} from "redux";
+import { AppThunkType} from "../../bll/store";
 import {setAppStatusAC, setAppStatusACType} from "../../app/app-reducer";
 import {setErrorAC, setErrorACType} from "../password/password-reducer";
 import {loginAPI} from "../../api/login-api";
@@ -32,6 +33,31 @@ export const isLoggedInAC = (isLoggedIn: boolean) => {
     } as const
 }
 
+export const logInAC = (email: string, password: string, isAuthorized: boolean) => {
+    return {
+        type: 'login-reducer/SET_IS_AUTH',
+        email,
+        password,
+        isAuthorized} as const
+}
+
+export const loginThunk = (email: string, password: string, rememberMe: boolean, isAuthorized: boolean): AppThunkType => dispatch => {
+    dispatch(setAppStatusAC("loading"))
+    try {
+        await loginApi.login(email, password, rememberMe)
+            .then((res) => {
+                dispatch(setAppStatusAC("succeeded"))
+                dispatch(logInAC(res.data.email, res.data.name, true))
+            }).catch((e: any) => {
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console');
+                dispatch(setErrorAC(error))
+                dispatch(setAppStatusAC("succeeded"))
+        })
+    }
+}
+
 export const logOutTC = () => async (dispatch: Dispatch<AllACType>) => {
     try {
         dispatch(setAppStatusAC("loading"))
@@ -49,6 +75,3 @@ export const logOutTC = () => async (dispatch: Dispatch<AllACType>) => {
 
 }
 
-export const initializeAppTC = () => (dispatch: Dispatch) => {
-
-}

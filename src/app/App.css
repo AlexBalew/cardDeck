@@ -1,5 +1,5 @@
 .appStyle {
-    background: linear-gradient(180deg, #E6D4DE 0%, #9890C7 100%);
     background-size: cover;
     min-height: 100vh;
+    background: linear-gradient(180deg, #fdedf2 40%, #c4d9e5 100%);
 }

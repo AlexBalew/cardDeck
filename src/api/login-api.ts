@@ -1,6 +1,6 @@
 import {instance_local} from "./api";
 
-export type AuthMeResponseType = {
+export type LoginResponseType = {
     _id: string
     email: string
     name: string
@@ -14,11 +14,29 @@ export type AuthMeResponseType = {
     error?: string
 }
 
+export type LoginUserType = {
+    email: string
+    password: string
+    rememberMe: boolean
+
+}
+
+export interface UserData {
+    name?: string
+    avatar?: string
+}
+
 export const loginAPI = {
+    authMe() {
+        return instance_local.post<LoginResponseType>('/auth/me', {}, {})
+    },
     logOut() {
         return instance_local.delete<{ info: string, error: string }>('/auth/me', {})
     },
-    authMe() {
-        return instance_local.post<AuthMeResponseType>('/auth/me', {}, {})
-    }
+    login(email: string, password: string, rememberMe: boolean) {
+        return instance_local.post<LoginResponseType>(`/auth/login`, {email, password, rememberMe}, {})
+    },
+    changeData(userData: UserData) {
+        return instance_local.put<{updatedUser: LoginResponseType, error?: string}>('auth/me', userData)
+    },
 }
