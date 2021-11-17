@@ -48,3 +48,7 @@ export const logOutTC = () => async (dispatch: Dispatch<AllACType>) => {
     }
 
 }
+
+export const initializeAppTC = () => (dispatch: Dispatch) => {
+
+}

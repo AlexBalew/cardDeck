@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {useLocation} from "react-router-dom";
 import Header from '../common/components/header/header';
 import CardDeckRoutes from "./Routes";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../bll/store";
 import {RequestStatusType} from "./app-reducer";
 import Preloader from "../common/components/preloader/Preloader";
@@ -11,7 +11,12 @@ import Preloader from "../common/components/preloader/Preloader";
 
 function App() {
     const location = useLocation()
+    const dispatch = useDispatch()
     let status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
+
+    useEffect(() => {
+        dispatch(initializeAppTC())
+    }, [dispatch])
 
 
         return (
