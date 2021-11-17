@@ -5,7 +5,7 @@ import Header from '../common/components/header/header';
 import CardDeckRoutes from "./Routes";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../bll/store";
-import {RequestStatusType} from "./app-reducer";
+import {initializeAppTC, RequestStatusType} from "./app-reducer";
 import Preloader from "../common/components/preloader/Preloader";
 
 
@@ -17,7 +17,6 @@ function App() {
     useEffect(() => {
         dispatch(initializeAppTC())
     }, [dispatch])
-
 
         return (
             <div className='appStyle'>
