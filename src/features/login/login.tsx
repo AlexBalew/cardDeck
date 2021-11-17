@@ -5,17 +5,12 @@ import {PATH} from "../../app/Routes";
 import viewPassword from "../../assets/viewPassword.png"
 import hiddenPassword from "../../assets/hiddenPassword.png"
 import SuperButton from "../../common/elements/button/SuperButton";
-import {useDispatch, useSelector} from "react-redux";
-import {loginThunk, setIsAuth} from "./login-reducer";
-import {AppStateType} from "../../bll/store";
+import {useDispatch} from "react-redux";
+import {loginThunk} from "./login-reducer";
 
 
+export const Login = () => {
 
-export type LoginPropsType = {}
-
-export const Login = (props: LoginPropsType) => {
-
-const isAuthorized  = useSelector<AppStateType, boolean>( state => state.login.isAuthorized)
     const dispatch = useDispatch();
 
     const [email, setEmail] = React.useState<string>('');
@@ -56,7 +51,7 @@ const isAuthorized  = useSelector<AppStateType, boolean>( state => state.login.i
 
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        dispatch(loginThunk(email, password, rememberMe,isAuthorized))
+        dispatch(loginThunk(email, password, rememberMe))
     }
 
     const handlerBlur = (e: FocusEventHandler<HTMLInputElement>) => {
@@ -77,11 +72,6 @@ const isAuthorized  = useSelector<AppStateType, boolean>( state => state.login.i
        }
     }, [emailError, passwordError])
 
-    useEffect(() => {
-        dispatch(setIsAuth(false))
-    }, [dispatch])
-
-    console.log(!formValid)
     return (
         <div className={s.loginContainer}>
             <div className={s.formBlock}>
