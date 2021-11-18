@@ -1,15 +1,24 @@
-.wrapper {
+.mainContainer {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    margin-top: 5%;
 }
 
-.box {
-    width: 413px;
-    height: 540px;
-    background-color: #F9F9FE;
-    border-radius: 8px;
+.formContainer {
+    background: #fff;
+    width: 400px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+
+    /* property from figma
+    /*width: 413px;*/
+    /*height: 540px;*/
+    /*background-color: #F9F9FE;*/
+    /*border-radius: 8px;*/
 }
 
 .title {
@@ -31,15 +40,36 @@
     margin-top: 32px;
 }
 
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .form input {
     border: 1px solid #cccccc;
     border-radius: 3px;
-    height: 24px;
     font-size: 16px;
+    margin-bottom: 15px;
 }
 input:focus {
     color: #000000;
     border: 1px solid #000000;
     background-color: #cbe0e7;
 }
+
+.password {
+    position: relative;
+}
+.passwordControl {
+    position: absolute;
+    top: 20px;
+    right: 2px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+
+}
+
 
