@@ -5,13 +5,16 @@ import {PATH} from "../../app/Routes";
 import viewPassword from "../../assets/viewPassword.png"
 import hiddenPassword from "../../assets/hiddenPassword.png"
 import SuperButton from "../../common/elements/button/SuperButton";
-import {useDispatch} from "react-redux";
-import {loginThunk} from "./login-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {loginTC} from "./login-reducer";
+import {AppStateType} from "../../bll/store";
+import {Nullable} from "../../types";
 
 
 export const Login = () => {
 
     const dispatch = useDispatch();
+    let error = useSelector<AppStateType, Nullable<string>>(state => state.password.error)
 
     const [email, setEmail] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
@@ -20,8 +23,10 @@ export const Login = () => {
     const [emailDirty, setEmailDirty] = useState(false)
     const [passwordDirty, setPasswordDirty] = useState(false)
     const [emailError, setEmailError] = useState('Invalid email address')
-    const [passwordError, setPasswordError] = useState('password is Required')
+    const [passwordError, setPasswordError] = useState('')
     const [formValid, setFormValid] = useState(false);
+
+
 
     const handleInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
@@ -33,11 +38,10 @@ export const Login = () => {
         }
     }
     const handleInputPassword = (e: ChangeEvent<HTMLInputElement>) => {
-
-        let currentEmailValue = e.currentTarget.value
-        setPassword(currentEmailValue)
-        if(currentEmailValue.length < 7)  {
-            setPasswordError('password must be more than 3 and less then 8 character')
+        let currentPasswordValue = e.currentTarget.value
+        setPassword(currentPasswordValue)
+        if(currentPasswordValue.length < 7)  {
+            setPasswordError('password must be more than 6 character')
         } else {
             setPasswordError('')
         }
@@ -51,7 +55,7 @@ export const Login = () => {
 
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        dispatch(loginThunk(email, password, rememberMe))
+        dispatch(loginTC(email, password, rememberMe))
     }
 
     const handlerBlur = (e: FocusEventHandler<HTMLInputElement>) => {
@@ -83,7 +87,7 @@ export const Login = () => {
                     }}>
                         <label>Email</label>
                         <div className={s.formInputBox}>
-                            {(passwordDirty && passwordError) && <div style={{color: 'red'}}>{passwordError}</div>}
+                            {(emailError) && <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}>{emailError}</div>}
                             <input name="email"
                                    value={email}
                                    type="email"
@@ -95,7 +99,7 @@ export const Login = () => {
 
                         <label>Password</label>
                         <div className={s.formInputBox}>
-                            {(emailDirty && emailError) && <div style={{color: 'red'}}>{emailError}</div>}
+                            {(passwordError) && <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}>{passwordError}</div>}
                             <input name="password"
                                    value={password}
                                    type="password"

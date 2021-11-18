@@ -63,16 +63,10 @@
 }
 
 .formButtonBlock {
-
 }
 
 .btn {
-    font-weight: bold;
-    margin-top: 10px;
-    color: #b83333;
-    border: none;
 }
-
 
 .textBlock {
     display: flex;

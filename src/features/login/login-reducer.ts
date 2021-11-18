@@ -51,7 +51,7 @@ export const logInAC = (email: string, name: string, isLoggedIn: boolean) => {
     } as const
 }
 
-export const loginThunk = (email: string, password: string, rememberMe: boolean): AppThunkType => async (dispatch: Dispatch<AllACType>) => {
+export const loginTC = (email: string, password: string, rememberMe: boolean): AppThunkType => async (dispatch: Dispatch<AllACType>) => {
     try {
         dispatch(setAppStatusAC("loading"))
         let response = await loginAPI.login(email, password, rememberMe)
