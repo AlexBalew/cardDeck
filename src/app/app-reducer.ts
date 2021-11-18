@@ -44,6 +44,7 @@ export const initializeAppTC = () => async (dispatch: Dispatch) => {
             : (e.message + ', more details in the console');
         console.log('Error: ', {...e})
         dispatch(setErrorAC(error))
+        dispatch(isLoggedInAC(false))
         dispatch(setAppStatusAC("succeeded"))
     }
 
