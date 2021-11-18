@@ -47,6 +47,7 @@
 }
 
 .formInput {
+    position: relative;
     width: 100%;
     font-weight: 500;
     font-size: 14px;
@@ -58,8 +59,11 @@
 }
 
 .inputPasswordView {
-    width: 15px;
+    position: absolute;
     transition: all 0.3s ease-in-out;
+    width: 15px;
+    height: 15px;
+
 }
 
 .formButtonBlock {

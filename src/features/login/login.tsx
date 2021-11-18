@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FocusEventHandler, FormEvent, useEffect, useState} from "react";
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import s from "./login.module.css"
 import {PATH} from "../../app/Routes";
 import viewPassword from "../../assets/viewPassword.png"
@@ -8,21 +8,23 @@ import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "./login-reducer";
 import {AppStateType} from "../../bll/store";
-import {Nullable} from "../../types";
+
 
 
 export const Login = () => {
 
     const dispatch = useDispatch();
-    let error = useSelector<AppStateType, Nullable<string>>(state => state.password.error)
+    const isLoggedIn = useSelector<AppStateType, boolean>((state) => state.login.isLoggedIn);
 
     const [email, setEmail] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
     const [rememberMe, setRememberMe] = React.useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [passwordType, setPasswordTypeType] = useState('password')
+    //состоняие отражает  были мы внутри инпута или нет
     const [emailDirty, setEmailDirty] = useState(false)
     const [passwordDirty, setPasswordDirty] = useState(false)
-    const [emailError, setEmailError] = useState('Invalid email address')
+    const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const [formValid, setFormValid] = useState(false);
 
@@ -50,6 +52,11 @@ export const Login = () => {
         setRememberMe(!rememberMe)
     }
     const handleShowPassword = () => {
+        if (showPassword) {
+            setPasswordTypeType('text')
+        } else {
+            setPasswordTypeType('password')
+        }
         setShowPassword(!showPassword)
     }
 
@@ -76,6 +83,11 @@ export const Login = () => {
        }
     }, [emailError, passwordError])
 
+
+    if (isLoggedIn) {
+        return <Navigate to={PATH.PROFILE}/>
+    }
+
     return (
         <div className={s.loginContainer}>
             <div className={s.formBlock}>
@@ -87,7 +99,7 @@ export const Login = () => {
                     }}>
                         <label>Email</label>
                         <div className={s.formInputBox}>
-                            {(emailError) && <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}>{emailError}</div>}
+                            {(emailDirty || emailError) && <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}>{emailError}</div>}
                             <input name="email"
                                    value={email}
                                    type="email"
@@ -99,10 +111,10 @@ export const Login = () => {
 
                         <label>Password</label>
                         <div className={s.formInputBox}>
-                            {(passwordError) && <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}>{passwordError}</div>}
+                            {(passwordDirty || passwordError) && <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}>{passwordError}</div>}
                             <input name="password"
                                    value={password}
-                                   type="password"
+                                   type={passwordType}
                                    className={s.formInput}
                                    onChange={handleInputPassword}
                                    onBlur={e => handlerBlur}
