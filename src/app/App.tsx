@@ -18,7 +18,6 @@ function App() {
         dispatch(initializeAppTC())
         }, [])
 
-
     return (
         <div className='appStyle'>
             {

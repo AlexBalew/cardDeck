@@ -27,7 +27,7 @@ function CardDeckRoutes() {
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
 
     const routes = (isLoggedIn: boolean) => {
-        const test = [
+        const routeObjects = [
             {path: '/cardDeck', element: <Navigate to={PATH.LOGIN}/>},
             {path: PATH.PROFILE, element: <Profile/>},
             {path: PATH.LOGIN, element: <Login/>},
@@ -39,9 +39,9 @@ function CardDeckRoutes() {
             {path: PATH.NOT_FOUND, element: <Error404/>},
             {path: '*', element: <Navigate to={PATH.NOT_FOUND}/>},
         ]
-        return test.map(item => ({
-            ...item,
-            element: isLoggedIn || item.path === PATH.LOGIN ? item.element : <Navigate to={PATH.LOGIN}/>
+        return routeObjects.map(routeObject => ({
+            ...routeObject,
+            element: isLoggedIn || routeObject.path === PATH.LOGIN ? routeObject.element : <Navigate to={PATH.LOGIN}/>
         }))
     }
 
