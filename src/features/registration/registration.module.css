@@ -40,10 +40,18 @@
     margin-top: 32px;
 }
 
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .form input {
     border: 1px solid #cccccc;
     border-radius: 3px;
     font-size: 16px;
+    margin-bottom: 15px;
 }
 input:focus {
     color: #000000;
@@ -56,14 +64,12 @@ input:focus {
 }
 .passwordControl {
     position: absolute;
-    top: 11px;
-    right: 6px;
+    top: 20px;
+    right: 2px;
     display: inline-block;
     width: 20px;
     height: 20px;
-    background: url("/src/assets/viewPassword.png") 0 0 no-repeat
+
 }
-.passwordControl.view {
-    background: url("/src/assets/hiddenPassword.png") 0 0 no-repeat;
-}
+
 
