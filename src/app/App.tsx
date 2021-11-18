@@ -12,21 +12,23 @@ import Preloader from "../common/components/preloader/Preloader";
 function App() {
     const location = useLocation()
     const dispatch = useDispatch()
-    let status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
+    const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
 
     useEffect(() => {
         dispatch(initializeAppTC())
-    }, [dispatch])
+        }, [])
 
-        return (
-            <div className='appStyle'>
-                {
-                   !(location.pathname === "/404") && <Header/>
-                }
-                {status === 'loading' && <Preloader/>}
-                <CardDeckRoutes/>
-            </div>
-        )
+
+    return (
+        <div className='appStyle'>
+            {
+                !(location.pathname === "/404") && <Header/>
+            }
+            {status === 'loading' && <Preloader/>}
+
+            <CardDeckRoutes/>
+        </div>
+    )
 }
 
 export default App;
