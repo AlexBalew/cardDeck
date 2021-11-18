@@ -1,32 +1,36 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {useLocation} from "react-router-dom";
-import Header from '../common/components/header/header';
 import CardDeckRoutes from "./Routes";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../bll/store";
 import {initializeAppTC, RequestStatusType} from "./app-reducer";
 import Preloader from "../common/components/preloader/Preloader";
+import CardDeckRoutesUnauthorized from "./unauthorizedRoutes";
+import SuperButton from "../common/elements/button/SuperButton";
+import {logOutTC} from "../features/login/login-reducer";
 
 
 function App() {
-    const location = useLocation()
+
     const dispatch = useDispatch()
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
+    const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
+
+    const onLogOut = () => {
+        dispatch(logOutTC())
+    }
 
     useEffect(() => {
         dispatch(initializeAppTC())
         }, [])
 
+    console.log(isLoggedIn)
 
     return (
         <div className='appStyle'>
-            {
-                !(location.pathname === "/404") && <Header/>
-            }
             {status === 'loading' && <Preloader/>}
-
-            <CardDeckRoutes/>
+            {isLoggedIn ?  <CardDeckRoutes/> : <CardDeckRoutesUnauthorized/>}
+            <div style={{position: "absolute", marginLeft: '90%', top: '20px'}} ><SuperButton onClick={onLogOut}>Log out</SuperButton></div>
         </div>
     )
 }
