@@ -8,6 +8,7 @@ import Preloader from "../common/components/preloader/Preloader";
 import CardDeckRoutesUnauthorized from "./unauthorizedRoutes";
 import SuperButton from "../common/elements/button/SuperButton";
 import {logOutTC} from "../features/login/login-reducer";
+import {useLocation} from "react-router-dom";
 
 
 function App() {
@@ -15,13 +16,15 @@ function App() {
     const dispatch = useDispatch()
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
+    const location = useLocation()
 
     const onLogOut = () => {
         dispatch(logOutTC())
     }
 
     useEffect(() => {
-        dispatch(initializeAppTC())
+        if(!(location.pathname === '/restore-password')) {
+            dispatch(initializeAppTC())}
         }, [])
 
     console.log(isLoggedIn)
