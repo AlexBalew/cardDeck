@@ -1,13 +1,13 @@
 import React, {ChangeEvent, FocusEventHandler, FormEvent, useEffect, useState} from "react";
 import {Navigate, NavLink} from "react-router-dom";
 import s from "./login.module.css"
-import {PATH} from "../../app/unauthorizedRoutes";
-import viewPassword from "../../assets/viewPassword.png"
-import hiddenPassword from "../../assets/hiddenPassword.png"
+import viewPassword from "../../assets/password/viewPassword.png"
+import hiddenPassword from "../../assets/password/hiddenPassword.png"
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "./login-reducer";
 import {AppStateType} from "../../bll/store";
+import {PATH} from "../../app/Routes";
 
 
 
@@ -143,7 +143,7 @@ export const Login = () => {
                     <div className={s.textBlock}>
                         <div>
                             <span className={s.formBlockText}>Forgot password?</span>
-                            <NavLink to={PATH.RESTORE_PASSWORD} className={s.formLink}>Click Here</NavLink>
+                            <NavLink to={PATH.CHANGE_PASSWORD} className={s.formLink}>Click Here</NavLink>
                         </div>
                         <div>
                             <span className={s.formBlockText}>Don't have an account</span>

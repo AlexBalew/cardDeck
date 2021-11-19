@@ -37,6 +37,6 @@ export const loginAPI = {
         return instance_local.post<LoginResponseType>(`/auth/login`, {email, password, rememberMe}, {})
     },
     changeData(userData: UserData) {
-        return instance_local.put<{updatedUser: LoginResponseType, error?: string}>('auth/me', userData)
+        return instance_local.put('auth/me', userData)
     },
 }
