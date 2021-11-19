@@ -7,8 +7,8 @@ import {registryTC, setErrorAC} from "./registration-reducer";
 import {RequestStatusType} from "../../app/app-reducer";
 import SuperButton from "../../common/elements/button/SuperButton";
 import SuperInput from "../../common/elements/input/SuperInput";
-import viewPassword from "../../assets/viewPassword.png";
-import hiddenPassword from "../../assets/hiddenPassword.png";
+import viewPassword from "../../assets/password/viewPassword.png";
+import hiddenPassword from "../../assets/password/hiddenPassword.png";
 
 export const Registration = () => {
     const [email, setEmail] = useState('')
