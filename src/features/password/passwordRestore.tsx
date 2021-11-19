@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
 import {SuccessfulRequestMessage} from "./successfulRequestMessage";
 import {sendCurrentEmailTC} from "./password-reducer";
-import {Nullable} from "../../types";
 import {RequestStatusType} from "../../app/app-reducer";
 import SuperButton from "../../common/elements/button/SuperButton";
 import SuperInput from "../../common/elements/input/SuperInput";
@@ -14,7 +13,6 @@ export const PasswordRestore = () => {
 
     let dispatch = useDispatch()
     let requestStatus = useSelector<AppStateType, boolean>(state => state.password.isSuccessfulRequest)
-    let error = useSelector<AppStateType, Nullable<string>>(state => state.password.error)
     let appStatus = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
 
     const [value, setValue] = useState<string>('')
@@ -44,7 +42,6 @@ export const PasswordRestore = () => {
                            onChange={onSetCurrentEmail}
                            style={{border: '1px solid black'}}
                     />
-                    {error && <div style={{color: 'red', marginTop: '5px'}}>{error}</div>}
                 </div>
                 <div>
                     <SuperButton name='sendCurrentEmail'
