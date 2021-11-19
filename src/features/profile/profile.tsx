@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React from "react";
 import s from "./profile.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
@@ -21,11 +21,17 @@ export const Profile = () => {
 
     return (
         <div className={s.profileContainer}>
-            <div>
-                <img className={s.profileAvatar} src={`${avatar !== 'Avatar is not defined' ? avatar : userDefaultImg }`} alt="ava"/>
-                <span>{name}</span>
+            <div className={s.profileBlock}>
+                <div className={s.aboutUser}>
+                    <h2>About user</h2>
+                    <img className={s.profileAvatar}
+                         src={`${avatar !== 'Avatar is not defined' ? avatar : userDefaultImg}`} alt="ava"/>
+                    <span>{name}</span>
+                </div>
+                <div className={s.content}>
+                    <h2>Content</h2>
+                </div>
             </div>
-
 
         </div>
     )
