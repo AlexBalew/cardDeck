@@ -6,7 +6,7 @@
 }
 
 .formBlock {
-    width: 400px;
+    width: 370px;
     height: 500px;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 7px;
@@ -44,6 +44,9 @@
 }
 
 .formInputBox {
+    position: relative;
+    width: 250px;
+    display: inline-block;
 }
 
 .formInput {
@@ -60,13 +63,25 @@
 
 .inputPasswordView {
     position: absolute;
-    transition: all 0.3s ease-in-out;
+    top: 4px;
+    right: 6px;
+    display: inline-block;
     width: 15px;
     height: 15px;
-
+    transition: all 0.3s ease-in-out;
+    opacity: 0.5;
+}
+.inputPasswordView:hover {
+    opacity: 0.8;
 }
 
+.checkbox {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
 .formButtonBlock {
+    margin-top: 60px;
 }
 
 .btn {

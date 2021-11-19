@@ -21,7 +21,7 @@ export const Login = () => {
     const [rememberMe, setRememberMe] = React.useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [passwordType, setPasswordTypeType] = useState('password')
-    //состоняие отражает  были мы внутри инпута или нет
+    //отражает состоняие были мы внутри инпута или нет
     const [emailDirty, setEmailDirty] = useState(false)
     const [passwordDirty, setPasswordDirty] = useState(false)
     const [emailError, setEmailError] = useState('')
@@ -43,7 +43,7 @@ export const Login = () => {
         let currentPasswordValue = e.currentTarget.value
         setPassword(currentPasswordValue)
         if(currentPasswordValue.length < 7)  {
-            setPasswordError('password must be more than 6 character')
+            setPasswordError('Password must be more than 6 character')
         } else {
             setPasswordError('')
         }
@@ -109,9 +109,9 @@ export const Login = () => {
                             />
                         </div>
 
-                        <label>Password</label>
+                        <label> {(passwordDirty || passwordError) ? <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}> {passwordError}</div> : "Password" } </label>
                         <div className={s.formInputBox}>
-                            {(passwordDirty || passwordError) && <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}>{passwordError}</div>}
+                            {/*{(passwordDirty || passwordError) && <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}>{passwordError}</div>}*/}
                             <input name="password"
                                    value={password}
                                    type={passwordType}
@@ -124,10 +124,12 @@ export const Login = () => {
                                  alt="eye"
                                  onClick={handleShowPassword}/>
                         </div>
+                        <div>
+                            <input type="checkbox" id="check" className={s.checkbox}
+                                   onChange={handleCheckbox}/>
+                            <label htmlFor="check" >Remember</label>
+                        </div>
 
-                        <label><input type="checkbox"
-                                      onChange={handleCheckbox}
-                        />Remember</label>
 
                         <div className={s.formButtonBlock}>
 
