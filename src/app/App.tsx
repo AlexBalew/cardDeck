@@ -23,7 +23,7 @@ function App() {
     }
 
     useEffect(() => {
-        if(!(location.pathname === '/restore-password')) {
+        if(location.pathname !== '/restore-password') {
             dispatch(initializeAppTC())}
         }, [])
 
@@ -33,7 +33,7 @@ function App() {
         <div className='appStyle'>
             {status === 'loading' && <Preloader/>}
             {isLoggedIn ?  <CardDeckRoutes/> : <CardDeckRoutesUnauthorized/>}
-            <div style={{position: "absolute", marginLeft: '90%', top: '20px'}} ><SuperButton onClick={onLogOut}>Log out</SuperButton></div>
+            {isLoggedIn&&<div style={{position: "absolute", marginLeft: '90%', top: '20px'}} ><SuperButton onClick={onLogOut}>Log out</SuperButton></div>}
         </div>
     )
 }
