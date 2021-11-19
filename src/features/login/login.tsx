@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FocusEventHandler, FormEvent, useEffect, useState} from "react";
 import {NavLink} from "react-router-dom";
 import s from "./login.module.css"
-import {PATH} from "../../app/Routes";
+import {PATH} from "../../app/unauthorizedRoutes";
 import viewPassword from "../../assets/viewPassword.png"
 import hiddenPassword from "../../assets/hiddenPassword.png"
 import SuperButton from "../../common/elements/button/SuperButton";

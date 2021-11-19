@@ -7,7 +7,6 @@ import {Navigate, useParams} from "react-router-dom";
 import {RequestStatusType} from "../../app/app-reducer";
 import SuperInput from "../../common/elements/input/SuperInput";
 import SuperButton from "../../common/elements/button/SuperButton";
-import {Nullable} from "../../types";
 
 
 export const NewPassword = () => {
@@ -15,7 +14,7 @@ export const NewPassword = () => {
     let dispatch = useDispatch()
     let requestStatus = useSelector<AppStateType, boolean>(state => state.password.isSuccessfulRequest)
     let appStatus = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
-    let error = useSelector<AppStateType, Nullable<string>>(state => state.password.error)
+    const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
 
     const {token} = useParams<'token'>();
 
@@ -30,8 +29,10 @@ export const NewPassword = () => {
         dispatch(setNewPasswordTC(value, token!))
     }
 
-    if (requestStatus) {
+    if (requestStatus && !isLoggedIn) {
         return <Navigate to={'/login'}/>
+    } else if (requestStatus && isLoggedIn) {
+        return <Navigate to={'/profile'}/>
     }
 
     return (
@@ -54,7 +55,6 @@ export const NewPassword = () => {
                         >Send
                         </SuperButton>
                     </div>
-                    {error && <div style={{color: 'red', marginTop: '5px'}}>{error}</div>}
                 </div>
             </div>
         </div>

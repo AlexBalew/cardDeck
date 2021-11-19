@@ -18,31 +18,11 @@ export const PATH = {
 
 function CardDeckRoutesUnauthorized() {
 
-   /* const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
-
-    const routes = () => {
-        const routeObjects = [
-            {path: '/cardDeck', element: <Navigate to={PATH.LOGIN}/>},
-            {path: PATH.LOGIN, element: <Login/>},
-            {path: PATH.REGISTRATION, element: <Registration/>},
-            {path: PATH.RESTORE_PASSWORD, element: <PasswordRestore/>},
-            {path: PATH.NEW_PASSWORD_WITH_TOKEN, element: <NewPassword/>},
-            {path: PATH.NEW_PASSWORD, element: <NewPasswordWithoutToken/>},
-            {path: PATH.NOT_FOUND, element: <Error404/>},
-            {path: '*', element: <Navigate to={PATH.NOT_FOUND}/>},
-        ]
-        return routeObjects.map(routeObject => ({
-            ...routeObject,
-            element: isLoggedIn || routeObject.path === PATH.LOGIN ? routeObject.element : <Navigate to={PATH.LOGIN}/>
-        }))
-    }
-
-    return useRoutes(routes())*/
-
     return (
         <div>
             <Routes>
                 <Route path={'/cardDeck'} element={<Navigate to={PATH.LOGIN}/>}/>
+                <Route path={'/'} element={<Navigate to={PATH.LOGIN}/>}/>
                 <Route path={PATH.LOGIN} element={<Login/>}/>
                 <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                 <Route path={PATH.RESTORE_PASSWORD} element={<PasswordRestore/>}/>

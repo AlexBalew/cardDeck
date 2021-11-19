@@ -16,7 +16,7 @@ function Header() {
                 </div>
                 <nav className={s.menu}>
                     <Link to='/profile'>profile</Link>
-                    <Link to='/restore-password'>change password</Link>
+                    <Link to='/change-password'>change password</Link>
                 </nav>
             </div>
         </div>
