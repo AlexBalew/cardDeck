@@ -53,6 +53,7 @@
     font-size: 16px;
     margin-bottom: 15px;
 }
+
 input:focus {
     color: #000000;
     border: 1px solid #000000;
@@ -62,14 +63,21 @@ input:focus {
 .password {
     position: relative;
 }
+
 .passwordControl {
     position: absolute;
-    top: 20px;
-    right: 2px;
+    top: 27px;
+    right: 5px;
     display: inline-block;
-    width: 20px;
-    height: 20px;
-
+    width: 15px;
+    height: 15px;
+    opacity: 0.5;
 }
 
+.passwordControl:hover {
+    opacity: 0.8;
+}
 
+.btn {
+    margin-right: 20px;
+}

@@ -68,7 +68,7 @@ export const Registration = () => {
                                         dispatch(setErrorAC(''))
                                         setEmail(e.currentTarget.value)
                                     }}
-                                    style={{border: '1px solid black'}}/>
+                                    style={{border: '1px solid black', marginTop: '5px'}}/>
                     </div>
 
                     <div className={s.password}>Password{<br/>}
@@ -78,7 +78,7 @@ export const Registration = () => {
                                     onChange={(e) => {
                                         setPassword(e.currentTarget.value)
                                     }}
-                                    style={{border: '1px solid black'}}/>
+                                    style={{border: '1px solid black', marginTop: '5px'}}/>
                         <img className={s.passwordControl}
                              src={showPassword ? viewPassword : hiddenPassword}
                              alt="eye"
@@ -93,7 +93,7 @@ export const Registration = () => {
                                     onChange={(e) => {
                                         setConfirm(e.currentTarget.value)
                                     }}
-                                    style={{border: '1px solid black'}}/>
+                                    style={{border: '1px solid black', marginTop: '5px'}}/>
                         <img className={s.passwordControl}
                              src={showPassword ? viewPassword : hiddenPassword}
                              alt="eye"
@@ -101,10 +101,12 @@ export const Registration = () => {
                         />
                     </div>
                     <SuperButton name='sendCurrentEmail'
+                                 className={s.btn}
                                  onClick={onCancelHandle}>
                         Cancel
                     </SuperButton>
                     <SuperButton name='sendCurrentEmail'
+                                 className={s.btn}
                                  onClick={handleSubmit}
                                  disabled={appStatus === 'loading'}>
                         Registry
