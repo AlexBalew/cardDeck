@@ -7,10 +7,7 @@ import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/Routes";
 import userDefaultImg from "../../assets/profile/userDefaultImg.png"
 
-
-type ProfilePropsType = {}
-
-export const Profile = (props: ProfilePropsType) => {
+export const Profile = () => {
 
     const dispatch = useDispatch()
     /*const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)*/
@@ -21,6 +18,7 @@ export const Profile = (props: ProfilePropsType) => {
     if (!isLoggedIn) {
         return <Navigate to={PATH.LOGIN}/>
     }
+
     return (
         <div className={s.profileContainer}>
             <div>

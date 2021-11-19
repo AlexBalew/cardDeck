@@ -28,7 +28,7 @@ export const Login = () => {
     const [passwordError, setPasswordError] = useState('')
     const [formValid, setFormValid] = useState(false);
 
-
+    console.log('LOGIN')
 
     const handleInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
@@ -49,7 +49,7 @@ export const Login = () => {
         }
     }
     const handleCheckbox = () => {
-        setRememberMe(!rememberMe)
+       setRememberMe(!rememberMe)
     }
     const handleShowPassword = () => {
         if (showPassword) {

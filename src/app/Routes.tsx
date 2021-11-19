@@ -31,14 +31,14 @@ function CardDeckRoutes() {
                 !(location.pathname === "/404") && <Header/>
             }
             <Routes>
-                <Route path={'/cardDeck'} element={<Navigate to={PATH.LOGIN}/>}/>
+                {/*<Route path={'/cardDeck'} element={<Navigate to={PATH.LOGIN}/>}/>*/}
                 <Route path={PATH.LOGIN} element={<Login/>}/>
-                <Route path={PATH.REGISTRATION} element={<Registration/>}/>
+                {/*<Route path={PATH.REGISTRATION} element={<Registration/>}/>*/}
                 <Route path={PATH.PROFILE} element={<Profile/>}/>
                 <Route path={PATH.CHANGE_PASSWORD} element={<ChangePassword/>}/>
                 <Route path={PATH.NEW_PASSWORD} element={<NewPasswordWithoutToken/>}/>
                 <Route path={PATH.NEW_PASSWORD_WITH_TOKEN} element={<NewPassword/>}/>
-                <Route path={PATH.TEST} element={<TestComps/>}/>
+                {/*<Route path={PATH.TEST} element={<TestComps/>}/>*/}
                 <Route path={PATH.NOT_FOUND} element={<Error404/>}/>
                 <Route path={'*'} element={<Navigate to={PATH.NOT_FOUND}/>}/>
             </Routes>
