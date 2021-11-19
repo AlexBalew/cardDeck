@@ -13,11 +13,10 @@ import {useLocation} from "react-router-dom";
 
 function App() {
 
-    const dispatch = useDispatch()
-    const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
+   const dispatch = useDispatch()
+   const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
     const location = useLocation()
-
     const onLogOut = () => {
         dispatch(logOutTC())
     }

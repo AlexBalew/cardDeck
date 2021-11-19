@@ -21,7 +21,7 @@ function CardDeckRoutesUnauthorized() {
     return (
         <div>
             <Routes>
-                <Route path={'/cardDeck'} element={<Navigate to={PATH.LOGIN}/>}/>
+                <Route path={'/cardDeck'} element={<Navigate to={PATH.REGISTRATION}/>}/>
                 <Route path={'/'} element={<Navigate to={PATH.LOGIN}/>}/>
                 <Route path={PATH.LOGIN} element={<Login/>}/>
                 <Route path={PATH.REGISTRATION} element={<Registration/>}/>

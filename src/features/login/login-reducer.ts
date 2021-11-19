@@ -23,6 +23,7 @@ export const loginReducer = (state = initState, action: AllACType): stateType =>
             return {...state, isLoggedIn: action.isLoggedIn}
         }
         case 'login/LOG_IN' : {
+            debugger
             return {...state, name: action.name, email: action.email, isLoggedIn: action.isLoggedIn}
         }
         default:
