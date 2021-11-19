@@ -62,6 +62,7 @@ export const Login = () => {
 
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         dispatch(loginTC(email, password, rememberMe))
     }
 
