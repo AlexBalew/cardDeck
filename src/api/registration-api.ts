@@ -1,4 +1,4 @@
-import {instance_local} from "./api";
+import {instance_local, instance_release} from "./api";
 
 export const registApi = {
     register(email: string, password: string) {
