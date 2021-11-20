@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/cardDeck/static/css/main.4615f81c.chunk.css",
-    "main.js": "/cardDeck/static/js/main.4ae453e3.chunk.js",
-    "main.js.map": "/cardDeck/static/js/main.4ae453e3.chunk.js.map",
-    "runtime-main.js": "/cardDeck/static/js/runtime-main.b428a6a3.js",
-    "runtime-main.js.map": "/cardDeck/static/js/runtime-main.b428a6a3.js.map",
-    "static/js/2.cbd80305.chunk.js": "/cardDeck/static/js/2.cbd80305.chunk.js",
-    "static/js/2.cbd80305.chunk.js.map": "/cardDeck/static/js/2.cbd80305.chunk.js.map",
-    "static/js/3.1800c811.chunk.js": "/cardDeck/static/js/3.1800c811.chunk.js",
-    "static/js/3.1800c811.chunk.js.map": "/cardDeck/static/js/3.1800c811.chunk.js.map",
+    "main.css": "/cardDeck/static/css/main.e87a58e5.chunk.css",
+    "main.js": "/cardDeck/static/js/main.1b241eb8.chunk.js",
+    "main.js.map": "/cardDeck/static/js/main.1b241eb8.chunk.js.map",
+    "runtime-main.js": "/cardDeck/static/js/runtime-main.74e98ae3.js",
+    "runtime-main.js.map": "/cardDeck/static/js/runtime-main.74e98ae3.js.map",
+    "static/js/2.feab7ff3.chunk.js": "/cardDeck/static/js/2.feab7ff3.chunk.js",
+    "static/js/2.feab7ff3.chunk.js.map": "/cardDeck/static/js/2.feab7ff3.chunk.js.map",
+    "static/js/3.940f77dc.chunk.js": "/cardDeck/static/js/3.940f77dc.chunk.js",
+    "static/js/3.940f77dc.chunk.js.map": "/cardDeck/static/js/3.940f77dc.chunk.js.map",
     "index.html": "/cardDeck/index.html",
-    "static/css/main.4615f81c.chunk.css.map": "/cardDeck/static/css/main.4615f81c.chunk.css.map",
-    "static/js/2.cbd80305.chunk.js.LICENSE.txt": "/cardDeck/static/js/2.cbd80305.chunk.js.LICENSE.txt",
+    "static/css/main.e87a58e5.chunk.css.map": "/cardDeck/static/css/main.e87a58e5.chunk.css.map",
+    "static/js/2.feab7ff3.chunk.js.LICENSE.txt": "/cardDeck/static/js/2.feab7ff3.chunk.js.LICENSE.txt",
     "static/media/hiddenPassword.a81cfb08.png": "/cardDeck/static/media/hiddenPassword.a81cfb08.png",
     "static/media/preloader.b2a8fa3d.gif": "/cardDeck/static/media/preloader.b2a8fa3d.gif",
     "static/media/viewPassword.0b5c67b9.png": "/cardDeck/static/media/viewPassword.0b5c67b9.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.b428a6a3.js",
-    "static/js/2.cbd80305.chunk.js",
-    "static/css/main.4615f81c.chunk.css",
-    "static/js/main.4ae453e3.chunk.js"
+    "static/js/runtime-main.74e98ae3.js",
+    "static/js/2.feab7ff3.chunk.js",
+    "static/css/main.e87a58e5.chunk.css",
+    "static/js/main.1b241eb8.chunk.js"
   ]
 }
