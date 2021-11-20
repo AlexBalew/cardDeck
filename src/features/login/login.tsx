@@ -28,8 +28,6 @@ export const Login = () => {
     const [passwordError, setPasswordError] = useState('')
     const [formValid, setFormValid] = useState(false);
 
-    console.log('LOGIN')
-
     const handleInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
         const re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;

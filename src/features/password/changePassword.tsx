@@ -44,7 +44,6 @@ export const ChangePassword = () => {
                            onChange={onSetCurrentEmail}
                            style={{border: '1px solid black'}}
                     />
-                    {error && <div style={{color: 'red', marginTop: '5px'}}>{error}</div>}
                 </div>
                 <div>
                     <SuperButton name='sendCurrentEmail'

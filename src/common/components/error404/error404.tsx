@@ -1,15 +1,13 @@
-import React, {useCallback} from "react";
+import React from "react";
 import s from './error404.module.css'
 import {useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store";
-import {logOutTC} from "../../../features/login/login-reducer";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../../app/Routes";
 
 
 export const Error404 = () => {
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
-
 
     if (!isLoggedIn) {
         return <Navigate to={PATH.LOGIN}/>
