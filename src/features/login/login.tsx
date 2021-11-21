@@ -20,14 +20,32 @@ export const Login = () => {
     const [password, setPassword] = React.useState<string>('');
     const [rememberMe, setRememberMe] = React.useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [passwordType, setPasswordTypeType] = useState('password')
+    const [passwordType, setPasswordTypeType] = useState('password');
+
+    const [emailDirty, setEmailDirty] = useState(false);
+    const [passwordDirty, setPasswordDirty] = useState(false);
     //отражает состоняие были мы внутри инпута или нет
-    const [emailDirty, setEmailDirty] = useState(false)
-    const [passwordDirty, setPasswordDirty] = useState(false)
-    const [emailError, setEmailError] = useState('')
-    const [passwordError, setPasswordError] = useState('')
+
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
     const [formValid, setFormValid] = useState(false);
 
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault()
+        dispatch(loginTC(email, password, rememberMe))
+    }
+
+    const handlerBlur = (e: ChangeEvent<HTMLInputElement>) => {
+        switch (e.currentTarget.value) {
+            case 'email':
+                setEmailDirty(true)
+                break
+            case 'password':
+                setPasswordDirty(true)
+                break
+        }
+    }
     const handleInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
         const re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -59,21 +77,7 @@ export const Login = () => {
     }
 
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        dispatch(loginTC(email, password, rememberMe))
-    }
 
-    const handlerBlur = (e: FocusEventHandler<HTMLInputElement>) => {
-        switch (e.name) {
-            case 'email':
-                setEmailDirty(true)
-                break
-            case 'password':
-                setPasswordDirty(true)
-                break
-        }
-    }
     useEffect(() => {
        if (emailError || passwordError) {
            setFormValid(false)
@@ -83,9 +87,11 @@ export const Login = () => {
     }, [emailError, passwordError])
 
 
+
     if (isLoggedIn) {
         return <Navigate to={PATH.PROFILE}/>
     }
+
 
     return (
         <div className={s.loginContainer}>
@@ -93,22 +99,19 @@ export const Login = () => {
                 <div className={s.content}>
                     <h3 className={s.fromBlockTitle}>It-incubator</h3>
 
-                    <form className={s.formContent} onSubmit={(e) => {
-                        handleSubmit(e)
-                    }}>
-                        <label>Email</label>
+                    <form className={s.formContent} onSubmit={handleSubmit}>
+                        <label>{(emailDirty || emailError) ? <div className={s.errorStyle}>{emailError}</div> : 'Email'}</label>
                         <div className={s.formInputBox}>
-                            {(emailDirty || emailError) && <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}>{emailError}</div>}
                             <input name="email"
                                    value={email}
                                    type="email"
                                    className={s.formInput}
                                    onChange={handleInputEmail}
-                                   onBlur={e => handlerBlur}
+                                   onBlur={handlerBlur}
                             />
                         </div>
 
-                        <label> {(passwordDirty || passwordError) ? <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}> {passwordError}</div> : "Password" } </label>
+                        <label> {(passwordDirty || passwordError) ? <div className={s.errorStyle}> {passwordError}</div> : "Password" } </label>
                         <div className={s.formInputBox}>
                             {/*{(passwordDirty || passwordError) && <div style={{color: 'red', marginBottom: '5px', fontSize: '12px'}}>{passwordError}</div>}*/}
                             <input name="password"
@@ -116,7 +119,7 @@ export const Login = () => {
                                    type={passwordType}
                                    className={s.formInput}
                                    onChange={handleInputPassword}
-                                   onBlur={e => handlerBlur}
+                                   onBlur={handlerBlur}
                             />
                             <img className={s.inputPasswordView}
                                  src={showPassword ? viewPassword : hiddenPassword}

@@ -75,6 +75,11 @@
     opacity: 0.8;
 }
 
+.errorStyle {
+    color: red;
+    font-size: 12px;
+}
+
 .checkbox {
     width: 15px;
     height: 15px;
