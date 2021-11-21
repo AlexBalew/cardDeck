@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/cardDeck/static/css/main.dec210c6.chunk.css",
+    "main.css": "/cardDeck/static/css/main.544ed2fc.chunk.css",
     "main.js": "/cardDeck/static/js/main.3fcbc2d9.chunk.js",
     "main.js.map": "/cardDeck/static/js/main.3fcbc2d9.chunk.js.map",
     "runtime-main.js": "/cardDeck/static/js/runtime-main.74e98ae3.js",
@@ -10,7 +10,7 @@
     "static/js/3.940f77dc.chunk.js": "/cardDeck/static/js/3.940f77dc.chunk.js",
     "static/js/3.940f77dc.chunk.js.map": "/cardDeck/static/js/3.940f77dc.chunk.js.map",
     "index.html": "/cardDeck/index.html",
-    "static/css/main.dec210c6.chunk.css.map": "/cardDeck/static/css/main.dec210c6.chunk.css.map",
+    "static/css/main.544ed2fc.chunk.css.map": "/cardDeck/static/css/main.544ed2fc.chunk.css.map",
     "static/js/2.feab7ff3.chunk.js.LICENSE.txt": "/cardDeck/static/js/2.feab7ff3.chunk.js.LICENSE.txt",
     "static/media/hiddenPassword.a81cfb08.png": "/cardDeck/static/media/hiddenPassword.a81cfb08.png",
     "static/media/preloader.b2a8fa3d.gif": "/cardDeck/static/media/preloader.b2a8fa3d.gif",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.74e98ae3.js",
     "static/js/2.feab7ff3.chunk.js",
-    "static/css/main.dec210c6.chunk.css",
+    "static/css/main.544ed2fc.chunk.css",
     "static/js/main.3fcbc2d9.chunk.js"
   ]
 }
