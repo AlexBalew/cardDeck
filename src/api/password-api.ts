@@ -5,7 +5,7 @@ export const restoreAPI = {
         return instance_release.post<{ info: string, error: string }>('/auth/forgot', {
             email: eMail,
             from: `test-front-admin <${eMail}>`,
-            message: `<div style="background-color: lime; padding: 15px">password recovery link: <a href='http://localhost:3000/#/new-password/$token$'>link</a></div>`
+            message: `<div style="background-color: #C7A5A5; padding: 50px; text-decoration: #3F51B5">password recovery link: <a href='http://localhost:3000/#/new-password/$token$'>Change password</a></div>`
         }, {})
     },
     newPassword(newPassword: string, token: string) {

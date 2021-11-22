@@ -11,7 +11,6 @@ test('isFetching should changes', () => {
 
     // action
 
-
     // expectation
 
 })

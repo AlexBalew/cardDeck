@@ -7,7 +7,8 @@ import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "./login-reducer";
 import {AppStateType} from "../../bll/store";
-import {PATH} from "../../app/unauthorizedRoutes";
+import {PATH} from "../../app/Routes";
+
 
 
 
