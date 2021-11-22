@@ -31,12 +31,12 @@ export const Login = () => {
     const [formValid, setFormValid] = useState(false);
 
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         dispatch(loginTC(email, password, rememberMe))
     }
 
-    const handlerBlur = (e: ChangeEvent<HTMLInputElement>) => {
+    const handlerBlur = (e: FormEvent<HTMLInputElement>) => {
         switch (e.currentTarget.value) {
             case 'email':
                 setEmailDirty(true)
