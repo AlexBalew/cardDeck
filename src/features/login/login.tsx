@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FocusEventHandler, FormEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {Navigate, NavLink} from "react-router-dom";
 import s from "./login.module.css"
 import viewPassword from "../../assets/password/viewPassword.png"
@@ -16,9 +16,9 @@ export const Login = () => {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector<AppStateType, boolean>((state) => state.login.isLoggedIn);
 
-    const [email, setEmail] = React.useState<string>('');
-    const [password, setPassword] = React.useState<string>('');
-    const [rememberMe, setRememberMe] = React.useState<boolean>(false);
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [rememberMe, setRememberMe] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [passwordType, setPasswordTypeType] = useState('password');
 

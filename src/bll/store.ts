@@ -5,6 +5,7 @@ import {loginReducer} from "../features/login/login-reducer";
 import {profileReducer} from "../features/profile/profile-reducer";
 import {registrationReducer} from "../features/registration/registration-reducer";
 import {appReducer} from "../app/app-reducer";
+import {cardsReducer} from "../features/cards/cards-reducer";
 
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     login: loginReducer,
     profile: profileReducer,
     registration: registrationReducer,
-    app: appReducer
+    app: appReducer,
+    cards: cardsReducer,
 })
 
 export let store = createStore(rootReducer, applyMiddleware(thunk))
