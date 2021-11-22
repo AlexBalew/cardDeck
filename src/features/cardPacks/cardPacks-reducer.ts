@@ -1,26 +1,40 @@
-import {Dispatch} from "redux";
-import {restoreAPI} from "../../api/password-api";
-import {Nullable} from "../../types";
-import {setAppStatusAC, setAppStatusACType} from "../../app/app-reducer";
+import {setAppStatusAC} from "../../app/app-reducer";
 import {GetPacksResponseType, packsAPI} from "../../api/packs-api";
+import {AppThunkType} from "../../bll/store";
 
-type stateType = Nullable<GetPacksResponseType>
+type stateType = GetPacksResponseType
 
-let initState: stateType = null
+let initState: stateType = {
+    cardPacks: [{
+        _id: '',
+        user_id: '',
+        name: '',
+        cardsCount: 0,
+        created: '',
+        updated: '',
+        user_name: '',
+    }],
+    cardPacksTotalCount: 0,
+    maxCardsCount: 0,
+    minCardsCount: 0,
+    page: 1,
+    pageCount: 4,
+}
 
 export const cardPacksReducer = (state = initState, action: AllACType): stateType => {
     switch (action.type) {
         case 'cardPacks/GET_CARD_PACKS' : {
             return {...state, ...action.data}
         }
+       /* case 'cardPacks/SET_MIN_CARDS_COUNT' :
+        case 'cardPacks/SET_MAX_CARDS_COUNT' :
+        case 'cardPacks/SET_CURRENT_PAGE' : {
+            return {...state, ...action.payload}
+        }*/
         default:
             return state
     }
 }
-
-type AllACType = setCardPacksDataACType | setAppStatusACType | setErrorACType
-
-type setCardPacksDataACType = ReturnType<typeof setCardPacksDataAC>
 
 export const setCardPacksDataAC = (data: GetPacksResponseType) => {
     return {
@@ -29,17 +43,37 @@ export const setCardPacksDataAC = (data: GetPacksResponseType) => {
     } as const
 }
 
-export type setErrorACType = ReturnType<typeof setErrorAC>
-
 export const setErrorAC = (error: string) => {
     return {
-        type: 'restore/SET_ERROR',
+        type: 'cardPacks/SET_ERROR',
         error
     } as const
 }
 
+/*export const setMinCardsCountAC = (minCardsCount: number) => {
+    return {
+        type: 'cardPacks/SET_MIN_CARDS_COUNT',
+        payload: minCardsCount
+    } as const
+}
 
-export const getPacksTC = () => async (dispatch: Dispatch<AllACType>) => {
+export const setMaxCardsCountAC = (maxCardsCount: number) => {
+    return {
+        type: 'cardPacks/SET_MAX_CARDS_COUNT',
+        payload: maxCardsCount
+    } as const
+}
+
+export const setCurrentPageAC = (page: number) => {
+    return {
+        type: 'cardPacks/SET_CURRENT_PAGE',
+        payload: page
+    } as const
+}*/
+
+
+export const getPacksTC = (): AppThunkType  => async (dispatch, getState) => { //затипизировать везде
+
     try {
         dispatch(setAppStatusAC("loading"))
         let response = await packsAPI.getPacks()
@@ -55,3 +89,12 @@ export const getPacksTC = () => async (dispatch: Dispatch<AllACType>) => {
     }
 
 }
+
+
+type AllACType =
+    ReturnType<typeof setCardPacksDataAC> |
+    ReturnType<typeof setAppStatusAC> |
+    ReturnType<typeof setErrorAC>
+    /*ReturnType<typeof setMinCardsCountAC> |
+    ReturnType<typeof setMaxCardsCountAC> |
+    ReturnType<typeof setCurrentPageAC>*/

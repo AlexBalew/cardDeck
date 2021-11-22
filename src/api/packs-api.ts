@@ -7,6 +7,7 @@ export type CardPackType = {
     cardsCount: number
     created: string
     updated: string
+    user_name: string
 }
 
 export type GetPacksResponseType = {
