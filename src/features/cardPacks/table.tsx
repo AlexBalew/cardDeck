@@ -2,17 +2,22 @@ import React, {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../bll/store";
 import {CardPackType} from "../../api/packs-api";
-import {getPacksTC} from "./cardPacks-reducer";
+import {getPacksTC, setPageCountAC} from "./cardPacks-reducer";
 
 export const CardPacksTable = () => {
 
     let dispatch = useDispatch()
     let titles = ['Name', 'Cards count', 'Last updated', 'Created by', 'Actions']
     const packs = useAppSelector<CardPackType[]>(state => state.packs.cardPacks)
+    const pageCount = useAppSelector<number>(state => state.packs.pageCount)
 
     useEffect(() => {
         dispatch(getPacksTC())
-    }, [])
+    }, [pageCount])
+
+    const onSetPageCount = () => {
+        dispatch(setPageCountAC(10))
+    }
 
     return (
         <div>
@@ -33,6 +38,7 @@ export const CardPacksTable = () => {
                     )}
                 </tbody>
             </table>
+            <button onClick={onSetPageCount}>10</button>
         </div>
     )
 }

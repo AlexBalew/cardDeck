@@ -26,11 +26,14 @@ export const cardPacksReducer = (state = initState, action: AllACType): stateTyp
         case 'cardPacks/GET_CARD_PACKS' : {
             return {...state, ...action.data}
         }
-       /* case 'cardPacks/SET_MIN_CARDS_COUNT' :
-        case 'cardPacks/SET_MAX_CARDS_COUNT' :
-        case 'cardPacks/SET_CURRENT_PAGE' : {
-            return {...state, ...action.payload}
-        }*/
+        case 'cardPacks/SET_PAGE_COUNT' : {
+            return {...state, pageCount: action.payload}
+        }
+        /* case 'cardPacks/SET_MIN_CARDS_COUNT' :
+         case 'cardPacks/SET_MAX_CARDS_COUNT' :
+         case 'cardPacks/SET_CURRENT_PAGE' : {
+             return {...state, ...action.payload}
+         }*/
         default:
             return state
     }
@@ -71,12 +74,19 @@ export const setCurrentPageAC = (page: number) => {
     } as const
 }*/
 
+export const setPageCountAC = (pageCount: number) => {
+    return {
+        type: 'cardPacks/SET_PAGE_COUNT',
+        payload: pageCount
+    } as const
+}
 
-export const getPacksTC = (): AppThunkType  => async (dispatch, getState) => { //затипизировать везде
 
+export const getPacksTC = (): AppThunkType => async (dispatch, getState) => { //затипизировать везде
+    let {pageCount} = getState().packs
     try {
         dispatch(setAppStatusAC("loading"))
-        let response = await packsAPI.getPacks()
+        let response = await packsAPI.getPacks(pageCount)
         dispatch(setCardPacksDataAC(response.data))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
@@ -94,7 +104,8 @@ export const getPacksTC = (): AppThunkType  => async (dispatch, getState) => { /
 type AllACType =
     ReturnType<typeof setCardPacksDataAC> |
     ReturnType<typeof setAppStatusAC> |
-    ReturnType<typeof setErrorAC>
-    /*ReturnType<typeof setMinCardsCountAC> |
-    ReturnType<typeof setMaxCardsCountAC> |
-    ReturnType<typeof setCurrentPageAC>*/
+    ReturnType<typeof setErrorAC> |
+    ReturnType<typeof setPageCountAC>
+/*ReturnType<typeof setMinCardsCountAC> |
+ReturnType<typeof setMaxCardsCountAC> |
+ReturnType<typeof setCurrentPageAC>*/
