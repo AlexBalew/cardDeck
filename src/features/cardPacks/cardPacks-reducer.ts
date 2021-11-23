@@ -86,9 +86,6 @@ export const setPageCountAC = (pageCount: number) => {
 }
 
 
-
-
-
 export const getPacksTC = (): AppThunkType => async (dispatch, getState) => { //затипизировать везде
     let {pageCount, page} = getState().packs
     try {
@@ -103,6 +100,25 @@ export const getPacksTC = (): AppThunkType => async (dispatch, getState) => { //
         console.log('Error: ', {...e})
         dispatch(setErrorAC(error))
         dispatch(setAppStatusAC("succeeded"))
+    }
+
+}
+
+export const createPackTC = (name: string): AppThunkType => async (dispatch) => { //затипизировать везде
+    try {
+        dispatch(setAppStatusAC("loading"))
+        let response = await packsAPI.createPack(name)
+        dispatch(setCardPacksDataAC(response.data))
+        dispatch(setAppStatusAC("succeeded"))
+    } catch (e: any) {
+        const error = e.response
+            ? e.response.data.error
+            : (e.message + ', more details in the console');
+        console.log('Error: ', {...e})
+        dispatch(setErrorAC(error))
+        dispatch(setAppStatusAC("succeeded"))
+    } finally {
+        dispatch(getPacksTC())
     }
 
 }

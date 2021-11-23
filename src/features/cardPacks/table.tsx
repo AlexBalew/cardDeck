@@ -37,7 +37,7 @@ export const CardPacksTable = () => {
                             <td>{pack.cardsCount}</td>
                             <td>{pack.updated}</td>
                             <td>{pack.user_name}</td>
-                            <td><button>click</button></td>
+                            <td><button>delete</button><button>edit</button><button>learn</button></td>
                         </tr>
                     )}
                 </tbody>

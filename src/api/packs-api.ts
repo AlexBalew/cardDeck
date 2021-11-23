@@ -22,5 +22,8 @@ export type GetPacksResponseType = {
 export const packsAPI = {
     getPacks(pageCount: number, page: number) {
         return instance_local.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}`, {})
+    },
+    createPack(name: string) {
+        return instance_local.post<GetPacksResponseType>(`/cards/pack`, {cardsPack: {name}}, {})
     }
 }

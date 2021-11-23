@@ -3,6 +3,7 @@ import s from './pagination.module.css';
 import {useAppSelector} from "../../../bll/store";
 import {useDispatch} from "react-redux";
 import {setCurrentPageAC} from "../../../features/cardPacks/cardPacks-reducer";
+import {Nullable} from "../../../types";
 
 
 type PaginationPropsType = {
@@ -13,8 +14,8 @@ type PaginationPropsType = {
 let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
 
     let dispatch = useDispatch()
-    let [portionNumber, setPortionNumber] = useState(1)
-    let [inputPage, setInputPage] = useState(1)
+    let [portionNumber, setPortionNumber] = useState<number>(1)
+    let [inputPage, setInputPage] = useState<Nullable<number>>(1)
 
     let cardPacksTotalCount = useAppSelector<number>(state => state.packs.cardPacksTotalCount)
     let pageCount = useAppSelector<number>(state => state.packs.pageCount)
@@ -42,6 +43,7 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
 
     const onSetNewPageByButton = (inputPage: number) => {
         dispatch(setCurrentPageAC(inputPage))
+        setInputPage(null)
     }
 
     return (
@@ -66,7 +68,7 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
             <input style={{border: '1px solid', width: '20px', marginLeft: '20px', marginRight: '5px'}}
                    onChange={onSetNewPageFromInput}/>
             <button onClick={() => {
-                onSetNewPageByButton(inputPage)
+                onSetNewPageByButton(inputPage!)
             }}>go
             </button>
         </div>
