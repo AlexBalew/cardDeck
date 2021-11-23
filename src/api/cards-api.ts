@@ -14,10 +14,14 @@ export const cardsAPI = {
         return instance_local.delete<CardsResponseType>
         (`cards/card?id=${cardsPack_id}`)
     },
-    createPack(title: string) {
+    updateCard(updateCard: updateCardType) {
+        return instance_local.put<CardsResponseType>
+        (`cards/card`, {card: updateCard})
+    },
+    /*createPack(title: string) {
         return instance_local.post<PacksResponseType>
         (`cards/pack`, { cardsPack: {name: title}})
-    },
+    },*/
 
 }
 
@@ -51,6 +55,18 @@ export type CardsResponseType = {
     tokenDeathTime: number
 }
 
+export type NewCardType = {
+    cardsPack_id: string
+    question?: string
+    answer?: string
+}
+
+type updateCardType = {
+    _id: string,
+    question?: string,
+    answer?: string
+}
+/*
 export type PacksResponseType = {
     cardsCount: number
     created: string
@@ -69,4 +85,4 @@ export type PacksResponseType = {
     _id: string
     token: string
     tokenDeathTime: number
-}
+}*/
