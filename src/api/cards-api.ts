@@ -6,6 +6,14 @@ export const cardsAPI = {
         return instance_local.get<CardsResponseType>
         (`cards/card?cardsPack_id=${cardsPack_id}&pageCount=${pageCount}&page=${page}`)
     },
+    createCard(cardsPack_id: string, question: string, answer: string) {
+        return instance_local.post<CardsResponseType>
+        (`cards/card`, { card: {cardsPack_id, question, answer}})
+    },
+    deleteCard(cardsPack_id: string) {
+        return instance_local.delete<CardsResponseType>
+        (`cards/card?id=${cardsPack_id}`)
+    },
     createPack(title: string) {
         return instance_local.post<PacksResponseType>
         (`cards/pack`, { cardsPack: {name: title}})
