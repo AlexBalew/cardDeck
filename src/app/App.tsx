@@ -13,8 +13,8 @@ import {useLocation} from "react-router-dom";
 
 function App() {
 
-   const dispatch = useDispatch()
-   const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
+    const dispatch = useDispatch()
+    const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
     const location = useLocation()
 
@@ -23,17 +23,18 @@ function App() {
     }
 
     useEffect(() => {
-        if(location.pathname !== '/restore-password') {
-            dispatch(initializeAppTC())}
-        }, [])
+        if (location.pathname !== '/restore-password') {
+            dispatch(initializeAppTC())
+        }
+    }, [])
 
-    console.log(isLoggedIn)
+    console.log('isLoggedIn: ', isLoggedIn)
 
     return (
         <div className='appStyle'>
             {status === 'loading' && <Preloader/>}
-            {isLoggedIn ?  <CardDeckRoutes/> : <CardDeckRoutesUnauthorized/>}
-            {isLoggedIn&&<div style={{position: "absolute", marginLeft: '90%', top: '20px'}} >
+            {isLoggedIn ? <CardDeckRoutes/> : <CardDeckRoutesUnauthorized/>}
+            {isLoggedIn && <div style={{position: "absolute", marginLeft: '90%', top: '20px'}}>
                 <SuperButton onClick={onLogOut}>Log out</SuperButton>
             </div>}
 
