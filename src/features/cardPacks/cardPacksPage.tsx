@@ -1,7 +1,7 @@
 import React from "react";
 import {CardPacksTable} from "./table";
 import s from './cardPacksPage.module.css';
-import Pagination from "../../common/pagination/pagination";
+import Pagination from "../../common/components/pagination/pagination";
 
 export const CardPacksPage = () => {
 

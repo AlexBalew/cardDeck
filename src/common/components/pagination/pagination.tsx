@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from './pagination.module.css';
-import {useAppSelector} from "../../bll/store";
+import {useAppSelector} from "../../../bll/store";
 import {useDispatch} from "react-redux";
-import {setCurrentPageAC} from "../../features/cardPacks/cardPacks-reducer";
+import {setCurrentPageAC} from "../../../features/cardPacks/cardPacks-reducer";
 
 
 type PaginationPropsType = {
@@ -13,6 +13,8 @@ type PaginationPropsType = {
 let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
 
     let dispatch = useDispatch()
+    let [portionNumber, setPortionNumber] = useState(1)
+    let [inputPage, setInputPage] = useState(1)
 
     let cardPacksTotalCount = useAppSelector<number>(state => state.packs.cardPacksTotalCount)
     let pageCount = useAppSelector<number>(state => state.packs.pageCount)
@@ -25,12 +27,21 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
     }
 
     let numberOfPortions = Math.ceil(totalAmountOfPages / numberOfPagesInOnePortion)
-    let [portionNumber, setPortionNumber] = useState(1)
+
     let leftPortionPageNumber = (portionNumber - 1) * numberOfPagesInOnePortion + 1
     let rightPortionPageNumber = portionNumber * numberOfPagesInOnePortion
 
     const onSetNewPage = (page: number) => {
         dispatch(setCurrentPageAC(page))
+    }
+
+    const onSetNewPageFromInput = (e: ChangeEvent<HTMLInputElement>) => {
+        let page = +e.currentTarget.value
+        setInputPage(page)
+    }
+
+    const onSetNewPageByButton = (inputPage: number) => {
+        dispatch(setCurrentPageAC(inputPage))
     }
 
     return (
@@ -52,6 +63,12 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
             <button onClick={() => {
                 setPortionNumber(portionNumber + 1)
             }}>next</button>}
+            <input style={{border: '1px solid', width: '20px', marginLeft: '20px', marginRight: '5px'}}
+                   onChange={onSetNewPageFromInput}/>
+            <button onClick={() => {
+                onSetNewPageByButton(inputPage)
+            }}>go
+            </button>
         </div>
     )
 }
