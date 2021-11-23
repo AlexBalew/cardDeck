@@ -27,7 +27,7 @@
 }
 
 .main input:checked ~ .menu {
-    width: 280px;
+    width: 360px;
 }
 
 .menu a {
