@@ -1,0 +1,12 @@
+.pagination {
+    margin: 10px;
+    cursor: pointer;
+}
+.pageNumber {
+    padding: 2px;
+    color: #bf7b7b;
+}
+
+.pageNumber.selectedPage {
+    font-weight: bold;
+}

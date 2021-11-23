@@ -11,10 +11,11 @@ export const CardPacksTable = () => {
     let titles = ['Name', 'Cards count', 'Last updated', 'Created by', 'Actions']
     const packs = useAppSelector<CardPackType[]>(state => state.packs.cardPacks)
     const pageCount = useAppSelector<number>(state => state.packs.pageCount)
+    const page = useAppSelector<number>(state => state.packs.page)
 
     useEffect(() => {
         dispatch(getPacksTC())
-    }, [pageCount])
+    }, [pageCount, page])
 
     const onSetPageCount = (e: MouseEvent<HTMLButtonElement>) => {
         let value = +e.currentTarget.value
