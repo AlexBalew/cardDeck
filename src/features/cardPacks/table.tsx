@@ -34,7 +34,7 @@ export const CardPacksTable = () => {
                 <tbody>
                     {packs.map(pack =>
                         <tr className={s.dataRow}>
-                            <td>{pack.name}</td>
+                            <td className={s.nameColumn}>{pack.name}</td>
                             <td>{pack.cardsCount}</td>
                             <td>{pack.updated}</td>
                             <td>{pack.user_name}</td>

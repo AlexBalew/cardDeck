@@ -18,3 +18,12 @@ tr:nth-child(2n) {
     text-align: center;
     border-collapse: collapse;
 }
+
+.nameColumn {
+   /* overflow-wrap: break-word;*/
+    max-width: 100px;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    /*display:inline-block;
+    -webkit-box-orient: revert;*/
+}
