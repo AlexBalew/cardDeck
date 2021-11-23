@@ -1,8 +1,9 @@
-import React, {useEffect} from "react";
+import React, {useEffect, MouseEvent} from "react";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../bll/store";
 import {CardPackType} from "../../api/packs-api";
 import {getPacksTC, setPageCountAC} from "./cardPacks-reducer";
+import s from './table.module.css'
 
 export const CardPacksTable = () => {
 
@@ -15,30 +16,34 @@ export const CardPacksTable = () => {
         dispatch(getPacksTC())
     }, [pageCount])
 
-    const onSetPageCount = () => {
-        dispatch(setPageCountAC(10))
+    const onSetPageCount = (e: MouseEvent<HTMLButtonElement>) => {
+        let value = +e.currentTarget.value
+        dispatch(setPageCountAC(value))
     }
 
     return (
         <div>
-            <table >
+            <table className={s.table}>
                 <thead>
                 <tr >
-                    {titles.map(title => <th key={Math.floor(Math.random()*1000)}>{title}</th>)}
+                    {titles.map(title => <th key={Math.floor(Math.random()*1000)} className={s.title}>{title}</th>)}
                 </tr>
                 </thead>
                 <tbody>
                     {packs.map(pack =>
-                        <tr>
+                        <tr className={s.dataRow}>
                             <td>{pack.name}</td>
                             <td>{pack.cardsCount}</td>
                             <td>{pack.updated}</td>
                             <td>{pack.user_name}</td>
+                            <td><button>click</button></td>
                         </tr>
                     )}
                 </tbody>
             </table>
-            <button onClick={onSetPageCount}>10</button>
+            <button onClick={onSetPageCount} value={4}>4</button>
+            <button onClick={onSetPageCount} value={10}>10</button>
+            <button onClick={onSetPageCount} value={20}>20</button>
         </div>
     )
 }

@@ -29,11 +29,15 @@ export const cardPacksReducer = (state = initState, action: AllACType): stateTyp
         case 'cardPacks/SET_PAGE_COUNT' : {
             return {...state, pageCount: action.payload}
         }
-        /* case 'cardPacks/SET_MIN_CARDS_COUNT' :
-         case 'cardPacks/SET_MAX_CARDS_COUNT' :
-         case 'cardPacks/SET_CURRENT_PAGE' : {
-             return {...state, ...action.payload}
-         }*/
+        case 'cardPacks/SET_MIN_CARDS_COUNT' : {
+            return {...state, minCardsCount: action.payload}
+        }
+        case 'cardPacks/SET_MAX_CARDS_COUNT' : {
+            return {...state, maxCardsCount: action.payload}
+        }
+        case 'cardPacks/SET_CURRENT_PAGE' : {
+            return {...state, page: action.payload}
+        }
         default:
             return state
     }
@@ -53,7 +57,7 @@ export const setErrorAC = (error: string) => {
     } as const
 }
 
-/*export const setMinCardsCountAC = (minCardsCount: number) => {
+export const setMinCardsCountAC = (minCardsCount: number) => {
     return {
         type: 'cardPacks/SET_MIN_CARDS_COUNT',
         payload: minCardsCount
@@ -72,7 +76,7 @@ export const setCurrentPageAC = (page: number) => {
         type: 'cardPacks/SET_CURRENT_PAGE',
         payload: page
     } as const
-}*/
+}
 
 export const setPageCountAC = (pageCount: number) => {
     return {
@@ -105,7 +109,7 @@ type AllACType =
     ReturnType<typeof setCardPacksDataAC> |
     ReturnType<typeof setAppStatusAC> |
     ReturnType<typeof setErrorAC> |
-    ReturnType<typeof setPageCountAC>
-/*ReturnType<typeof setMinCardsCountAC> |
-ReturnType<typeof setMaxCardsCountAC> |
-ReturnType<typeof setCurrentPageAC>*/
+    ReturnType<typeof setPageCountAC> |
+    ReturnType<typeof setMinCardsCountAC> |
+    ReturnType<typeof setMaxCardsCountAC> |
+    ReturnType<typeof setCurrentPageAC>
