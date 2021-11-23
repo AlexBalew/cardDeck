@@ -62,7 +62,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): A
             ? e.response.data.error
             : (e.message + ', more details in the console');
         dispatch(setErrorAC(error))
-        dispatch(setAppStatusAC("succeeded"))
+        dispatch(setAppStatusAC("failed"))
     }
 
 }
@@ -79,7 +79,7 @@ export const logOutTC = () => async (dispatch: Dispatch<AllACType>) => {
             : (e.message + ', more details in the console');
         console.log('Error: ', {...e})
         dispatch(setErrorAC(error))
-        dispatch(setAppStatusAC("succeeded"))
+        dispatch(setAppStatusAC("failed"))
     }
 
 }
