@@ -8,6 +8,7 @@ import Header from "../common/components/header/header";
 import {ChangePassword} from "../features/password/changePassword";
 import CardPacksPage from "../features/cardPacks/cardPacksPage";
 import {PasswordRestore} from "../features/password/passwordRestore";
+import {Cards} from "../features/cards/Cards";
 
 export const PATH = {
     LOGIN: '/login',
@@ -15,6 +16,7 @@ export const PATH = {
     PROFILE: '/profile',
     CHANGE_PASSWORD: '/change-password',
     NEW_PASSWORD_WITH_TOKEN: '/new-password/:token',
+    CARDS: '/cards',
     TEST: '/test',
     NOT_FOUND: '/404',
     PACKS_LIST: '/packs-list',
@@ -40,6 +42,7 @@ function CardDeckRoutes() {
            {/*     <Route path={PATH.NEW_PASSWORD} element={<NewPasswordWithoutToken/>}/>*/}
                 <Route path={PATH.NEW_PASSWORD_WITH_TOKEN} element={<NewPassword/>}/>
                 <Route path={PATH.PACKS_LIST} element={<CardPacksPage/>}/>
+                <Route path={PATH.CARDS} element={<Cards/>}/>
                 {/*<Route path={PATH.TEST} element={<TestComps/>}/>*/}
                 <Route path={PATH.NOT_FOUND} element={<Error404/>}/>
                 <Route path={'*'} element={<Navigate to={PATH.NOT_FOUND}/>}/>
