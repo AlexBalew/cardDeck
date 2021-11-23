@@ -42,7 +42,7 @@ function CardDeckRoutes() {
            {/*     <Route path={PATH.NEW_PASSWORD} element={<NewPasswordWithoutToken/>}/>*/}
                 <Route path={PATH.NEW_PASSWORD_WITH_TOKEN} element={<NewPassword/>}/>
                 <Route path={PATH.PACKS_LIST} element={<CardPacksPage/>}/>
-                <Route path={PATH.CARDS + `/:id`} element={<Cards/>}/>
+                <Route path={PATH.CARDS} element={<Cards/>}/>
                 {/*<Route path={PATH.TEST} element={<TestComps/>}/>*/}
                 <Route path={PATH.NOT_FOUND} element={<Error404/>}/>
                 <Route path={'*'} element={<Navigate to={PATH.NOT_FOUND}/>}/>

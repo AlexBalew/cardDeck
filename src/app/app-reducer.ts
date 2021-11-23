@@ -7,23 +7,28 @@ export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 export type InitialStateType = {
     status: RequestStatusType
+    _id: string
 }
 
 const initialState: InitialStateType = {
     status: 'idle',
+    _id: ''
 }
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'APP/SET_STATUS':
             return {...state, status: action.status}
+        case 'APP/SET_USER_ID':
+            return {...state, _id: action.id}
         default:
             return state
     }
 }
 
-export type ActionsType = setAppStatusACType
+export type ActionsType = setAppStatusACType | setUsersIDACType
 export type setAppStatusACType = ReturnType<typeof setAppStatusAC>
+export type setUsersIDACType = ReturnType<typeof setUsersIDAC>
 
 export const setAppStatusAC = (status: RequestStatusType) => {
     return {
@@ -32,11 +37,21 @@ export const setAppStatusAC = (status: RequestStatusType) => {
     } as const
 }
 
+export const setUsersIDAC = (id: string) => {
+    return {
+        type: 'APP/SET_USER_ID',
+        id
+    } as const
+}
+
+
+
 export const initializeAppTC = () => async (dispatch: Dispatch) => {
     try {
         dispatch(setAppStatusAC("loading"))
-        await loginAPI.authMe()
+        let response = await loginAPI.authMe()
         dispatch(isLoggedInAC(true))
+        dispatch(setUsersIDAC(response.data._id))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         const error = e.response

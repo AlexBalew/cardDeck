@@ -12,6 +12,7 @@ export const CardPacksTable = () => {
     const packs = useAppSelector<CardPackType[]>(state => state.packs.cardPacks)
     const pageCount = useAppSelector<number>(state => state.packs.pageCount)
     const page = useAppSelector<number>(state => state.packs.page)
+    const myId = useAppSelector<string>(state => state.app._id)
 
     useEffect(() => {
         dispatch(getPacksTC())
@@ -37,7 +38,9 @@ export const CardPacksTable = () => {
                             <td>{pack.cardsCount}</td>
                             <td>{pack.updated}</td>
                             <td>{pack.user_name}</td>
-                            <td><button>delete</button><button>edit</button><button>learn</button></td>
+                            {pack.user_id === myId
+                                ? <td><button>delete</button><button>edit</button><button>learn</button></td>
+                                : <td><button>learn</button></td>}
                         </tr>
                     )}
                 </tbody>
