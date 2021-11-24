@@ -32,7 +32,7 @@ export const CardPacksTable = () => {
             <table className={s.table}>
                 <thead>
                 <tr >
-                    {titles.map(title => <th key={Math.floor(Math.random()*1000)} className={s.title}>{title}</th>)}
+                    {titles.map(title => <th key={Math.floor(Math.random()*100000)} className={s.title}>{title}</th>)}
                 </tr>
                 </thead>
                 <tbody>
