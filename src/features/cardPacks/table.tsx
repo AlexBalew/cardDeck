@@ -4,6 +4,8 @@ import {useAppSelector} from "../../bll/store";
 import {CardPackType} from "../../api/packs-api";
 import {getPacksTC, setPageCountAC} from "./cardPacks-reducer";
 import s from './table.module.css'
+import {NavLink} from "react-router-dom";
+import {PATH} from "../../app/Routes";
 
 export const CardPacksTable = () => {
 
@@ -33,7 +35,9 @@ export const CardPacksTable = () => {
                 <tbody>
                     {packs.map(pack =>
                         <tr className={s.dataRow}>
-                            <td>{pack.name}</td>
+                            <td>
+                                <NavLink to={PATH.CARDS + `/${pack._id}`}>{pack.name}</NavLink>
+                            </td>
                             <td>{pack.cardsCount}</td>
                             <td>{pack.updated}</td>
                             <td>{pack.user_name}</td>

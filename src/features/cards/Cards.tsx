@@ -8,28 +8,22 @@ import {CardType} from "../../api/cards-api";
 import {useParams} from "react-router-dom";
 import {Card} from "./card/Card";
 
-interface ParamTypes {
-    tokenName: string | undefined
-}
-
 
 export const Cards = () => {
     const dispatch = useDispatch()
 
     const cards = useSelector<AppStateType, Array<CardType>>(state => state.cards.cards)
     const page = useSelector<AppStateType, number>(state => state.cards.page)
-    const cardId =  "619c20e519837f019f391b23"
-    const {packID}: any = useParams()
-    //const packID = '2343545465'
-
+    const cardId = "619c20e519837f019f391b23"
+    const {packId} = useParams<'packId'>()
 
 
     useEffect(() => {
-        dispatch(getCards(packID))
-    }, [dispatch, packID, page])
+        dispatch(getCards(packId!))
+    }, [dispatch, packId, page])
 
     const copyCards = cards.map(el => <tbody key={el._id}>
-    <Card card={el} packID={packID}/>
+    <Card card={el} packID={packId!}/>
     </tbody>)
 
 
@@ -38,11 +32,29 @@ export const Cards = () => {
             <h1>Cards</h1>
             <div className={s.cardsContainer}>
                 <div>
+                    {
+                        !cards.length
+                            ? <div>
+                                <span>There are no cards in this pack...</span>
+                            </div>
+                            : <table>
+                                <thead>
+                                <tr>
+                                    <th>QUESTION</th>
+                                    <th>ANSWER</th>
+                                    <th>LAST UPDATE</th>
+                                    <th>GRADE</th>
+                                    <th>ACTIONS</th>
+                                </tr>
+                                </thead>
+                                {copyCards}
+                            </table>
+                    }
                 </div>
-                <SuperButton onClick={ () => dispatch(getCards(packID))}>GET CARDS</SuperButton>
-               {/* <SuperButton onClick={ () => dispatch(CreateCardsPack('rer'))}>ADD PACK</SuperButton>*/}
-                <SuperButton onClick={ () => dispatch(createCards(packID, 'What is it?', 'It is answer.'))}>CREATE CARD</SuperButton>
-                <SuperButton onClick={ () => dispatch(deleteCard(cardId, packID))}>DELETE CARD</SuperButton>
+                <SuperButton onClick={() => dispatch(getCards(packId!))}>GET CARDS</SuperButton>
+                <SuperButton onClick={() => dispatch(createCards(packId!, 'What is it?', 'It is answer.'))}>CREATE
+                    CARD</SuperButton>
+                <SuperButton onClick={() => dispatch(deleteCard(cardId, packId!))}>DELETE CARD</SuperButton>
             </div>
 
         </div>
