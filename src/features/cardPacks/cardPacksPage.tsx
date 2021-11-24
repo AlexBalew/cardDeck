@@ -6,18 +6,19 @@ import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch} from "react-redux";
 import {createPackTC, getPacksTC} from "./cardPacks-reducer";
 import {useAppSelector} from "../../bll/store";
-import SuperDoubleRange from "../../common/elements/doubleRange/DoubleRange";
+
 import style from '../../common/elements/doubleRange/DoubleRange.module.css'
+import SuperDoubleRange from "../../common/elements/doubleRange/DoubleRange";
 
 
 export const CardPacksPage = () => {
 
     let dispatch = useDispatch()
 
-    const [newName, setNewName] = useState<string>('')
-    const [value1, setValue1] = useState(50)
-    const [value2, setValue2] = useState(100)
-    const [value3, setValue3] = React.useState<number[]>([value1, value2]);
+    const [newName, setNewName] = useState<string>('') //add new pack input state
+    const [value1, setValue1] = useState(0) //slider's state
+    const [value2, setValue2] = useState(103) //slider's state
+    const [value3, setValue3] = React.useState<number[]>([value1, value2]); //slider's state
 
     const myId = useAppSelector<string>(state => state.app._id)
 
@@ -39,6 +40,10 @@ export const CardPacksPage = () => {
         dispatch(getPacksTC(myId))
     }
 
+    const onGetAmountOfCards = () => {
+       /* dispatch(getPacksTC(value1, value2))*/
+    }
+
     return (
 
         <div className={s.container}>
@@ -58,6 +63,7 @@ export const CardPacksPage = () => {
                         setValue3={setValue3}
                     />
                     <span className={style.span}>{value1 < value2 ? value1 : value2-1}</span>
+                    <SuperButton onClick={onGetAmountOfCards}>Find</SuperButton>
                 </div>
             </div>
             <div className={s.packsContainer}>
