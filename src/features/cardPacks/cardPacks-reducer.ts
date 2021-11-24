@@ -95,11 +95,11 @@ export const deletePackAC = (id: string) => {
 }
 
 
-export const getPacksTC = (): AppThunkType => async (dispatch, getState) => { //затипизировать везде
+export const getPacksTC = (myId?: string): AppThunkType => async (dispatch, getState) => { //затипизировать везде
     let {pageCount, page} = getState().packs
     try {
         dispatch(setAppStatusAC("loading"))
-        let response = await packsAPI.getPacks(pageCount, page)
+        let response = await packsAPI.getPacks(pageCount, page, myId)
         dispatch(setCardPacksDataAC(response.data))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {

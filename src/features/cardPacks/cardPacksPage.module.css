@@ -10,7 +10,7 @@
 .filterContainer {
     background-color: #f0f0f0;
     width: 10%;
-    height: 500px;
+    height: 600px;
     padding: 15px;
     border-radius: 7px;
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
@@ -18,7 +18,7 @@
 
 .packsContainer {
     width: 80%;
-    height: 500px;
+    height: 600px;
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 7px;
     margin: 50px 50px 50px 0;

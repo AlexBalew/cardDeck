@@ -16,7 +16,7 @@ tr:nth-child(2n) {
 
 .dataRow {
     width: 150px;
-    height: 40px;
+    height: 30px;
     text-align: center;
     border-collapse: collapse;
 }

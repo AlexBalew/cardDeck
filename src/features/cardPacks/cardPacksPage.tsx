@@ -4,13 +4,17 @@ import s from './cardPacksPage.module.css';
 import Pagination from "../../common/components/pagination/pagination";
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch} from "react-redux";
-import {createPackTC} from "./cardPacks-reducer";
+import {createPackTC, getPacksTC} from "./cardPacks-reducer";
+import {useAppSelector} from "../../bll/store";
+import {Slider} from "../../common/elements/doubleRange/doubleRange";
 
 export const CardPacksPage = () => {
 
     let dispatch = useDispatch()
 
     const [newName, setNewName] = useState<string>('')
+
+    const myId = useAppSelector<string>(state => state.app._id)
 
     const onSetNewName = (e: ChangeEvent<HTMLInputElement>) => {
         let newName = e.currentTarget.value
@@ -22,13 +26,22 @@ export const CardPacksPage = () => {
         setNewName('')
     }
 
+    const onGetAllPacks = () => {
+        dispatch(getPacksTC())
+    }
+
+    const onGetMyPacks = () => {
+        dispatch(getPacksTC(myId))
+    }
+
     return (
 
         <div className={s.container}>
             <div className={s.filterContainer}>
                 <div>Show packs</div>
-                <SuperButton>My packs</SuperButton>
-                <SuperButton>All packs</SuperButton>
+                <SuperButton onClick={onGetMyPacks}>My packs</SuperButton>
+                <SuperButton onClick={onGetAllPacks}>All packs</SuperButton>
+               {/* <Slider min={0} max={100}/>*/}
             </div>
             <div className={s.packsContainer}>
                 <h1>Packs</h1>
@@ -38,7 +51,8 @@ export const CardPacksPage = () => {
                                                           placeholder={'insert title here'}/></div>
                 <div className={s.addNewPackButton}>
                     <SuperButton onClick={() => {
-                    onClickNewName(newName)}}>add new pack</SuperButton>
+                        onClickNewName(newName)
+                    }}>add new pack</SuperButton>
                 </div>
                 <CardPacksTable/>
                 <Pagination numberOfPagesInOnePortion={6}/>
