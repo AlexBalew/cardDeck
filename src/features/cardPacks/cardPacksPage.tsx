@@ -6,8 +6,9 @@ import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch} from "react-redux";
 import {createPackTC, getPacksTC} from "./cardPacks-reducer";
 import {useAppSelector} from "../../bll/store";
-import SuperDoubleRange from "../../common/elements/doubleRange/DoubleRange";
+
 import style from '../../common/elements/doubleRange/DoubleRange.module.css'
+import SuperDoubleRange from "../../common/elements/doubleRange/DoubleRange";
 
 
 export const CardPacksPage = () => {
