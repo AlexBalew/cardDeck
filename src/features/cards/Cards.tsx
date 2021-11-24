@@ -8,7 +8,7 @@ import {CardType} from "../../api/cards-api";
 import {useNavigate, useParams} from "react-router-dom";
 import {Card} from "./card/Card";
 import Pagination from "../../common/components/pagination/pagination";
-import {SelectPage} from "../../common/components/selectPage/SelectPage";
+/*import {SelectPage} from "../../common/components/selectPage/SelectPage";*/
 
 
 export const Cards = () => {
