@@ -40,7 +40,6 @@ export const CardPacksTable = () => {
                 <tbody>
                     {packs.map(pack =>
                         <tr className={s.dataRow}>
-                            <td className={s.nameColumn}>{pack.name}</td>
                             <td>
                                 <NavLink to={PATH.CARDS + `/${pack._id}`}>{pack.name}</NavLink>
                             </td>
