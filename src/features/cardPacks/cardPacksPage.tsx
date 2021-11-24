@@ -23,11 +23,23 @@ export const CardPacksPage = () => {
     }
 
     return (
+
         <div className={s.container}>
-            <h1>Packs</h1>
+            <div className={s.filterContainer}>
+                <div>Show packs</div>
+                <SuperButton>My packs</SuperButton>
+                <SuperButton>All packs</SuperButton>
+            </div>
             <div className={s.packsContainer}>
-                <div className={s.addNewPackInput}><input style={{border: '1px solid #C7A5A5'}} onChange={onSetNewName} value={newName} placeholder={'insert title here'}/></div>
-                <div className={s.addNewPackButton}><SuperButton onClick={() => {onClickNewName(newName)}}>add new pack</SuperButton></div>
+                <h1>Packs</h1>
+                <div className={s.addNewPackInput}><input style={{border: '1px solid #C7A5A5'}}
+                                                          onChange={onSetNewName}
+                                                          value={newName}
+                                                          placeholder={'insert title here'}/></div>
+                <div className={s.addNewPackButton}>
+                    <SuperButton onClick={() => {
+                    onClickNewName(newName)}}>add new pack</SuperButton>
+                </div>
                 <CardPacksTable/>
                 <Pagination numberOfPagesInOnePortion={6}/>
             </div>
