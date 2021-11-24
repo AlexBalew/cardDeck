@@ -1,8 +1,11 @@
 import {setAppStatusAC} from "../../app/app-reducer";
 import {GetPacksResponseType, packsAPI} from "../../api/packs-api";
 import {AppThunkType} from "../../bll/store";
+import {menuItemClasses} from "@mui/material";
 
-type stateType = GetPacksResponseType
+export type SettingType = {settingSlider: {min: number; max : number}}
+
+type stateType = GetPacksResponseType & SettingType
 
 let initState: stateType = {
     cardPacks: [{
@@ -19,6 +22,10 @@ let initState: stateType = {
     minCardsCount: 0,
     page: 1,
     pageCount: 4,
+    settingSlider: {
+        min: 0,
+        max: 103
+    },
 }
 
 export const cardPacksReducer = (state = initState, action: AllACType): stateType => {
@@ -37,6 +44,8 @@ export const cardPacksReducer = (state = initState, action: AllACType): stateTyp
         }
         case 'cardPacks/SET_CURRENT_PAGE' : {
             return {...state, page: action.payload}
+        } case 'cardPacks/DELETE_PACK' : {
+            return {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.payload)}
         }
         default:
             return state
@@ -85,12 +94,19 @@ export const setPageCountAC = (pageCount: number) => {
     } as const
 }
 
+export const deletePackAC = (id: string) => {
+    return {
+        type: 'cardPacks/DELETE_PACK',
+        payload: id
+    } as const
+}
 
-export const getPacksTC = (): AppThunkType => async (dispatch, getState) => { //затипизировать везде
-    let {pageCount, page} = getState().packs
+
+export const getPacksTC = (myId?: string): AppThunkType => async (dispatch, getState) => { //затипизировать везде
+    let {pageCount, page, minCardsCount, maxCardsCount} = getState().packs
     try {
         dispatch(setAppStatusAC("loading"))
-        let response = await packsAPI.getPacks(pageCount, page)
+        let response = await packsAPI.getPacks(pageCount, page, myId, minCardsCount, maxCardsCount)
         dispatch(setCardPacksDataAC(response.data))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
@@ -123,6 +139,25 @@ export const createPackTC = (name: string): AppThunkType => async (dispatch) => 
 
 }
 
+export const deletePackTC = (id: string): AppThunkType => async (dispatch) => { //затипизировать везде
+    try {
+        dispatch(setAppStatusAC("loading"))
+        let response = await packsAPI.deletePack(id)
+        dispatch(setCardPacksDataAC(response.data))
+        dispatch(setAppStatusAC("succeeded"))
+    } catch (e: any) {
+        const error = e.response
+            ? e.response.data.error
+            : (e.message + ', more details in the console');
+        console.log('Error: ', {...e})
+        dispatch(setErrorAC(error))
+        dispatch(setAppStatusAC("succeeded"))
+    } finally {
+        dispatch(getPacksTC())
+    }
+
+}
+
 
 type AllACType =
     ReturnType<typeof setCardPacksDataAC> |
@@ -131,4 +166,5 @@ type AllACType =
     ReturnType<typeof setPageCountAC> |
     ReturnType<typeof setMinCardsCountAC> |
     ReturnType<typeof setMaxCardsCountAC> |
-    ReturnType<typeof setCurrentPageAC>
+    ReturnType<typeof setCurrentPageAC> |
+    ReturnType<typeof deletePackAC>
