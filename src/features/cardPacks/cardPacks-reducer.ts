@@ -3,7 +3,9 @@ import {GetPacksResponseType, packsAPI} from "../../api/packs-api";
 import {AppThunkType} from "../../bll/store";
 import {menuItemClasses} from "@mui/material";
 
-type stateType = GetPacksResponseType
+export type SettingType = {settingSlider: {min: number; max : number}}
+
+type stateType = GetPacksResponseType & SettingType
 
 let initState: stateType = {
     cardPacks: [{
@@ -20,6 +22,10 @@ let initState: stateType = {
     minCardsCount: 0,
     page: 1,
     pageCount: 4,
+    settingSlider: {
+        min: 0,
+        max: 103
+    },
 }
 
 export const cardPacksReducer = (state = initState, action: AllACType): stateType => {
@@ -96,11 +102,11 @@ export const deletePackAC = (id: string) => {
 }
 
 
-export const getPacksTC = (myId?: string, value1?: number, value2?: number): AppThunkType => async (dispatch, getState) => { //затипизировать везде
-    let {pageCount, page/*, minCardsCount = value1, maxCardsCount = value2*/} = getState().packs
+export const getPacksTC = (myId?: string): AppThunkType => async (dispatch, getState) => { //затипизировать везде
+    let {pageCount, page, minCardsCount, maxCardsCount} = getState().packs
     try {
         dispatch(setAppStatusAC("loading"))
-        let response = await packsAPI.getPacks(pageCount, page, myId, value1, value2)
+        let response = await packsAPI.getPacks(pageCount, page, myId, minCardsCount, maxCardsCount)
         dispatch(setCardPacksDataAC(response.data))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {

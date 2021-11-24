@@ -1,5 +1,7 @@
 import React from 'react';
 import {Box, Slider} from "@mui/material";
+import {useDispatch} from "react-redux";
+import {setMaxCardsCountAC, setMinCardsCountAC} from "../../../features/cardPacks/cardPacks-reducer";
 
 
 type SuperDoubleRangePropsType = {
@@ -23,6 +25,8 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
         setValue3,
     }) => {
 
+    const dispatch = useDispatch()
+
     const handleChange1 = (
         event: Event,
         newValue: number | number[],
@@ -34,9 +38,11 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
         if (activeThumb === 0) {
             setValue3([Math.min(newValue[0], value2 - minDistance), value2]);
             setValue1(Math.min(newValue[0], value2 - minDistance))
+            dispatch(setMinCardsCountAC(Math.min(newValue[0], value2 - minDistance)))
         } else {
             setValue3([value3[0], Math.max(newValue[1], value1 + minDistance)]);
             setValue2(value3[1])
+            dispatch(setMaxCardsCountAC(value3[1]))
         }
     };
 
