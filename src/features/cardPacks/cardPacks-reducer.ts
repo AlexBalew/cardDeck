@@ -1,6 +1,7 @@
 import {setAppStatusAC} from "../../app/app-reducer";
 import {GetPacksResponseType, packsAPI} from "../../api/packs-api";
 import {AppThunkType} from "../../bll/store";
+import {menuItemClasses} from "@mui/material";
 
 type stateType = GetPacksResponseType
 
@@ -95,11 +96,11 @@ export const deletePackAC = (id: string) => {
 }
 
 
-export const getPacksTC = (myId?: string): AppThunkType => async (dispatch, getState) => { //затипизировать везде
-    let {pageCount, page} = getState().packs
+export const getPacksTC = (myId?: string, value1?: number, value2?: number): AppThunkType => async (dispatch, getState) => { //затипизировать везде
+    let {pageCount, page/*, minCardsCount = value1, maxCardsCount = value2*/} = getState().packs
     try {
         dispatch(setAppStatusAC("loading"))
-        let response = await packsAPI.getPacks(pageCount, page, myId)
+        let response = await packsAPI.getPacks(pageCount, page, myId, value1, value2)
         dispatch(setCardPacksDataAC(response.data))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
