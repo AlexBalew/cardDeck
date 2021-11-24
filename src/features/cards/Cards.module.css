@@ -1,22 +1,125 @@
 .container {
+    border: 1px solid;
     min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    max-width: 1068px;
+    min-height: 636px;
+    margin-top: 50px;
+    border-radius: 7px;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+}
+
+.backLink {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.arrowBack {
+    cursor: pointer;
+    font-size: 25px;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.search {
+    display: flex;
+    justify-content: space-between;
+    width: 950px;
+    margin: 5px 30px;
+}
+
+.cardsTable {
+    border: 1px solid;
+    width: 950px;
+    min-height: 450px;
+    border-radius: 3px;
+    margin: 10px auto;
+}
+
+.noCards {
+    font-size: 1.5em;
+    color: #ef7b7b;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.card {
+    width: 100%;
+    min-height: 45px;
+    background-color: #e0e8ec;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.paginator {
+    margin-bottom: 5px;
+    margin-left: 30px;
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+}
+
+/*.cardsContainer {
+    width: 90%;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin: 10px auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 40px;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    padding: 30px 0;
+}*/
+
+/*
+
+.backLink {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 40px;
+}
+*/
+
+/*.arrowBack {
+    cursor: pointer;
+    font-size: 25px;
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 50px;
+}*/
+/*i {
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
 }
 
-.cardsContainer {
-    width: 80%;
-    height: 500px;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 7px;
-    margin: 50px auto 0;
+.arrow {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}*/
+
+/*.cardsBlock {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-    padding-bottom: 30px;
-}
+    justify-content: flex-start;
+}*/
+
+
+

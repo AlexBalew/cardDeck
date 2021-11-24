@@ -18,7 +18,6 @@ function Header() {
                     <Link to='/profile'>profile</Link>
                     <Link to='/change-password'>change password</Link>
                     <Link to='/packs-list'>packs</Link>
-                    <Link to='/cards'>cards</Link>
                 </nav>
             </div>
         </div>
