@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import s from './Cards.module.css'
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
-import {getCards} from "./cards-reducer";
+import {createCards, getCards} from "./cards-reducer";
 import {AppStateType} from "../../bll/store";
 import {CardType} from "../../api/cards-api";
 import {useNavigate, useParams} from "react-router-dom";
@@ -18,6 +18,9 @@ export const Cards = () => {
     const cards = useSelector<AppStateType, Array<CardType>>(state => state.cards.cards)
     const page = useSelector<AppStateType, number>(state => state.cards.page)
     const packName = useSelector<AppStateType, string>(state => state.cards.packName)
+    const userId = useSelector<AppStateType, string>(state => state.profile._id)
+    const packUserId = useSelector<AppStateType, string>(state => state.cards.packUserId)
+
     const cardId = "619c20e519837f019f391b23"
     const {packId} = useParams<'packId'>()
     const navigate = useNavigate()
@@ -45,7 +48,7 @@ export const Cards = () => {
 
                 <div className={s.search}>
                     Search
-                    <SuperButton onClick={() => dispatch(getCards(packId!))}>ADD NEW CARD</SuperButton>
+                    <SuperButton onClick={() => dispatch(createCards(packId!, 'What is it?', 'It is answer'))}>ADD NEW CARD</SuperButton>
                 </div>
 
                 <div className={s.cardsTable}>
@@ -56,9 +59,9 @@ export const Cards = () => {
                         :
                         <div className={s.cards}>
                             <div className={s.card}>
-                                <div>Question</div>
-                                <div>Answer</div>
-                                <div>
+                                <div className={s.infoItem}>Question</div>
+                                <div className={s.infoItem}>Answer</div>
+                                <div className={s.cardInfo}>
                                     <div><span>Last Updated</span></div>
                                     <div><span>Grade</span></div>
                                     <div>Actions</div>
