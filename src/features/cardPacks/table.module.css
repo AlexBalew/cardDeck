@@ -7,14 +7,16 @@ tr:nth-child(2n) {
 }
 
 .title {
-    width: 100px;
+    width: 150px;
+    height: 40px;
     padding: 10px;
     background-color: #C7A5A5;
     border-collapse: collapse;
 }
 
 .dataRow {
-    width: 100px;
+    width: 150px;
+    height: 40px;
     text-align: center;
     border-collapse: collapse;
 }

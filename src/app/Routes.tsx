@@ -16,7 +16,7 @@ export const PATH = {
     PROFILE: '/profile',
     CHANGE_PASSWORD: '/change-password',
     NEW_PASSWORD_WITH_TOKEN: '/new-password/:token',
-    CARDS: '/cards',
+    CARDS: '/cards/:cardId',
     TEST: '/test',
     NOT_FOUND: '/404',
     PACKS_LIST: '/packs-list',

@@ -25,5 +25,8 @@ export const packsAPI = {
     },
     createPack(name: string) {
         return instance_local.post<GetPacksResponseType>(`/cards/pack`, {cardsPack: {name}}, {})
+    },
+    deletePack(id: string) {
+        return instance_local.delete<GetPacksResponseType>(`/cards/pack?id=${id}`, {})
     }
 }

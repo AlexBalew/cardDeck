@@ -2,7 +2,7 @@ import React, {useEffect, MouseEvent} from "react";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../bll/store";
 import {CardPackType} from "../../api/packs-api";
-import {getPacksTC, setPageCountAC} from "./cardPacks-reducer";
+import {deletePackTC, getPacksTC, setPageCountAC} from "./cardPacks-reducer";
 import s from './table.module.css'
 
 export const CardPacksTable = () => {
@@ -23,6 +23,10 @@ export const CardPacksTable = () => {
         dispatch(setPageCountAC(value))
     }
 
+    const onDeletePack = (id: string) => {
+        dispatch(deletePackTC(id))
+    }
+
     return (
         <div>
             <table className={s.table}>
@@ -39,7 +43,13 @@ export const CardPacksTable = () => {
                             <td>{pack.updated}</td>
                             <td>{pack.user_name}</td>
                             {pack.user_id === myId
-                                ? <td><button>delete</button><button>edit</button><button>learn</button></td>
+                                ? <td><button
+                                    onClick={() => {onDeletePack(pack._id)}}
+                                    value={pack._id}>
+                                    delete
+                                </button>
+                                    <button>edit</button>
+                                    <button>learn</button></td>
                                 : <td><button>learn</button></td>}
                         </tr>
                     )}
