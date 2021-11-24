@@ -3,10 +3,9 @@ import {CardPacksTable} from "./table";
 import s from './cardPacksPage.module.css';
 import Pagination from "../../common/components/pagination/pagination";
 import SuperButton from "../../common/elements/button/SuperButton";
-import {useDispatch} from "react-redux";
-import {createPackTC, getPacksTC} from "./cardPacks-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {createPackTC, getPacksTC, SettingType} from "./cardPacks-reducer";
 import {useAppSelector} from "../../bll/store";
-
 import style from '../../common/elements/doubleRange/DoubleRange.module.css'
 import SuperDoubleRange from "../../common/elements/doubleRange/DoubleRange";
 
@@ -14,10 +13,11 @@ import SuperDoubleRange from "../../common/elements/doubleRange/DoubleRange";
 export const CardPacksPage = () => {
 
     let dispatch = useDispatch()
+    const settingSlider = useAppSelector<{min: number; max : number}>(state => state.packs.settingSlider)
 
     const [newName, setNewName] = useState<string>('') //add new pack input state
-    const [value1, setValue1] = useState(0) //slider's state
-    const [value2, setValue2] = useState(103) //slider's state
+    const [value1, setValue1] = useState(settingSlider.min) //slider's state
+    const [value2, setValue2] = useState(settingSlider.max) //slider's state
     const [value3, setValue3] = React.useState<number[]>([value1, value2]); //slider's state
 
     const myId = useAppSelector<string>(state => state.app._id)
@@ -32,7 +32,7 @@ export const CardPacksPage = () => {
         setNewName('')
     }
 
-    const onGetAllPacks = () => {
+    const onGetPacks = () => {
         dispatch(getPacksTC())
     }
 
@@ -40,9 +40,6 @@ export const CardPacksPage = () => {
         dispatch(getPacksTC(myId))
     }
 
-    const onGetAmountOfCards = () => {
-       /* dispatch(getPacksTC(value1, value2))*/
-    }
 
     return (
 
@@ -50,7 +47,7 @@ export const CardPacksPage = () => {
             <div className={s.filterContainer}>
                 <div>Show packs</div>
                 <SuperButton onClick={onGetMyPacks}>My packs</SuperButton>
-                <SuperButton onClick={onGetAllPacks}>All packs</SuperButton>
+                <SuperButton onClick={onGetPacks}>All packs</SuperButton>
                 <div className={style.doubleRangeBlock}>
                     <span className={style.choose}>Choose the the amount of cards:</span>
                     <span className={style.span}>{value2}</span>
@@ -63,7 +60,7 @@ export const CardPacksPage = () => {
                         setValue3={setValue3}
                     />
                     <span className={style.span}>{value1 < value2 ? value1 : value2-1}</span>
-                    <SuperButton onClick={onGetAmountOfCards}>Find</SuperButton>
+                    <SuperButton onClick={onGetPacks}>Find</SuperButton>
                 </div>
             </div>
             <div className={s.packsContainer}>
