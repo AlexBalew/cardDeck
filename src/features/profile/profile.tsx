@@ -1,19 +1,25 @@
 import React from "react";
 import s from "./profile.module.css"
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../bll/store";
+import {AppStateType, useAppSelector} from "../../bll/store";
 import {UserDataType} from "./profile-reducer";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/Routes";
 import userDefaultImg from "../../assets/profile/userDefaultImg.png"
+import Preloader from "../../common/components/preloader/Preloader";
+import {RequestStatusType} from "../../app/app-reducer";
 
 export const Profile = () => {
 
     const dispatch = useDispatch()
-    /*const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)*/
     const {name, avatar} = useSelector<AppStateType, UserDataType>(state => state.profile)
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
+    const status = useAppSelector<RequestStatusType>(state => state.app.status)
 
+
+    if(status === 'loading') {
+        return <Preloader/>
+    }
 
     if (!isLoggedIn) {
         return <Navigate to={PATH.LOGIN}/>
