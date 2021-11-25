@@ -4,8 +4,8 @@ import s from './SuperSelect.module.css'
 type DefaultSelectPropsType = DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>
 
 type SuperSelectPropsType = DefaultSelectPropsType & {
-    options: string[]
-    onChangeOption: (option: string) => void
+    options: any[]
+    onChangeOption?: (option: any) => void
 }
 
 const SuperSelect: React.FC<SuperSelectPropsType> = (
@@ -22,7 +22,8 @@ const SuperSelect: React.FC<SuperSelectPropsType> = (
 
     const onChangeCallback = (e: ChangeEvent<HTMLSelectElement>) => {
         let currentValue = e.currentTarget.value
-        onChangeOption(currentValue)
+        if(onChangeOption)
+        onChangeOption(+currentValue)
     }
 
     return (

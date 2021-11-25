@@ -20,13 +20,16 @@ const initState = {
 }
 
 
-export const cardsReducer = (state: stateType = initState, action: AllACType): stateType => {
+export const cardsReducer = (state: stateType = initState, action: AllActionsType): stateType => {
     switch (action.type) {
         case 'cardsReducer/SET_CARDS':
             return {
                 ...state,
                 cards: action.cards
             }
+        case 'cardsReducer/SET_PAGE_COUNT' : {
+            return {...state, pageCount: action.pageCount}
+        }
         default:
             return state
     }
@@ -34,16 +37,15 @@ export const cardsReducer = (state: stateType = initState, action: AllACType): s
 
 
 type setCardsACType = ReturnType<typeof setCardsAC>
-//type createCardsACType = ReturnType<typeof createCardAC>
-//type setPackCardsIdACType = ReturnType<typeof setPackCardsIdAC>
-type AllACType = setCardsACType
+type setPageCountACType = ReturnType<typeof setPageCountAC>
+
+type AllActionsType = setCardsACType | setPageCountACType
 
 
 //* Action Creators --------------------------------------------------------->
 export const setCardsAC = (cards: Array<CardType>) => ({type: 'cardsReducer/SET_CARDS', cards} as const)
+export const setPageCountAC = (pageCount: number) =>( {type: 'cardsReducer/SET_PAGE_COUNT', pageCount} as const)
 //export const createCardAC = (card: CardType) => ({type: 'cardsReducer/CREATE_CARDS', card} as const)
-//export const createCardsPackAC = (title: string) => ({type: 'cardsReducer/CREATE_CARDS_PACK', title} as const)
-//export const setPackCardsIdAC = (packId: string) => ({type: 'cardsReducer/SET_PACK_CARDS_ID', packId} as const)
 
 //* Thunk Creators --------------------------------------------------------->
 
@@ -56,7 +58,7 @@ export const getCards = (packId: string): AppThunkType =>
         const currentPage = cards.page
         const packsOnPage = cards.pageCount
 
-        cardsAPI.getCards(packId, currentPage, packsOnPage)
+        cardsAPI.getCards(packId, packsOnPage, currentPage)
             .then(response => {
                 dispatch(setCardsAC(response.data.cards))
                 dispatch(setAppStatusAC("succeeded"))
@@ -126,19 +128,3 @@ export const updateCard = (cardsPack_id: string, cardId: string, question: strin
             })
     }
 
-
-/*
-export const CreateCardsPack = (title: string): AppThunkType =>
-    (dispatch, getState) => {
-        cardsAPI.createPack(title)
-            .then(response => {
-                console.log('OK')
-            })
-            .catch((e) => {
-                const error = e.response
-                    ? e.response.data.error
-                    : (e.message + ', more details in the console');
-            })
-
-    }
-*/

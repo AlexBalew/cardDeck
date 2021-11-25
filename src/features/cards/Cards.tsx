@@ -1,14 +1,16 @@
-import React, {ChangeEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, MouseEvent, useEffect, useState} from 'react'
 import s from './Cards.module.css'
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
-import {createCards, getCards} from "./cards-reducer";
+import {createCards, getCards, setPageCountAC} from "./cards-reducer";
 import {AppStateType} from "../../bll/store";
 import {CardType} from "../../api/cards-api";
 import {useNavigate, useParams} from "react-router-dom";
 import {Card} from "./card/Card";
 import Pagination from "../../common/components/pagination/pagination";
 import {RequestStatusType} from "../../app/app-reducer";
+import {SelectPage} from "../../common/components/selectPage/SelectPage";
+
 
 
 export const Cards = () => {
@@ -19,6 +21,7 @@ export const Cards = () => {
     const packName = useSelector<AppStateType, string>(state => state.cards.packName)
     const userId = useSelector<AppStateType, string>(state => state.profile._id)
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
+    const pageCount = useSelector<AppStateType, number>(state => state.cards.pageCount)
     const {packId} = useParams<'packId'>()
     const navigate = useNavigate()
 
@@ -37,10 +40,16 @@ export const Cards = () => {
         setQuestion('')
         setAnswer('')
     }
+    const onSetPageCount = (value: number) => {
+        if(value){
+            dispatch(setPageCountAC(value))
+        }
+    }
+
 
     useEffect(() => {
         dispatch(getCards(packId!))
-    }, [dispatch, packId, page])
+    }, [dispatch, packId, page, pageCount])
 
 
     return (
@@ -97,7 +106,15 @@ export const Cards = () => {
                         </div>
                     }
                 </div>
+
                 <div className={s.paginator}><Pagination numberOfPagesInOnePortion={6}/></div>
+                <div className={s.selector}>
+                    <SelectPage onChangeOptions={onSetPageCount}
+                                value={pageCount}
+                                disabled={status === "loading"}
+                                description={'cards on page'}/>
+                </div>
+
             </div>
         </div>)
 }

@@ -1,16 +1,17 @@
 .select {
-    width: 90px;
+    width: 45px;
     height: 80%;
     padding: 3px;
     cursor: pointer;
-    margin-left: 10px;
-    background-color: #cbe0e7;
+    margin: 0 10px;
+    background-color: rgba(255, 255, 255, 0.4);
     color: #454857;
     box-shadow: 0 1px 1px #0000002e;
     text-shadow: 0 1px 0 #79485f7a;
     transition: all 100ms linear ;
     outline: none;
-    border-radius: 4px;
+    border: 1px solid #b4b3b3;
+    border-radius: 3px;
 }
 
 .select:hover {
@@ -18,7 +19,7 @@
 
 .option {
     background-color: #454857;
-    color: gray;
+    color: #686767;
     height: 40px;
     cursor: pointer;
 }

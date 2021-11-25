@@ -26,6 +26,7 @@
     align-items: center;
     justify-content: flex-start;
 }
+
 .backLink:hover {
     color: #bf7b7b;
 }
@@ -65,7 +66,7 @@
 
 .noCards {
     font-size: 1.5em;
-    color: #ef7b7b;
+    color: #97b0ce;
     margin-top: 50px;
     text-align: center;
 }
