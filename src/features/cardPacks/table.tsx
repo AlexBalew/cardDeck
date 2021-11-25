@@ -1,4 +1,4 @@
-import React, {useEffect, MouseEvent} from "react";
+import React, {MouseEvent, useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../bll/store";
 import {CardPackType} from "../../api/packs-api";
@@ -15,10 +15,16 @@ export const CardPacksTable = () => {
     const pageCount = useAppSelector<number>(state => state.packs.pageCount)
     const page = useAppSelector<number>(state => state.packs.page)
     const myId = useAppSelector<string>(state => state.app._id)
+    const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
+    const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
+    const searchedName = useAppSelector<string>(state => state.packs.searchedName)
 
     useEffect(() => {
-        dispatch(getPacksTC())
-    }, [pageCount, page])
+        //setTimeout(() => {
+            dispatch(getPacksTC())
+       // }, 3000)
+    }, [pageCount, page, searchedName/*minCardsCount, maxCardsCount*/])
+
 
     const onSetPageCount = (e: MouseEvent<HTMLButtonElement>) => {
         let value = +e.currentTarget.value
@@ -28,6 +34,8 @@ export const CardPacksTable = () => {
     const onDeletePack = (id: string) => {
         dispatch(deletePackTC(id))
     }
+    console.log('minCardsCount, ' , minCardsCount)
+    console.log('maxCardsCount, ' , maxCardsCount)
 
     return (
         <div>

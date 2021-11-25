@@ -37,12 +37,16 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
         }
         if (activeThumb === 0) {
             setValue3([Math.min(newValue[0], value2 - minDistance), value2]);
-            setValue1(Math.min(newValue[0], value2 - minDistance))
-            dispatch(setMinCardsCountAC(Math.min(newValue[0], value2 - minDistance)))
+            setValue1(Math.min(newValue[0], value2 - minDistance));
+            setTimeout(() => {
+                dispatch(setMinCardsCountAC(Math.min(newValue[0], value2 - minDistance)))
+            }, 3000)
         } else {
             setValue3([value3[0], Math.max(newValue[1], value1 + minDistance)]);
             setValue2(value3[1])
-            dispatch(setMaxCardsCountAC(value3[1]))
+           setTimeout(() => {
+               dispatch(setMaxCardsCountAC(value3[1]));
+           }, 3000)
         }
     };
 
@@ -50,6 +54,7 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
     return (
         <Box sx={{height: 300}}>
             <Slider
+                step={1}
                 size={"medium"}
                 value={value3}
                 onChange={handleChange1}

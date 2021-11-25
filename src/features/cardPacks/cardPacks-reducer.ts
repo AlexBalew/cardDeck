@@ -3,8 +3,9 @@ import {GetPacksResponseType, packsAPI} from "../../api/packs-api";
 import {AppThunkType} from "../../bll/store";
 
 export type SettingType = {settingSlider: {min: number; max : number}}
+export type SearchedNameType = {searchedName: string}
 
-type stateType = GetPacksResponseType & SettingType
+type stateType = GetPacksResponseType & SettingType & SearchedNameType
 
 let initState: stateType = {
     cardPacks: [{
@@ -25,6 +26,7 @@ let initState: stateType = {
         min: 0,
         max: 103
     },
+    searchedName: '',
 }
 
 export const cardPacksReducer = (state = initState, action: AllACType): stateType => {
@@ -45,6 +47,9 @@ export const cardPacksReducer = (state = initState, action: AllACType): stateTyp
             return {...state, page: action.payload}
         } case 'cardPacks/DELETE_PACK' : {
             return {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.payload)}
+        }
+        case 'cardPacks/SEARCH_NAME' : {
+            return {...state, searchedName: action.payload}
         }
         default:
             return state
@@ -101,12 +106,19 @@ export const deletePackAC = (id: string) => {
     } as const
 }
 
+export const setSearchedNameAC = (searchName: string) => {
+    return {
+        type: 'cardPacks/SEARCH_NAME',
+        payload: searchName
+    } as const
+}
+
 
 export const getPacksTC = (myId?: string): AppThunkType => async (dispatch, getState) => { //затипизировать везде
-    let {pageCount, page, minCardsCount, maxCardsCount} = getState().packs
+    let {pageCount, page, minCardsCount, maxCardsCount, searchedName} = getState().packs
     try {
         dispatch(setAppStatusAC("loading"))
-        let response = await packsAPI.getPacks(pageCount, page, myId, minCardsCount, maxCardsCount)
+        let response = await packsAPI.getPacks(pageCount, page, myId, minCardsCount, maxCardsCount, searchedName)
         dispatch(setCardPacksDataAC(response.data))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
@@ -167,4 +179,5 @@ type AllACType =
     ReturnType<typeof setMinCardsCountAC> |
     ReturnType<typeof setMaxCardsCountAC> |
     ReturnType<typeof setCurrentPageAC> |
-    ReturnType<typeof deletePackAC>
+    ReturnType<typeof deletePackAC> |
+    ReturnType<typeof setSearchedNameAC>

@@ -20,12 +20,15 @@ export type GetPacksResponseType = {
 }
 
 export const packsAPI = {
-    getPacks(pageCount: number, page: number, user_id?: string, minCardsCount?: number, maxCardsCount?:number) {
+    getPacks(pageCount: number, page: number, user_id?: string, minCardsCount?: number, maxCardsCount?:number, searchedName?: string) {
         if (user_id) {
             return instance_local.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&user_id=${user_id}`, {})
         }
         if (minCardsCount&&maxCardsCount) {
             return instance_local.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&min=${minCardsCount}&max=${maxCardsCount}`, {})
+        }
+        if(searchedName) {
+            return instance_local.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&packName=${searchedName}`, {})
         }
         return instance_local.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}`, {})
 
