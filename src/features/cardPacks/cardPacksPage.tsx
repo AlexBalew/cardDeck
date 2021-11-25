@@ -47,7 +47,7 @@ export const CardPacksPage = () => {
     }
 
     useEffect(() => {
-        let searchTimer = setTimeout(() => dispatch(setSearchedNameAC(searchName)), 4000)
+        let searchTimer = setTimeout(() => dispatch(setSearchedNameAC(searchName)), 3000)
         return () => clearTimeout(searchTimer)
     }, [searchName])
 
@@ -78,7 +78,7 @@ export const CardPacksPage = () => {
                 <div className={s.addNewPackInput}><input style={{border: '1px solid #C7A5A5', marginRight: '400px'}}
                                                           onChange={onSetNewSearchName}
                                                           value={searchName}
-                                                          placeholder={'insert pack name here'}/>
+                                                          placeholder={'search for pack names here'}/>
                     <input style={{border: '1px solid #C7A5A5'}}
                            onChange={onSetNewName}
                            value={newName}
