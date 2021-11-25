@@ -1,6 +1,5 @@
 import React from 'react'
 import {Navigate, Route, Routes, useLocation} from 'react-router-dom'
-import {Error404} from '../common/components/error404/error404'
 import {Login} from '../features/login/login'
 import {Profile} from '../features/profile/profile'
 import {NewPassword} from "../features/password/newPassword";
@@ -9,6 +8,7 @@ import {ChangePassword} from "../features/password/changePassword";
 import CardPacksPage from "../features/cardPacks/cardPacksPage";
 import {PasswordRestore} from "../features/password/passwordRestore";
 import {Cards} from "../features/cards/Cards";
+import {Error404} from "../common/components/error404/error404";
 
 export const PATH = {
     LOGIN: '/login',

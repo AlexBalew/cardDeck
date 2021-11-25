@@ -1,7 +1,6 @@
 import {setAppStatusAC} from "../../app/app-reducer";
 import {GetPacksResponseType, packsAPI} from "../../api/packs-api";
 import {AppThunkType} from "../../bll/store";
-import {menuItemClasses} from "@mui/material";
 
 export type SettingType = {settingSlider: {min: number; max : number}}
 
@@ -51,6 +50,7 @@ export const cardPacksReducer = (state = initState, action: AllACType): stateTyp
             return state
     }
 }
+
 
 export const setCardPacksDataAC = (data: GetPacksResponseType) => {
     return {
