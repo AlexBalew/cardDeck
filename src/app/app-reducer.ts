@@ -52,7 +52,9 @@ export const initializeAppTC = () => async (dispatch: Dispatch) => {
         let response = await loginAPI.authMe()
         dispatch(isLoggedInAC(true))
         dispatch(setUsersIDAC(response.data._id))
+        await Promise.all([response])
         dispatch(setAppStatusAC("succeeded"))
+        return response
     } catch (e: any) {
         const error = e.response
             ? e.response.data.error
@@ -62,5 +64,4 @@ export const initializeAppTC = () => async (dispatch: Dispatch) => {
         dispatch(isLoggedInAC(false))
         dispatch(setAppStatusAC("succeeded"))
     }
-
 }

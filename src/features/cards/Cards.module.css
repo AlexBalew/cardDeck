@@ -26,7 +26,6 @@
     align-items: center;
     justify-content: flex-start;
 }
-
 .backLink:hover {
     color: #bf7b7b;
 }
@@ -42,6 +41,18 @@
     justify-content: space-between;
     width: 950px;
     margin: 5px 30px;
+}
+.addCard {
+    display: flex;
+    justify-content: space-between;
+}
+.addInfoCard {
+    border: 1px solid #C7A5A5;
+    height: 20px;
+    margin: 10px;
+}
+.addInfoCard:focus {
+    border: 1px solid #C7A5A5;
 }
 
 .cardsTable {
@@ -70,15 +81,17 @@
 
 .cardInfo {
     width: 30%;
-    margin:0 10px;
+    margin: 0 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+
 .infoItem {
     margin-left: 10px;
 }
+
 .paginator {
     margin-bottom: 5px;
     margin-left: 30px;

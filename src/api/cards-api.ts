@@ -4,7 +4,7 @@ import {instance_local} from "./api";
 export const cardsAPI = {
     getCards(cardsPack_id: string, pageCount: number = 5, page: number = 1) {
         return instance_local.get<CardsResponseType>
-        (`cards/card?cardsPack_id=${cardsPack_id}&pageCount=${pageCount}&page=${page}`)
+        (`cards/card?cardsPack_id=${cardsPack_id}&pageCount=${pageCount}&page=${page}&max=5`)
     },
     createCard(cardsPack_id: string, question: string, answer: string) {
         return instance_local.post<CardsResponseType>
