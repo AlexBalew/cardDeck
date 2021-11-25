@@ -45,7 +45,6 @@ export const CardPacksPage = () => {
 
         <div className={s.container}>
             <div className={s.filterContainer}>
-                <div>Show packs</div>
                 <SuperButton onClick={onGetMyPacks}>My packs</SuperButton>
                 <SuperButton onClick={onGetPacks}>All packs</SuperButton>
                 <div className={style.doubleRangeBlock}>
