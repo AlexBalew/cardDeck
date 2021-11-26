@@ -1,8 +1,8 @@
-import React, {MouseEvent, useEffect} from "react";
+import React, {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../bll/store";
 import {CardPackType} from "../../api/packs-api";
-import {deletePackTC, getPacksTC, setPageCountAC} from "./cardPacks-reducer";
+import {deletePackTC, getPacksTC} from "./cardPacks-reducer";
 import s from './table.module.css'
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../app/Routes";
@@ -19,6 +19,7 @@ export const CardPacksTable = () => {
     const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
     const searchedName = useAppSelector<string>(state => state.packs.searchedName)
 
+
     useEffect(() => {
         //setTimeout(() => {
             dispatch(getPacksTC())
@@ -26,16 +27,11 @@ export const CardPacksTable = () => {
     }, [pageCount, page, searchedName/*minCardsCount, maxCardsCount*/])
 
 
-    const onSetPageCount = (e: MouseEvent<HTMLButtonElement>) => {
-        let value = +e.currentTarget.value
-        dispatch(setPageCountAC(value))
-    }
-
     const onDeletePack = (id: string) => {
         dispatch(deletePackTC(id))
     }
-    console.log('minCardsCount, ' , minCardsCount)
-    console.log('maxCardsCount, ' , maxCardsCount)
+    /*console.log('minCardsCount, ' , minCardsCount)
+    console.log('maxCardsCount, ' , maxCardsCount)*/
 
     return (
         <div>
@@ -67,9 +63,7 @@ export const CardPacksTable = () => {
                     )}
                 </tbody>
             </table>
-            <button onClick={onSetPageCount} value={4}>4</button>
-            <button onClick={onSetPageCount} value={10}>10</button>
-            <button onClick={onSetPageCount} value={20}>20</button>
+
         </div>
     )
 }

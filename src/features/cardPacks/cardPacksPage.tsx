@@ -4,10 +4,12 @@ import s from './cardPacksPage.module.css';
 import Pagination from "../../common/components/pagination/pagination";
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch} from "react-redux";
-import {createPackTC, getPacksTC, setSearchedNameAC} from "./cardPacks-reducer";
+import {createPackTC, getPacksTC, setPageCountAC, setSearchedNameAC} from "./cardPacks-reducer";
 import {useAppSelector} from "../../bll/store";
 import style from '../../common/elements/doubleRange/DoubleRange.module.css'
 import SuperDoubleRange from "../../common/elements/doubleRange/DoubleRange";
+import {SelectPage} from "../../common/components/selectPage/SelectPage";
+import {RequestStatusType} from "../../app/app-reducer";
 
 
 export const CardPacksPage = () => {
@@ -22,6 +24,8 @@ export const CardPacksPage = () => {
     const [value1, setValue1] = useState(settingSlider.min) //slider's state
     const [value2, setValue2] = useState(settingSlider.max) //slider's state
     const [value3, setValue3] = React.useState<number[]>([value1, value2]); //slider's state
+    const status = useAppSelector<RequestStatusType>(state => state.app.status)
+    const pageCount = useAppSelector<number>(state => state.packs.pageCount)
 
     const onSetNewName = (e: ChangeEvent<HTMLInputElement>) => {
         let newName = e.currentTarget.value
@@ -31,6 +35,12 @@ export const CardPacksPage = () => {
     const onSetNewSearchName = (e: ChangeEvent<HTMLInputElement>) => {
         let searchName = e.currentTarget.value
         setSearchName(searchName)
+    }
+
+    const onSetPageCount = (value: number) => {
+        if(value){
+            dispatch(setPageCountAC(value))
+        }
     }
 
     const onClickNewName = (newName: string) => {
@@ -91,7 +101,13 @@ export const CardPacksPage = () => {
                     }}>add new pack</SuperButton>
                 </div>
                 <CardPacksTable/>
+                <div className={s.selectPagination}>
+                <SelectPage onChangeOptions={onSetPageCount}
+                            value={pageCount}
+                            disabled={status === "loading"}
+                            description={'cards on page'}/>
                 <Pagination numberOfPagesInOnePortion={6}/>
+                </div>
             </div>
 
         </div>

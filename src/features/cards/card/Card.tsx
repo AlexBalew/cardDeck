@@ -12,7 +12,7 @@ type CardPropsType = {
 
 export const Card: React.FC<CardPropsType> = ({card, packId}) => {
 
-    const authUserId = useSelector<AppStateType, string>(state => state.profile._id)
+    const authUserId = useSelector<AppStateType, string>(state => state.app._id)
 
     return (
         <div className={s.cardContainer}>

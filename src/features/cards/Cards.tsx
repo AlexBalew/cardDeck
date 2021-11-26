@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from './Cards.module.css'
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -10,7 +10,6 @@ import {Card} from "./card/Card";
 import Pagination from "../../common/components/pagination/pagination";
 import {RequestStatusType} from "../../app/app-reducer";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
-
 
 
 export const Cards = () => {
@@ -40,7 +39,7 @@ export const Cards = () => {
         setQuestion('')
         setAnswer('')
     }
-    const onSetPageCount = (value: number) => {
+   const onSetPageCount = (value: number) => {
         if(value){
             dispatch(setPageCountAC(value))
         }

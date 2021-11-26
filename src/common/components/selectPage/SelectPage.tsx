@@ -19,11 +19,11 @@ export const SelectPage: React.FC<SelectPageProps> = ({
     return (
         <div className={s.selectPage}>
             <span></span>
+            <span>{description}</span>
             <SuperSelect options={arrOptions}
                          onChangeOption={onChangeOptions}
                          value={value}
                          disabled={disabled}/>
-            <span>{description}</span>
         </div>
     )
 }
