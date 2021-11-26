@@ -21,14 +21,19 @@ export const CardPacksTable = () => {
     const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
     const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
     const searchedName = useAppSelector<string>(state => state.packs.searchedName)
+    const settingSlider = useAppSelector<{ min: number; max: number }>(state => state.packs.settingSlider)
 
 
     useEffect(() => {
         //setTimeout(() => {
             dispatch(getPacksTC())
        // }, 3000)
-    }, [pageCount, page, searchedName/*minCardsCount, maxCardsCount*/])
+    }, [pageCount, page, searchedName /*minCardsCount, maxCardsCount*/])
 
+    /*useEffect(() => {
+        let searchTimer = setTimeout(() => dispatch(setCardsCountAC(settingSlider.min, settingSlider.max)), 3000)
+        return () => clearTimeout(searchTimer)
+    }, [settingSlider.min, settingSlider.max])*/
 
     const onDeletePack = (id: string) => {
         dispatch(deletePackTC(id))
