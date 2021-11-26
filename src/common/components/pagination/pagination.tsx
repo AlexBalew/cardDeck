@@ -54,12 +54,12 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
                 setPortionNumber(portionNumber - 1)
             }}>prev</button>}
             {pages
-                .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
-                .map(p => {
-                    return <span key={p} className={currentPage === p ? s.selectedPage : s.pageNumber}
+                .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
+                .map(page => {
+                    return <span key={page} className={currentPage === page ? s.selectedPage : s.pageNumber}
                                  onClick={() => {
-                                     onSetNewPage(p)
-                                 }}>{p} </span>
+                                     onSetNewPage(page)
+                                 }}>{page} </span>
                 })}
             {numberOfPortions > portionNumber &&
             <button onClick={() => {
