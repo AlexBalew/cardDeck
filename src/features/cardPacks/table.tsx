@@ -37,7 +37,7 @@ export const CardPacksTable = () => {
     console.log('maxCardsCount, ' , maxCardsCount)*/
 
     return (
-        <div>
+        <div className={s.mainContainer}>
             <table className={s.table}>
                 <thead>
                 <tr >

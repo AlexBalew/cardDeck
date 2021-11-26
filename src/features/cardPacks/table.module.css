@@ -1,4 +1,6 @@
-
+.mainContainer {
+    overflow: auto;
+}
 
 .table {
     border-spacing: 0;
