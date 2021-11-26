@@ -1,10 +1,6 @@
 .cardContainer {
     width: 100%;
     min-height: 45px;
-    /*display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;*/
     display: grid;
     grid-template-columns: 3fr 4fr 1fr 1fr 2fr;
     grid-template-rows: 1fr;
@@ -25,10 +21,10 @@
 }
 
 .btn {
-    margin-top: 0px;
+    margin-top: 0;
     margin-left: 5px;
     padding: 5px 8px;
-    border-radius: 2px;
+    border-radius: 3px;
     color: black;
 }
 .btn:hover {

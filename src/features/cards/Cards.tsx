@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from './Cards.module.css'
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,7 +9,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Card} from "./card/Card";
 import {RequestStatusType} from "../../app/app-reducer";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
-import {setSearchedNameAC} from "../cardPacks/cardPacks-reducer";
 
 
 export const Cards = () => {
@@ -36,20 +35,21 @@ export const Cards = () => {
     const onSetAnswer = (e: ChangeEvent<HTMLInputElement>) => {
         setAnswer(e.currentTarget.value)
     }
-    const handlerCreateCard = (packId: string, question: string, answer: string) => {
-        dispatch(createCards(packId!, question, answer))
-        setQuestion('')
-        setAnswer('')
-    }
+
     const onSetPageCount = (value: number) => {
         if (value) {
             dispatch(setPageCountAC(value))
         }
     }
-
-    const onSetNewSearchQuestion = (e: ChangeEvent<HTMLInputElement>) => {
+    const onSetSearchQuestion = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchQuestion(e.currentTarget.value)
     }
+    const handlerCreateCard = (packId: string, question: string, answer: string) => {
+        dispatch(createCards(packId!, question, answer))
+        setQuestion('')
+        setAnswer('')
+    }
+
 
     useEffect(() => {
         dispatch(getCards(packId!))
@@ -59,6 +59,8 @@ export const Cards = () => {
         let searchTimer = setTimeout(() => dispatch(setSearchedQuestionAC(searchQuestion)), 3000)
         return () => clearTimeout(searchTimer)
     }, [searchQuestion])
+
+
     return (
         <div className={s.container}>
             <div className={s.cardsContainer}>
@@ -69,9 +71,14 @@ export const Cards = () => {
 
 
                 <div className={s.search}>
-                    <div className={s.addDataCard}><input onChange={onSetNewSearchQuestion}
-                                                          value={searchQuestion}
-                                                          placeholder={'search for pack names here'}/>
+                    <div className={s.searchBlock}>
+                        <form className={s.searchForm}>
+                            <input type="text" placeholder="Search.." name="search"/>
+                            <button className={s.searchBtn} type="submit">&#8617;</button>
+                        </form>
+                        {/*<input onChange={onSetSearchQuestion}
+                                value={searchQuestion}
+                                placeholder={'Search...'}/>*/}
                     </div>
                     <div className={s.addCard}>
                         <div>
@@ -124,7 +131,7 @@ export const Cards = () => {
                         <SelectPage onChangeOptions={onSetPageCount}
                                     value={pageCount}
                                     disabled={status === "loading"}
-                                    description={'cards on page'}/>
+                                    description={'Cards on page'}/>
                     </div>
 
                 </div>
