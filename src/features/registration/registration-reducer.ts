@@ -44,6 +44,6 @@ export const registryTC = (email: string, password: string) => async (dispatch: 
             : (e.message + ', more details in the console');
         console.log('Error: ', {...e})
         dispatch(setErrorAC(error))
-        dispatch(setAppStatusAC("succeeded"))
+        dispatch(setAppStatusAC("failed"))
     }
 }

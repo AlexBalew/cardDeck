@@ -3,13 +3,14 @@ import {AppThunkType} from "../../bll/store";
 import {loginAPI, UserData} from "../../api/login-api";
 import {setAppStatusAC, setAppStatusACType} from "../../app/app-reducer";
 import {setErrorAC, setErrorACType} from "../password/password-reducer";
+import {Nullable} from "../../types";
 
 
 export type UserDataType = {
     _id: string,
-    email: null | string,
-    name: string,
-    avatar: string,
+    email: Nullable<string>,
+    name: Nullable<string>,
+    avatar?: string,
 }
 
 const initState = {
@@ -53,5 +54,5 @@ export const changeUserData = (userData: UserData): AppThunkType => async (dispa
         dispatch(setErrorAC(error))
         dispatch(setAppStatusAC("succeeded"))
     }
-
 }
+

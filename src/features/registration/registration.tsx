@@ -1,4 +1,4 @@
-import React, {FormEvent, useState} from "react";
+import React, {ChangeEvent, FormEvent, useState} from "react";
 import s from "./registration.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
@@ -17,6 +17,8 @@ export const Registration = () => {
     const [type, setType] = useState('password')
     const [showPassword, setShowPassword] = useState<boolean>(true);
     const [isPasswordEqual, setIsPasswordEqual] = useState<boolean>(false);
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
 
     const backError = useSelector<AppStateType, string>((state) => state.registration.backError)
@@ -24,6 +26,25 @@ export const Registration = () => {
     const appStatus = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
 
     const dispatch = useDispatch()
+
+    const handleInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.currentTarget.value)
+        const re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        if( re.test(String(e.currentTarget.value).toLowerCase())) {
+            setEmailError('')
+        } else {
+            setEmailError('Invalid email address')
+        }
+    }
+    const handleInputPassword = (e: ChangeEvent<HTMLInputElement>) => {
+        let currentPasswordValue = e.currentTarget.value
+        setPassword(currentPasswordValue)
+        if(currentPasswordValue.length < 7)  {
+            setPasswordError('Password must be more than 6 character')
+        } else {
+            setPasswordError('')
+        }
+    }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -65,25 +86,20 @@ export const Registration = () => {
             <div className={s.form}>
 
                 <form onSubmit={handleSubmit}>
-                    <div>Email{<br/>}
+                    <div>{emailError ? <div style={{color: "red", display: "inline"}}>{emailError}</div> : 'Email'}{<br/>}
                         <SuperInput type={"email"}
                                     value={email}
                                     id={"email"}
-                                    onChange={(e) => {
-                                        dispatch(setErrorAC(''))
-                                        setEmail(e.currentTarget.value)
-                                    }}
+                                    onChange={handleInputEmail}
                                     style={{border: '1px solid black', marginTop: '5px'}}/>
                     </div>
 
-                    <div className={s.password}>Password{<br/>}
+                    <div className={s.password}>{passwordError ? <div style={{color: "red", display: "inline"}}>{passwordError}</div> : 'Password'}{<br/>}
                         <SuperInput type={type}
                                     value={password}
                                     id={"password"}
                                     onBlur={handlePasswordsMatch}
-                                    onChange={(e) => {
-                                        setPassword(e.currentTarget.value)
-                                    }}
+                                    onChange={handleInputPassword}
                                     style={{border: '1px solid black', marginTop: '5px'}}/>
                         <img className={s.passwordControl}
                              src={showPassword ? viewPassword : hiddenPassword}

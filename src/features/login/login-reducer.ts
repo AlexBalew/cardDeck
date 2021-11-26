@@ -2,19 +2,23 @@ import {Dispatch} from "redux";
 import {AppThunkType} from "../../bll/store";
 import {setAppStatusAC, setAppStatusACType} from "../../app/app-reducer";
 import {setErrorAC, setErrorACType} from "../password/password-reducer";
-import {loginAPI} from "../../api/login-api";
+import {loginAPI, LoginResponseType} from "../../api/login-api";
 import {Nullable} from "../../types";
 
-type stateType = {
+export type stateType = {
     isLoggedIn: boolean
-    email?: Nullable<string>
-    name?: Nullable<string>
+    _id: string
+    email: Nullable<string>
+    name: Nullable<string>
+    avatar?: string
 }
 
 let initState: stateType = {
     isLoggedIn: false,
+    _id: '',
     email: null,
-    name: null
+    name: null,
+    avatar: '',
 }
 
 export const loginReducer = (state = initState, action: AllACType): stateType => {
@@ -23,7 +27,13 @@ export const loginReducer = (state = initState, action: AllACType): stateType =>
             return {...state, isLoggedIn: action.isLoggedIn}
         }
         case 'login/LOG_IN' : {
-            return {...state, name: action.name, email: action.email, isLoggedIn: action.isLoggedIn}
+            return {
+                ...state,
+                name: action.payload.name,
+                avatar: action.payload.avatar,
+                email: action.payload.email,
+                isLoggedIn: action.isLoggedIn
+            }
         }
         default:
             return state
@@ -42,11 +52,10 @@ export const isLoggedInAC = (isLoggedIn: boolean) => {
     } as const
 }
 
-export const logInAC = (email: string, name: string, isLoggedIn: boolean) => {
+export const logInAC = (payload: LoginResponseType, isLoggedIn: boolean) => {
     return {
         type: 'login/LOG_IN',
-        email,
-        name,
+        payload,
         isLoggedIn
     } as const
 }
@@ -56,7 +65,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): A
         dispatch(setAppStatusAC("loading"))
         let response = await loginAPI.login(email, password, rememberMe)
         dispatch(setAppStatusAC("succeeded"))
-        dispatch(logInAC(response.data.email, response.data.name, true))
+        dispatch(logInAC(response.data, true))
     } catch (e: any) {
         const error = e.response
             ? e.response.data.error
