@@ -16,7 +16,7 @@ export const Card: React.FC<CardPropsType> = ({card, packId}) => {
 
     return (
         <div className={s.cardContainer}>
-            <div>{card.question}</div>
+            <div className={s.col}>{card.question}</div>
             <div>{card.answer}</div>
             <div>update</div>
             <div>grade</div>

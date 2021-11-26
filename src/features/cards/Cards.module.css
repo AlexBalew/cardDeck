@@ -9,7 +9,7 @@
 .cardsContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-around;
     text-align: center;
     max-width: 1068px;
@@ -30,6 +30,7 @@
 .backLink:hover {
     color: #bf7b7b;
 }
+
 .arrowBack {
     cursor: pointer;
     font-size: 25px;
@@ -43,16 +44,19 @@
     width: 950px;
     margin: 5px 30px;
 }
+
 .addCard {
     display: flex;
     justify-content: space-between;
 }
-.addInfoCard {
+
+.addDataCard {
     border: 1px solid #C7A5A5;
     height: 20px;
     margin: 10px;
 }
-.addInfoCard:focus {
+
+.addDataCard:focus {
     border: 1px solid #C7A5A5;
 }
 
@@ -63,7 +67,27 @@
     margin: 10px auto;
     box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
 }
+.cards {
+    display: grid;
+    grid-template-rows: 45px 1fr;
+    grid-gap: 10px;
+}
+.cardsHeader {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 4fr 1fr 1fr 2fr;
+    grid-gap: 10px;
+    margin-left: 5px;
+    font-weight: bold;
+    color: #020f65;
+}
 
+.cardsHeader div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 .noCards {
     font-size: 1.5em;
     color: #97b0ce;
@@ -80,27 +104,30 @@
     align-items: center;
 }
 
-.cardInfo {
-    width: 30%;
-    margin: 0 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
 .infoItem {
     margin-left: 10px;
 }
 
+.footer {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin-bottom: 25px;
+    margin-top: 20px;
+}
+
 .paginator {
-    margin-bottom: 5px;
-    margin-left: 30px;
+    height: 25px;
+    margin-left: 25px;
     align-self: flex-start;
     display: flex;
     align-items: center;
 }
 
-
+.selector {
+    display: flex;
+    height: 25px;
+    width: 180px;
+}
 
 
