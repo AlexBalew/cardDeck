@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, MouseEvent, useEffect, useState} from 'react'
 import s from './Cards.module.css'
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -10,6 +10,7 @@ import {Card} from "./card/Card";
 import Pagination from "../../common/components/pagination/pagination";
 import {RequestStatusType} from "../../app/app-reducer";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
+
 
 
 export const Cards = () => {
@@ -29,7 +30,7 @@ export const Cards = () => {
     const [answer, setAnswer] = useState<string>('')
 
     const onSetQuestion = (e: ChangeEvent<HTMLInputElement>) => {
-        setQuestion( e.currentTarget.value)
+        setQuestion(e.currentTarget.value)
     }
     const onSetAnswer = (e: ChangeEvent<HTMLInputElement>) => {
         setAnswer(e.currentTarget.value)
@@ -39,8 +40,8 @@ export const Cards = () => {
         setQuestion('')
         setAnswer('')
     }
-   const onSetPageCount = (value: number) => {
-        if(value){
+    const onSetPageCount = (value: number) => {
+        if (value) {
             dispatch(setPageCountAC(value))
         }
     }
@@ -63,14 +64,14 @@ export const Cards = () => {
                     Search
                     <div className={s.addCard}>
                         <div>
-                        <input
-                            className={s.addInfoCard}
-                            onChange={onSetQuestion}
-                            value={question}
-                            placeholder={'insert question'}
-                        />
                             <input
-                                className={s.addInfoCard}
+                                className={s.addDataCard}
+                                onChange={onSetQuestion}
+                                value={question}
+                                placeholder={'insert question'}
+                            />
+                            <input
+                                className={s.addDataCard}
                                 onChange={onSetAnswer}
                                 value={answer}
                                 placeholder={'insert answer'}
@@ -90,28 +91,31 @@ export const Cards = () => {
                         :
                         <div className={s.cards}>
                             <div className={s.card}>
+                                <div className={s.cardsHeader}>
                                 <div className={s.infoItem}>Question</div>
                                 <div className={s.infoItem}>Answer</div>
-                                <div className={s.cardInfo}>
-                                    <div><span>Last Updated</span></div>
-                                    <div><span>Grade</span></div>
+                                    <div><span>Last updated</span></div>
+                                    <div><span style={{marginLeft: '5px'}}>Grade</span></div>
                                     <div>Actions</div>
                                 </div>
                             </div>
+                            <div>
                             {cards.map(el =>
                                 <div key={el._id}>
                                     <Card card={el} packId={packId!}/>
                                 </div>)}
+                            </div>
                         </div>
                     }
                 </div>
+                <div className={s.footer}>
+                    <div className={s.selector}>
+                        <SelectPage onChangeOptions={onSetPageCount}
+                                    value={pageCount}
+                                    disabled={status === "loading"}
+                                    description={'cards on page'}/>
+                    </div>
 
-                <div className={s.paginator}><Pagination numberOfPagesInOnePortion={6}/></div>
-                <div className={s.selector}>
-                    <SelectPage onChangeOptions={onSetPageCount}
-                                value={pageCount}
-                                disabled={status === "loading"}
-                                description={'cards on page'}/>
                 </div>
 
             </div>
