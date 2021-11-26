@@ -1,4 +1,4 @@
-import {CardType, cardsAPI, NewCardType} from "../../api/cards-api";
+import {CardType, cardsAPI} from "../../api/cards-api";
 import {AppThunkType} from "../../bll/store";
 import {setAppStatusAC} from "../../app/app-reducer";
 
@@ -17,6 +17,7 @@ const initState = {
     token: '',
     tokenDeathTime: 0,
     activeModal: false,
+    searchQuestion: '',
 }
 
 
@@ -30,6 +31,9 @@ export const cardsReducer = (state: stateType = initState, action: AllActionsTyp
         case 'cardsReducer/SET_PAGE_COUNT' : {
             return {...state, pageCount: action.pageCount}
         }
+        case 'cardsReducer/SEARCH_QUESTION' : {
+            return {...state, searchQuestion: action.searchQuestion}
+        }
         default:
             return state
     }
@@ -38,17 +42,19 @@ export const cardsReducer = (state: stateType = initState, action: AllActionsTyp
 
 type setCardsACType = ReturnType<typeof setCardsAC>
 type setPageCountACType = ReturnType<typeof setPageCountAC>
+type setSearchedQuestionACType = ReturnType<typeof setSearchedQuestionAC>
 
-type AllActionsType = setCardsACType | setPageCountACType
+type AllActionsType = setCardsACType | setPageCountACType | setSearchedQuestionACType
 
 
 //* Action Creators --------------------------------------------------------->
 export const setCardsAC = (cards: Array<CardType>) => ({type: 'cardsReducer/SET_CARDS', cards} as const)
 export const setPageCountAC = (pageCount: number) =>( {type: 'cardsReducer/SET_PAGE_COUNT', pageCount} as const)
-//export const createCardAC = (card: CardType) => ({type: 'cardsReducer/CREATE_CARDS', card} as const)
+export const setSearchedQuestionAC = (searchQuestion: string) => ({type: 'cardsReducer/SEARCH_QUESTION', searchQuestion } as const)
+
+
 
 //* Thunk Creators --------------------------------------------------------->
-
 
 export const getCards = (packId: string): AppThunkType =>
     (dispatch, getState) => {

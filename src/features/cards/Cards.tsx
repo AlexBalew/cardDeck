@@ -2,15 +2,14 @@ import React, {ChangeEvent, MouseEvent, useEffect, useState} from 'react'
 import s from './Cards.module.css'
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
-import {createCards, getCards, setPageCountAC} from "./cards-reducer";
+import {createCards, getCards, setPageCountAC, setSearchedQuestionAC} from "./cards-reducer";
 import {AppStateType} from "../../bll/store";
 import {CardType} from "../../api/cards-api";
 import {useNavigate, useParams} from "react-router-dom";
 import {Card} from "./card/Card";
-import Pagination from "../../common/components/pagination/pagination";
 import {RequestStatusType} from "../../app/app-reducer";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
-
+import {setSearchedNameAC} from "../cardPacks/cardPacks-reducer";
 
 
 export const Cards = () => {
@@ -28,6 +27,8 @@ export const Cards = () => {
 
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
+    const [searchQuestion, setSearchQuestion] = useState<string>('')
+
 
     const onSetQuestion = (e: ChangeEvent<HTMLInputElement>) => {
         setQuestion(e.currentTarget.value)
@@ -46,12 +47,18 @@ export const Cards = () => {
         }
     }
 
+    const onSetNewSearchQuestion = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchQuestion(e.currentTarget.value)
+    }
 
     useEffect(() => {
         dispatch(getCards(packId!))
     }, [dispatch, packId, page, pageCount])
 
-
+    useEffect(() => {
+        let searchTimer = setTimeout(() => dispatch(setSearchedQuestionAC(searchQuestion)), 3000)
+        return () => clearTimeout(searchTimer)
+    }, [searchQuestion])
     return (
         <div className={s.container}>
             <div className={s.cardsContainer}>
@@ -60,8 +67,12 @@ export const Cards = () => {
                     <div onClick={() => navigate('/packs-list')} className={s.arrowBack}>&larr;{packName}</div>
                 </div>
 
+
                 <div className={s.search}>
-                    Search
+                    <div className={s.addDataCard}><input onChange={onSetNewSearchQuestion}
+                                                          value={searchQuestion}
+                                                          placeholder={'search for pack names here'}/>
+                    </div>
                     <div className={s.addCard}>
                         <div>
                             <input
@@ -92,18 +103,18 @@ export const Cards = () => {
                         <div className={s.cards}>
                             <div className={s.card}>
                                 <div className={s.cardsHeader}>
-                                <div className={s.infoItem}>Question</div>
-                                <div className={s.infoItem}>Answer</div>
+                                    <div className={s.infoItem}>Question</div>
+                                    <div className={s.infoItem}>Answer</div>
                                     <div><span>Last updated</span></div>
                                     <div><span style={{marginLeft: '5px'}}>Grade</span></div>
                                     <div>Actions</div>
                                 </div>
                             </div>
                             <div>
-                            {cards.map(el =>
-                                <div key={el._id}>
-                                    <Card card={el} packId={packId!}/>
-                                </div>)}
+                                {cards.map(el =>
+                                    <div key={el._id}>
+                                        <Card card={el} packId={packId!}/>
+                                    </div>)}
                             </div>
                         </div>
                     }
@@ -120,6 +131,8 @@ export const Cards = () => {
 
             </div>
         </div>)
+
+
 }
 
 

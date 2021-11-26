@@ -1,21 +1,32 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import s from "./profile.module.css"
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType, useAppSelector} from "../../bll/store";
+import {AppStateType} from "../../bll/store";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/Routes";
-import userDefaultImg from "../../assets/profile/userDefaultImg.png"
+import userDefaultImg from "../../assets/profile/userImg.png"
 import Preloader from "../../common/components/preloader/Preloader";
 import {RequestStatusType} from "../../app/app-reducer";
-import {stateType} from "../login/login-reducer";
 
 export const Profile = () => {
     const dispatch = useDispatch()
 
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
-    const {name, avatar} = useSelector<AppStateType, stateType>(state => state.login)
-    const status = useAppSelector<RequestStatusType>(state => state.app.status)
+    const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
+    const name = useSelector<AppStateType, string>(state => state.profile.name)
+    const avatar = useSelector<AppStateType, string>(state => state.profile.avatar)
 
+
+    const [myName, setMyName] = useState('')
+    const [myAvatar, setMyAvatar] = useState<string>('Avatar is not defined')
+
+
+    useEffect(() => {
+        setMyName(name)
+        if (avatar) {
+            setMyAvatar(avatar)
+        }
+    }, [name, avatar])
     if (status === 'loading') {
         return <Preloader/>
     }
@@ -27,14 +38,11 @@ export const Profile = () => {
     return (
         <div className={s.profileContainer}>
             <div className={s.profileBlock}>
-                <div className={s.aboutUser}>
-                    <h2>About user</h2>
-                    <img className={s.profileAvatar}
-                         src={`${avatar !== 'Avatar is not defined' ? avatar : userDefaultImg}`} alt="ava"/>
-                    <span>{name}</span>
-                </div>
                 <div className={s.content}>
-                    <h2>Content</h2>
+                    <div className={s.profileAvatar}>
+                        <img src={`${avatar !== 'Avatar is not defined' ? avatar : userDefaultImg}`} alt="ava"/>
+                    </div>
+                    <div>{name}</div>
                 </div>
             </div>
 
