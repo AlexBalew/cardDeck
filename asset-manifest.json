@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/cardDeck/static/css/main.d24b517e.chunk.css",
-    "main.js": "/cardDeck/static/js/main.2dc362bd.chunk.js",
-    "main.js.map": "/cardDeck/static/js/main.2dc362bd.chunk.js.map",
+    "main.js": "/cardDeck/static/js/main.954346f3.chunk.js",
+    "main.js.map": "/cardDeck/static/js/main.954346f3.chunk.js.map",
     "runtime-main.js": "/cardDeck/static/js/runtime-main.96f9036e.js",
     "runtime-main.js.map": "/cardDeck/static/js/runtime-main.96f9036e.js.map",
     "static/js/2.68ab0bc6.chunk.js": "/cardDeck/static/js/2.68ab0bc6.chunk.js",
@@ -20,6 +20,6 @@
     "static/js/runtime-main.96f9036e.js",
     "static/js/2.68ab0bc6.chunk.js",
     "static/css/main.d24b517e.chunk.css",
-    "static/js/main.2dc362bd.chunk.js"
+    "static/js/main.954346f3.chunk.js"
   ]
 }
