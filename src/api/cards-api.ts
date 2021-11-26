@@ -18,11 +18,6 @@ export const cardsAPI = {
         return instance_local.put<CardsResponseType>
         (`cards/card`, {card: updateCard})
     },
-    /*createPack(title: string) {
-        return instance_local.post<PacksResponseType>
-        (`cards/pack`, { cardsPack: {name: title}})
-    },*/
-
 }
 
 //* types --------------------------------------------------------->
@@ -66,23 +61,13 @@ type updateCardType = {
     question?: string,
     answer?: string
 }
-/*
-export type PacksResponseType = {
-    cardsCount: number
-    created: string
-    grade: number
-    more_id: string
-    name: string
-    path: string
-    private: boolean
-    rating: number
-    shots: number
-    type: string
-    updated: string
-    user_id: string
-    user_name: string
-    __v: number
-    _id: string
-    token: string
-    tokenDeathTime: number
-}*/
+
+
+export type RequestParamsType = {
+    cardAnswer?: string
+    cardQuestion?: string
+    cardsPack_id?: string
+    sortCards?: string
+    page?: number
+    pageCount?: number
+}
