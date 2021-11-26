@@ -93,7 +93,7 @@ export const Cards = () => {
                                 <div className={s.cardsHeader}>
                                 <div className={s.infoItem}>Question</div>
                                 <div className={s.infoItem}>Answer</div>
-                                    <div><span>Last Updated</span></div>
+                                    <div><span>Last updated</span></div>
                                     <div><span style={{marginLeft: '5px'}}>Grade</span></div>
                                     <div>Actions</div>
                                 </div>
@@ -108,7 +108,6 @@ export const Cards = () => {
                     }
                 </div>
                 <div className={s.footer}>
-                    <div className={s.paginator}><Pagination numberOfPagesInOnePortion={6}/></div>
                     <div className={s.selector}>
                         <SelectPage onChangeOptions={onSetPageCount}
                                     value={pageCount}
