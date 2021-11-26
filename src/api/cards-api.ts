@@ -1,21 +1,21 @@
-import {instance_local} from "./api";
+import {instance} from "./api";
 
 
 export const cardsAPI = {
     getCards(cardsPack_id: string, pageCount: number = 5, page: number = 1) {
-        return instance_local.get<CardsResponseType>
+        return instance.get<CardsResponseType>
         (`cards/card?cardsPack_id=${cardsPack_id}&pageCount=${pageCount}&page=${page}&max=5`)
     },
     createCard(cardsPack_id: string, question: string, answer: string) {
-        return instance_local.post<CardsResponseType>
+        return instance.post<CardsResponseType>
         (`cards/card`, { card: {cardsPack_id, question, answer}})
     },
     deleteCard(cardsPack_id: string) {
-        return instance_local.delete<CardsResponseType>
+        return instance.delete<CardsResponseType>
         (`cards/card?id=${cardsPack_id}`)
     },
     updateCard(updateCard: updateCardType) {
-        return instance_local.put<CardsResponseType>
+        return instance.put<CardsResponseType>
         (`cards/card`, {card: updateCard})
     },
 }
