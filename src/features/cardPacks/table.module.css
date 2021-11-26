@@ -1,3 +1,5 @@
+
+
 .table {
     border-spacing: 0;
     margin-bottom: 20px;
@@ -30,3 +32,13 @@ tr:nth-child(2n) {
     /*display:inline-block;
     -webkit-box-orient: revert;*/
 }
+
+.deleteButton {
+
+}
+
+.deleteButton:after {
+    top: 0;
+    left: 0;
+}
+

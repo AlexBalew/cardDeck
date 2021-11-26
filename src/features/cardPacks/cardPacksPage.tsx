@@ -50,6 +50,9 @@ export const CardPacksPage = () => {
 
     const onGetPacks = () => {
         dispatch(getPacksTC())
+        setValue1(settingSlider.min)
+        setValue2(settingSlider.max)
+        setValue3([settingSlider.min, settingSlider.max])
     }
 
     const onGetMyPacks = () => {
@@ -84,8 +87,7 @@ export const CardPacksPage = () => {
             </div>
             <div className={s.packsContainer}>
                 <h1>Packs</h1>
-
-                <div className={s.addNewPackInput}><input style={{border: '1px solid #C7A5A5', marginRight: '400px'}}
+                <div className={s.addNewPackInput}><input style={{border: '1px solid #C7A5A5'}}
                                                           onChange={onSetNewSearchName}
                                                           value={searchName}
                                                           placeholder={'search for pack names here'}/>

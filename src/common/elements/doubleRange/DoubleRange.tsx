@@ -38,15 +38,19 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
         if (activeThumb === 0) {
             setValue3([Math.min(newValue[0], value2 - minDistance), value2]);
             setValue1(Math.min(newValue[0], value2 - minDistance));
-            setTimeout(() => {
+            /*setTimeout(() => {*/
                 dispatch(setMinCardsCountAC(Math.min(newValue[0], value2 - minDistance)))
-            }, 3000)
+            /*}, 3000)*/
+            console.log('minCardCount: ', value1)
+            console.log('value3: ', value3)
         } else {
             setValue3([value3[0], Math.max(newValue[1], value1 + minDistance)]);
             setValue2(value3[1])
-           setTimeout(() => {
+          /* setTimeout(() => {*/
                dispatch(setMaxCardsCountAC(value3[1]));
-           }, 3000)
+        /*   }, 3000)*/
+            console.log('maxCardCount: ', value2)
+            console.log('value3: ', value3)
         }
     };
 

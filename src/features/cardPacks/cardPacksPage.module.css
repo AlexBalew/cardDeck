@@ -41,8 +41,8 @@
 .addNewPackInput {
     width: inherit;
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 10px;
+    justify-content: space-between;
+    margin: 30px 10px;
 }
 
 .selectPagination {

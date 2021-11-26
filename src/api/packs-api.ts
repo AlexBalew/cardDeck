@@ -24,7 +24,7 @@ export const packsAPI = {
         if (user_id) {
             return instance_local.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&user_id=${user_id}`, {})
         }
-        if (minCardsCount&&maxCardsCount) {
+        if (minCardsCount||maxCardsCount) {
             return instance_local.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&min=${minCardsCount}&max=${maxCardsCount}`, {})
         }
         if(searchedName) {
