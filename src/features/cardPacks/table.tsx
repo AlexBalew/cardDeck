@@ -4,8 +4,11 @@ import {useAppSelector} from "../../bll/store";
 import {CardPackType} from "../../api/packs-api";
 import {deletePackTC, getPacksTC} from "./cardPacks-reducer";
 import s from './table.module.css'
+import btn from '../cards/card/Card.module.css'
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../app/Routes";
+import SuperButton from "../../common/elements/button/SuperButton";
+
 
 export const CardPacksTable = () => {
 
@@ -51,14 +54,15 @@ export const CardPacksTable = () => {
                             <td>{pack.updated}</td>
                             <td>{pack.user_name}</td>
                             {pack.user_id === myId
-                                ? <td><button
+                                ? <td><SuperButton
+                                    className={btn.btn}
                                     onClick={() => {onDeletePack(pack._id)}}
                                     value={pack._id}>
                                     delete
-                                </button>
-                                    <button>edit</button>
-                                    <button>learn</button></td>
-                                : <td><button>learn</button></td>}
+                                </SuperButton>
+                                    <SuperButton className={btn.btn}>edit</SuperButton>
+                                    <SuperButton className={btn.btn}>learn</SuperButton></td>
+                                : <td><SuperButton className={btn.btn}>learn</SuperButton></td>}
                         </tr>
                     )}
                 </tbody>
