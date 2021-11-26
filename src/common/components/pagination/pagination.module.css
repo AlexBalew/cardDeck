@@ -1,6 +1,7 @@
 .pagination {
     margin: 10px;
     cursor: pointer;
+    display: flex;
 }
 .pageNumber {
     padding: 2px;
@@ -9,4 +10,11 @@
 
 .pageNumber.selectedPage {
     font-weight: bold;
+}
+
+.pages {
+    display: inherit;
+    justify-content: space-between;
+    width: 240px;
+    align-items: center;
 }

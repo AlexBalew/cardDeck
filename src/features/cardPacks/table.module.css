@@ -1,6 +1,6 @@
 .table {
     border-spacing: 0;
-
+    margin-bottom: 20px;
 }
 
 tr:nth-child(2n) {

@@ -41,15 +41,14 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
     }
 
     const onSetNewPageByButton = (inputPage: number) => {
-        debugger
         dispatch(setCurrentPageAC(inputPage))
         setInputPage('')
-        console.log('inputPage: ', inputPage)
     }
 
     return (
 
         <div className={s.pagination}>
+            <div className={s.pages}>
             {portionNumber > 1 &&
             <button onClick={() => {
                 setPortionNumber(portionNumber - 1)
@@ -66,6 +65,7 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
             <button onClick={() => {
                 setPortionNumber(portionNumber + 1)
             }}>next</button>}
+            </div>
             <input style={{border: '1px solid',
                 width: '40px',
                 marginLeft: '20px',
