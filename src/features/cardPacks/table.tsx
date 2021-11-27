@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../bll/store";
 import {CardPackType} from "../../api/packs-api";
-import {deletePackTC, getPacksTC} from "./cardPacks-reducer";
+import {deletePackTC, getPacksTC, setCardsCountAC} from "./cardPacks-reducer";
 import s from './table.module.css'
 import btn from '../cards/card/Card.module.css'
 import {NavLink} from "react-router-dom";
@@ -18,28 +18,28 @@ export const CardPacksTable = () => {
     const pageCount = useAppSelector<number>(state => state.packs.pageCount)
     const page = useAppSelector<number>(state => state.packs.page)
     const myId = useAppSelector<string>(state => state.app._id)
-    const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
-    const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
     const searchedName = useAppSelector<string>(state => state.packs.searchedName)
     const settingSlider = useAppSelector<{ min: number; max: number }>(state => state.packs.settingSlider)
 
 
     useEffect(() => {
-        //setTimeout(() => {
             dispatch(getPacksTC())
-       // }, 3000)
-    }, [pageCount, page, searchedName /*minCardsCount, maxCardsCount*/])
+    }, [pageCount, page])
 
-    /*useEffect(() => {
-        let searchTimer = setTimeout(() => dispatch(setCardsCountAC(settingSlider.min, settingSlider.max)), 3000)
-        return () => clearTimeout(searchTimer)
-    }, [settingSlider.min, settingSlider.max])*/
+    useEffect(() => {
+       let timer = setTimeout(() => {
+        dispatch(getPacksTC())
+        }, 3000)
+        return () => clearTimeout(timer)
+    }, [searchedName, settingSlider.min, settingSlider.max])
+
+    useEffect(() => {
+        dispatch(setCardsCountAC(settingSlider.min, settingSlider.max))
+    }, [settingSlider.min, settingSlider.max])
 
     const onDeletePack = (id: string) => {
         dispatch(deletePackTC(id))
     }
-    /*console.log('minCardsCount, ' , minCardsCount)
-    console.log('maxCardsCount, ' , maxCardsCount)*/
 
     return (
         <div className={s.mainContainer}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Slider} from "@mui/material";
 import {useDispatch} from "react-redux";
-import {setMaxCardsCountAC, setMinCardsCountAC} from "../../../features/cardPacks/cardPacks-reducer";
+import {setCardsCountAC} from "../../../features/cardPacks/cardPacks-reducer";
 
 
 type SuperDoubleRangePropsType = {
@@ -38,19 +38,11 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
         if (activeThumb === 0) {
             setValue3([Math.min(newValue[0], value2 - minDistance), value2]);
             setValue1(Math.min(newValue[0], value2 - minDistance));
-            /*setTimeout(() => {*/
-                dispatch(setMinCardsCountAC(Math.min(newValue[0], value2 - minDistance)))
-            /*}, 3000)*/
-            console.log('minCardCount: ', value1)
-            console.log('value3: ', value3)
+                dispatch(setCardsCountAC((Math.min(newValue[0], value2 - minDistance)), value2))
         } else {
             setValue3([value3[0], Math.max(newValue[1], value1 + minDistance)]);
             setValue2(value3[1])
-          /* setTimeout(() => {*/
-               dispatch(setMaxCardsCountAC(value3[1]));
-        /*   }, 3000)*/
-            console.log('maxCardCount: ', value2)
-            console.log('value3: ', value3)
+               dispatch(setCardsCountAC(value3[0], value3[1]));
         }
     };
 
@@ -58,11 +50,12 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
     return (
         <Box sx={{height: 300}}>
             <Slider
+                min={10}
                 step={1}
                 size={"medium"}
                 value={value3}
                 onChange={handleChange1}
-                //valueLabelDisplay="off"
+                //valueLabelDisplay="on"
                 style={{color: '#C7A5A5'}}
                 disableSwap
                 orientation={"vertical"}

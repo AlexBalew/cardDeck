@@ -19,25 +19,33 @@ export type GetPacksResponseType = {
     pageCount: number
 }
 
+   /* ?pageCount=${pageCount}&page=${page}&user_id=${user_id}*/
+
 export const packsAPI = {
-    getPacks(pageCount: number, page: number, user_id?: string, minCardsCount?: number, maxCardsCount?:number, searchedName?: string,/* settingSlider?:{min: number, max: number}*/) {
-        if (user_id) {
-            return instance.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&user_id=${user_id}`, {})
-        }
+    getPacks(pageCount: number, page: number, user_id?: string, /*minCardsCount?: number, maxCardsCount?:number,*/ searchedName?: string, settingSlider?:{min: number, max: number}) {
+      /*  if (user_id) {*/
+            return instance.get<GetPacksResponseType>(`/cards/pack?min=${settingSlider?.min}&max=${settingSlider?.max}&packName=${searchedName}`, {params: {
+                    pageCount,
+                    page,
+                    user_id,
+                    /*minCardsCount,
+                    maxCardsCount,*/
+                    /*searchedName,*/
+                    /*settingSlider*/
+                }})
+       /* }
         if(searchedName) {
             return instance.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&packName=${searchedName}`, {})
         }
-       /* // @ts-ignore
-        if (settingSlider.min||settingSlider.max) {
-            // @ts-ignore
-            return instance.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&min=${settingSlider.min}&max=${settingSlider.max}`, {})
-        }*/
+        if (settingSlider?.min||settingSlider?.max) {
+            return instance.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&min=${settingSlider!.min}&max=${settingSlider!.max}`, {})
+        }
         if (minCardsCount||maxCardsCount) {
             return instance.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&min=${minCardsCount}&max=${maxCardsCount}`, {})
         }
          else {
             return instance.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}`, {})
-        }
+        }*/
 
 
     },

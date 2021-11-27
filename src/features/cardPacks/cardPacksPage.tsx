@@ -4,7 +4,7 @@ import s from './cardPacksPage.module.css';
 import Pagination from "../../common/components/pagination/pagination";
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch} from "react-redux";
-import {createPackTC, getPacksTC, setPageCountAC, setSearchedNameAC} from "./cardPacks-reducer";
+import {createPackTC, getPacksTC, setCardsCountAC, setPageCountAC, setSearchedNameAC} from "./cardPacks-reducer";
 import {useAppSelector} from "../../bll/store";
 import style from '../../common/elements/doubleRange/DoubleRange.module.css'
 import SuperDoubleRange from "../../common/elements/doubleRange/DoubleRange";
@@ -15,17 +15,17 @@ import {RequestStatusType} from "../../app/app-reducer";
 export const CardPacksPage = () => {
 
     let dispatch = useDispatch()
+
     const settingSlider = useAppSelector<{ min: number; max: number }>(state => state.packs.settingSlider)
     const myId = useAppSelector<string>(state => state.app._id)
-
+    const status = useAppSelector<RequestStatusType>(state => state.app.status)
+    const pageCount = useAppSelector<number>(state => state.packs.pageCount)
 
     const [newName, setNewName] = useState<string>('') //add new pack input state
     const [searchName, setSearchName] = useState<string>('') //search pack input state
     const [value1, setValue1] = useState(settingSlider.min) //slider's state
     const [value2, setValue2] = useState(settingSlider.max) //slider's state
     const [value3, setValue3] = React.useState<number[]>([value1, value2]); //slider's state
-    const status = useAppSelector<RequestStatusType>(state => state.app.status)
-    const pageCount = useAppSelector<number>(state => state.packs.pageCount)
 
     const onSetNewName = (e: ChangeEvent<HTMLInputElement>) => {
         let newName = e.currentTarget.value
@@ -49,13 +49,18 @@ export const CardPacksPage = () => {
     }
 
     const onGetPacks = () => {
+        dispatch(setCardsCountAC(0, 103))
+        setValue1(0)
+        setValue2(103)
+        setValue3([0, 103])
         dispatch(getPacksTC())
-        setValue1(settingSlider.min)
-        setValue2(settingSlider.max)
-        setValue3([settingSlider.min, settingSlider.max])
     }
 
     const onGetMyPacks = () => {
+        dispatch(setCardsCountAC(0, 103))
+        setValue1(0)
+        setValue2(103)
+        setValue3([0, 103])
         dispatch(getPacksTC(myId))
     }
 
@@ -82,7 +87,6 @@ export const CardPacksPage = () => {
                         setValue3={setValue3}
                     />
                     <span className={style.span}>{value1 < value2 ? value1 : value2 - 1}</span>
-                    <SuperButton onClick={onGetPacks}>Find</SuperButton>
                 </div>
             </div>
             <div className={s.packsContainer}>
