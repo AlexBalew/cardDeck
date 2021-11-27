@@ -46,12 +46,12 @@ export const CardPacksTable = () => {
             <table className={s.table}>
                 <thead>
                 <tr >
-                    {titles.map(title => <th key={Math.floor(Math.random()*100000)} className={s.title}>{title}</th>)}
+                    {titles.map((title, index) => <th key={title + index} className={s.title}>{title}</th>)}
                 </tr>
                 </thead>
                 <tbody>
                     {packs.map(pack =>
-                        <tr className={s.dataRow} key={Math.floor(Math.random()*100000)}>
+                        <tr className={s.dataRow} key={pack._id}>
                             <td>
                                 <NavLink to={PATH.CARDS + `/${pack._id}`}>{pack.name}</NavLink>
                             </td>
