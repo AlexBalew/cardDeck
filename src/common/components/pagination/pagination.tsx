@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from "react";
 import s from './pagination.module.css';
 import {useAppSelector} from "../../../bll/store";
 import {useDispatch} from "react-redux";
@@ -14,7 +14,7 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
 
     let dispatch = useDispatch()
     let [portionNumber, setPortionNumber] = useState<number>(1)
-    let [inputPage, setInputPage] = useState<number|string>('')
+    let [inputPage, setInputPage] = useState<number | string>('')
 
     let cardPacksTotalCount = useAppSelector<number>(state => state.packs.cardPacksTotalCount)
     let pageCount = useAppSelector<number>(state => state.packs.pageCount)
@@ -27,7 +27,7 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
     }
 
     let numberOfPortions = Math.ceil(totalAmountOfPages / numberOfPagesInOnePortion)
-    let currentPortion = Math.ceil(currentPage/numberOfPagesInOnePortion)
+    let currentPortion = Math.ceil(currentPage / numberOfPagesInOnePortion)
 
     let leftPortionPageNumber = (portionNumber - 1) * numberOfPagesInOnePortion + 1
     let rightPortionPageNumber = portionNumber * numberOfPagesInOnePortion
@@ -41,42 +41,52 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
         setInputPage(page)
     }
 
+    const onSetNewPageByEnterKey = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            dispatch(setCurrentPageAC(+inputPage))
+            setInputPage('')
+        }
+    }
+
     const onSetNewPageByButton = (inputPage: number) => {
         dispatch(setCurrentPageAC(inputPage))
         setInputPage('')
     }
 
-    useEffect( () => {
+    useEffect(() => {
         setPortionNumber(currentPortion)
     }, [currentPortion])
 
     return (
         <div className={s.pagination}>
             <div className={s.pages}>
-            {portionNumber > 1 &&
-            <button onClick={() => {
-                setPortionNumber(portionNumber - 1)
-            }}>prev</button>}
-            {pages
-                .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
-                .map(page => {
-                    return <span key={page} className={currentPage === page ? s.selectedPage : s.pageNumber}
-                                 onClick={() => {
-                                     onSetNewPage(page)
-                                 }}>{page} </span>
-                })}
-            {numberOfPortions > portionNumber &&
-            <button onClick={() => {
-                setPortionNumber(portionNumber + 1)
-            }}>next</button>}
+                {portionNumber > 1 &&
+                <button onClick={() => {
+                    setPortionNumber(portionNumber - 1)
+                }}>prev</button>}
+                {pages
+                    .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
+                    .map(page => {
+                        return <span key={page} className={currentPage === page ? s.selectedPage : s.pageNumber}
+                                     onClick={() => {
+                                         onSetNewPage(page)
+                                     }}>{page} </span>
+                    })}
+                {numberOfPortions > portionNumber &&
+                <button onClick={() => {
+                    setPortionNumber(portionNumber + 1)
+                }}>next</button>}
             </div>
-            <input style={{border: '1px solid',
+            <input style={{
+                border: '1px solid',
                 width: '40px',
                 marginLeft: '20px',
-                marginRight: '5px'}}
+                marginRight: '5px'
+            }}
                    onChange={onSetNewPageFromInput}
                    value={inputPage!}
                    placeholder={'page'}
+                   onKeyPress={onSetNewPageByEnterKey}
             />
             <button onClick={() => {
                 onSetNewPageByButton(+inputPage)
