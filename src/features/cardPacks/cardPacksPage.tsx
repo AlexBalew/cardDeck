@@ -4,7 +4,14 @@ import s from './cardPacksPage.module.css';
 import Pagination from "../../common/components/pagination/pagination";
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch} from "react-redux";
-import {createPackTC, getPacksTC, setCardsCountAC, setPageCountAC, setSearchedNameAC} from "./cardPacks-reducer";
+import {
+    createPackTC,
+    getPacksTC,
+    setCardsCountAC,
+    setCurrentPageAC,
+    setPageCountAC,
+    setSearchedNameAC
+} from "./cardPacks-reducer";
 import {useAppSelector} from "../../bll/store";
 import style from '../../common/elements/doubleRange/DoubleRange.module.css'
 import SuperDoubleRange from "../../common/elements/doubleRange/DoubleRange";
@@ -53,6 +60,7 @@ export const CardPacksPage = () => {
 
     const onGetPacks = () => {
         dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
+        dispatch(setCurrentPageAC(1))
         setValue1(minCardsCount)
         setValue2(maxCardsCount)
         setValue3([minCardsCount, maxCardsCount])
@@ -61,6 +69,7 @@ export const CardPacksPage = () => {
 
     const onGetMyPacks = () => {
         dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
+        dispatch(setCurrentPageAC(1))
         setValue1(minCardsCount)
         setValue2(maxCardsCount)
         setValue3([minCardsCount, maxCardsCount])
