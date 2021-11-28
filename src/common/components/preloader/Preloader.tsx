@@ -1,5 +1,5 @@
 import s from "./Preloader.module.css";
-import preloader from '../../../assets/preloader/preloader.gif'
+import preloader from '../../../assets/preloader/Eclipse200px.gif'
 import React from "react";
 
 

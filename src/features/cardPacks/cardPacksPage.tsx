@@ -124,7 +124,7 @@ export const CardPacksPage = () => {
                 <SelectPage onChangeOptions={onSetPageCount}
                             value={pageCount}
                             disabled={status === "loading"}
-                            description={'cards on page'}/>
+                            description={'packs on page'}/>
                 <Pagination numberOfPagesInOnePortion={6}/>
                 </div>
             </div>
