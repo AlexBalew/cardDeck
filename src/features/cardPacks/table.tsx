@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../bll/store";
 import {CardPackType} from "../../api/packs-api";
-import {deletePackTC, getPacksTC, setCardsCountAC} from "./cardPacks-reducer";
+import {deletePackTC, getPacksTC} from "./cardPacks-reducer";
 import s from './table.module.css'
 import btn from '../cards/card/Card.module.css'
 import {NavLink} from "react-router-dom";
@@ -13,7 +13,9 @@ import SuperButton from "../../common/elements/button/SuperButton";
 export const CardPacksTable = () => {
 
     let dispatch = useDispatch()
+
     let titles = ['Name', 'Cards count', 'Last updated', 'Created by', 'Actions']
+
     const packs = useAppSelector<CardPackType[]>(state => state.packs.cardPacks)
     const pageCount = useAppSelector<number>(state => state.packs.pageCount)
     const page = useAppSelector<number>(state => state.packs.page)
@@ -24,18 +26,7 @@ export const CardPacksTable = () => {
 
     useEffect(() => {
             dispatch(getPacksTC())
-    }, [pageCount, page])
-
-    useEffect(() => {
-       let timer = setTimeout(() => {
-        dispatch(getPacksTC())
-        }, 3000)
-        return () => clearTimeout(timer)
-    }, [searchedName, settingSlider.min, settingSlider.max])
-
-    useEffect(() => {
-        dispatch(setCardsCountAC(settingSlider.min, settingSlider.max))
-    }, [settingSlider.min, settingSlider.max])
+    }, [pageCount, page, searchedName, settingSlider.min, settingSlider.max])
 
     const onDeletePack = (id: string) => {
         dispatch(deletePackTC(id))

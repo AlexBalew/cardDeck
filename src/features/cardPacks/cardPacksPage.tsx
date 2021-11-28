@@ -20,6 +20,8 @@ export const CardPacksPage = () => {
     const myId = useAppSelector<string>(state => state.app._id)
     const status = useAppSelector<RequestStatusType>(state => state.app.status)
     const pageCount = useAppSelector<number>(state => state.packs.pageCount)
+    const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
+    const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
 
     const [newName, setNewName] = useState<string>('') //add new pack input state
     const [searchName, setSearchName] = useState<string>('') //search pack input state
@@ -27,15 +29,16 @@ export const CardPacksPage = () => {
     const [value2, setValue2] = useState(settingSlider.max) //slider's state
     const [value3, setValue3] = React.useState<number[]>([value1, value2]); //slider's state
 
+
     const onSetNewName = (e: ChangeEvent<HTMLInputElement>) => {
         let newName = e.currentTarget.value
         setNewName(newName)
     }
 
     const onSetNewSearchName = (e: ChangeEvent<HTMLInputElement>) => {
-        let searchName = e.currentTarget.value
-        setSearchName(searchName)
-    }
+        const search = e.currentTarget.value
+        setSearchName(search)
+        }
 
     const onSetPageCount = (value: number) => {
         if(value){
@@ -49,23 +52,23 @@ export const CardPacksPage = () => {
     }
 
     const onGetPacks = () => {
-        dispatch(setCardsCountAC(0, 103))
-        setValue1(0)
-        setValue2(103)
-        setValue3([0, 103])
+        dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
+        setValue1(minCardsCount)
+        setValue2(maxCardsCount)
+        setValue3([minCardsCount, maxCardsCount])
         dispatch(getPacksTC())
     }
 
     const onGetMyPacks = () => {
-        dispatch(setCardsCountAC(0, 103))
-        setValue1(0)
-        setValue2(103)
-        setValue3([0, 103])
+        dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
+        setValue1(minCardsCount)
+        setValue2(maxCardsCount)
+        setValue3([minCardsCount, maxCardsCount])
         dispatch(getPacksTC(myId))
     }
 
     useEffect(() => {
-        let searchTimer = setTimeout(() => dispatch(setSearchedNameAC(searchName)), 3000)
+        let searchTimer = setTimeout(() => dispatch(setSearchedNameAC(searchName)), 1500)
         return () => clearTimeout(searchTimer)
     }, [searchName])
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Box, Slider} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {setCardsCountAC} from "../../../features/cardPacks/cardPacks-reducer";
@@ -38,14 +38,18 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
         if (activeThumb === 0) {
             setValue3([Math.min(newValue[0], value2 - minDistance), value2]);
             setValue1(Math.min(newValue[0], value2 - minDistance));
-                dispatch(setCardsCountAC((Math.min(newValue[0], value2 - minDistance)), value2))
+                //dispatch(setCardsCountAC((Math.min(newValue[0], value2 - minDistance)), value2))
         } else {
             setValue3([value3[0], Math.max(newValue[1], value1 + minDistance)]);
             setValue2(value3[1])
-               dispatch(setCardsCountAC(value3[0], value3[1]));
+               //dispatch(setCardsCountAC(value3[0], value3[1]));
         }
     };
 
+     useEffect(() => {
+        let searchTimer = setTimeout(() => dispatch(setCardsCountAC(value1, value2)), 1500)
+        return () => clearTimeout(searchTimer)
+    }, [value1, value2])
 
     return (
         <Box sx={{height: 300}}>
@@ -59,6 +63,7 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
                 style={{color: '#C7A5A5'}}
                 disableSwap
                 orientation={"vertical"}
+
             />
         </Box>
     );

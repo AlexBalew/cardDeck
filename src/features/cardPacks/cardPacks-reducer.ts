@@ -21,7 +21,7 @@ let initState: stateType = {
     maxCardsCount: 0,
     minCardsCount: 0,
     page: 1,
-    pageCount: 4,
+    pageCount: 10,
     settingSlider: {
         min: 0,
         max: 103
