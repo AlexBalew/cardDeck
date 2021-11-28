@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import s from './pagination.module.css';
 import {useAppSelector} from "../../../bll/store";
 import {useDispatch} from "react-redux";
@@ -27,6 +27,7 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
     }
 
     let numberOfPortions = Math.ceil(totalAmountOfPages / numberOfPagesInOnePortion)
+    let currentPortion = Math.ceil(currentPage/numberOfPagesInOnePortion)
 
     let leftPortionPageNumber = (portionNumber - 1) * numberOfPagesInOnePortion + 1
     let rightPortionPageNumber = portionNumber * numberOfPagesInOnePortion
@@ -45,8 +46,11 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
         setInputPage('')
     }
 
-    return (
+    useEffect( () => {
+        setPortionNumber(currentPortion)
+    }, [currentPortion])
 
+    return (
         <div className={s.pagination}>
             <div className={s.pages}>
             {portionNumber > 1 &&

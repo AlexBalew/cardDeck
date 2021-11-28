@@ -28,8 +28,6 @@ function App() {
         }
     }, [])
 
-    console.log('isLoggedIn: ', isLoggedIn)
-
     return (
         <div className='appStyle'>
             {status === 'loading' && <Preloader/>}

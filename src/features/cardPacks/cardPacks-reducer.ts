@@ -5,6 +5,7 @@ import {AppThunkType} from "../../bll/store";
 export type SettingType = {settingSlider: {min: number; max : number}}
 export type SearchedNameType = {searchedName: string}
 
+
 type stateType = GetPacksResponseType & SettingType & SearchedNameType
 
 let initState: stateType = {
@@ -45,7 +46,8 @@ export const cardPacksReducer = (state = initState, action: AllACType): stateTyp
         }
         case 'cardPacks/SET_CURRENT_PAGE' : {
             return {...state, page: action.payload}
-        } case 'cardPacks/DELETE_PACK' : {
+        }
+        case 'cardPacks/DELETE_PACK' : {
             return {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.payload)}
         }
         case 'cardPacks/SEARCH_NAME' : {
@@ -195,4 +197,5 @@ type AllACType =
     ReturnType<typeof deletePackAC> |
     ReturnType<typeof setSearchedNameAC> |
     ReturnType<typeof setCardsCountAC>
+
 

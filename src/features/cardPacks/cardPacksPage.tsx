@@ -78,6 +78,7 @@ export const CardPacksPage = () => {
 
     useEffect(() => {
         let searchTimer = setTimeout(() => dispatch(setSearchedNameAC(searchName)), 1500)
+        console.log('сработал серч')
         return () => clearTimeout(searchTimer)
     }, [searchName])
 

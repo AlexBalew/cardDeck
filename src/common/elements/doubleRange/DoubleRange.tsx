@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {Box, Slider} from "@mui/material";
 import {useDispatch} from "react-redux";
 import {setCardsCountAC} from "../../../features/cardPacks/cardPacks-reducer";
+import {useAppSelector} from "../../../bll/store";
 
 
 type SuperDoubleRangePropsType = {
@@ -27,6 +28,9 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
 
     const dispatch = useDispatch()
 
+    const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
+    const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
+
     const handleChange1 = (
         event: Event,
         newValue: number | number[],
@@ -38,11 +42,9 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
         if (activeThumb === 0) {
             setValue3([Math.min(newValue[0], value2 - minDistance), value2]);
             setValue1(Math.min(newValue[0], value2 - minDistance));
-                //dispatch(setCardsCountAC((Math.min(newValue[0], value2 - minDistance)), value2))
         } else {
             setValue3([value3[0], Math.max(newValue[1], value1 + minDistance)]);
             setValue2(value3[1])
-               //dispatch(setCardsCountAC(value3[0], value3[1]));
         }
     };
 
@@ -54,7 +56,8 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
     return (
         <Box sx={{height: 300}}>
             <Slider
-                min={10}
+                min={minCardsCount}
+                max={maxCardsCount}
                 step={1}
                 size={"medium"}
                 value={value3}
