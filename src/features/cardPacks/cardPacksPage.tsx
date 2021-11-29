@@ -36,13 +36,11 @@ export const CardPacksPage = React.memo(() => {
     const onSetNewName = (e: ChangeEvent<HTMLInputElement>) => {
         let newName = e.currentTarget.value
         setNewName(newName)
-        console.log('onSetNewName')
     }
 
     const onSetNewSearchName = (e: ChangeEvent<HTMLInputElement>) => {
         const search = e.currentTarget.value
         setSearchName(search)
-        console.log('onSetNewSearchName')
         }
 
     const onSetPageCount = (value: number) => {
@@ -54,7 +52,6 @@ export const CardPacksPage = React.memo(() => {
     const onClickNewName = (newName: string) => {
         dispatch(createPackTC(newName))
         setNewName('')
-        console.log('onClickNewName')
     }
 
     const onPageChange = (page: number) => {
@@ -88,7 +85,6 @@ export const CardPacksPage = React.memo(() => {
 
     useEffect(() => {
         let searchTimer = setTimeout(() => dispatch(setSearchedNameAC(searchName)), 1500)
-        console.log('сработал серч')
         return () => clearTimeout(searchTimer)
     }, [searchName])
 
