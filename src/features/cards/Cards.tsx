@@ -10,7 +10,6 @@ import {Card} from "./card/Card";
 import {RequestStatusType} from "../../app/app-reducer";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
 import SuperInput from "../../common/elements/input/SuperInput";
-import {log} from "util";
 
 
 export const Cards = React.memo(() => {
@@ -19,7 +18,7 @@ export const Cards = React.memo(() => {
     const cards = useSelector<AppStateType, Array<CardType>>(state => state.cards.cards)
     const page = useSelector<AppStateType, number>(state => state.cards.page)
     const packName = useSelector<AppStateType, string>(state => state.cards.packName)
-    //const userId = useSelector<AppStateType, string>(state => state.profile._id)
+    const authUserId = useSelector<AppStateType, string>(state => state.app._id)
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
     const pageCount = useSelector<AppStateType, number>(state => state.cards.pageCount)
     const {packId} = useParams<'packId'>()
@@ -45,6 +44,7 @@ export const Cards = React.memo(() => {
     }
 
     const handlerCreateCard = (packId: string, question: string, answer: string) => {
+
         dispatch(createCards(packId!, question, answer))
         setQuestion('')
         setAnswer('')
@@ -130,7 +130,9 @@ export const Cards = React.memo(() => {
                             <div>
                                 {cards.map(el =>
                                     <div key={el._id}>
-                                        <Card card={el} packId={packId!}/>
+                                        <Card card={el} packId={packId!}
+                                              question={question} answer={answer} setQuestion={setQuestion} setAnswer={setAnswer}
+                                              onSetQuestion={onSetQuestion} onSetAnswer={onSetAnswer}/>
                                     </div>)}
                             </div>
                         </div>
