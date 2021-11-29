@@ -59,9 +59,9 @@ export const CardPacksPage = React.memo(() => {
     }
 
     const onGetPacks = () => {
-        dispatch(setMinCardsCountAC(0))
-        dispatch(setMaxCardsCountAC(0))
-        //dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
+        /*dispatch(setMinCardsCountAC(0))
+        dispatch(setMaxCardsCountAC(0))*/
+        dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
         dispatch(setCurrentPageAC(1))
         setValue1(minCardsCount)
         setValue2(maxCardsCount)
