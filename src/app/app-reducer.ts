@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {loginAPI} from "../api/login-api";
 import {setErrorAC} from "../features/password/password-reducer";
 import {isLoggedInAC} from "../features/login/login-reducer";
+import {setProfileData} from "../features/profile/profile-reducer";
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
@@ -52,6 +53,7 @@ export const initializeAppTC = () => async (dispatch: Dispatch) => {
         let response = await loginAPI.authMe()
         dispatch(isLoggedInAC(true))
         dispatch(setUsersIDAC(response.data._id))
+        dispatch(setProfileData(response.data))
         await Promise.all([response])
         dispatch(setAppStatusAC("succeeded"))
         return response

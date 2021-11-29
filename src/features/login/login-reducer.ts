@@ -4,6 +4,7 @@ import {setAppStatusAC, setAppStatusACType} from "../../app/app-reducer";
 import {setErrorAC, setErrorACType} from "../password/password-reducer";
 import {loginAPI, LoginResponseType} from "../../api/login-api";
 import {Nullable} from "../../types";
+import {setProfileData, setProfileDataACType} from "../profile/profile-reducer";
 
 export type stateType = {
     isLoggedIn: boolean
@@ -40,7 +41,12 @@ export const loginReducer = (state = initState, action: AllACType): stateType =>
     }
 }
 
-type AllACType = isLoggedInACType | setAppStatusACType | setErrorACType | logInACType
+type AllACType =
+    isLoggedInACType
+    | setAppStatusACType
+    | setErrorACType
+    | logInACType
+    | setProfileDataACType
 
 type isLoggedInACType = ReturnType<typeof isLoggedInAC>
 type logInACType = ReturnType<typeof logInAC>
@@ -64,6 +70,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): A
     try {
         dispatch(setAppStatusAC("loading"))
         let response = await loginAPI.login(email, password, rememberMe)
+        dispatch(setProfileData(response))
         dispatch(setAppStatusAC("succeeded"))
         dispatch(logInAC(response, true))
     } catch (e: any) {
