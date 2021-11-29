@@ -1,11 +1,12 @@
 .mainContainer {
-    overflow: auto;
+overflow: auto;
 }
 
 .table {
     border-spacing: 0;
     margin-bottom: 20px;
     box-shadow: 0 1px 15px rgb(0 0 0 / 10%);
+
 }
 
 tr:nth-child(2n) {
@@ -28,7 +29,7 @@ tr:nth-child(2n) {
 }
 
 .nameColumn {
-   /* overflow-wrap: break-word;*/
+    /* overflow-wrap: break-word;*/
     max-width: 100px;
     -webkit-line-clamp: 2;
     overflow: hidden;
@@ -45,3 +46,10 @@ tr:nth-child(2n) {
     left: 0;
 }
 
+.tableBody {
+
+}
+
+.tableHead {
+
+}

@@ -28,6 +28,7 @@ function App() {
         }
     }, [])
 
+
     return (
         <div className='appStyle'>
             {status === 'loading' && <Preloader/>}

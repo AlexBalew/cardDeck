@@ -17,16 +17,19 @@ export const CardPacksTable = React.memo(() => {
     let titles = ['Name', 'Cards count', 'Last updated', 'Created by', 'Actions']
 
     const packs = useAppSelector<CardPackType[]>(state => state.packs.cardPacks)
-    const pageCount = useAppSelector<number>(state => state.packs.pageCount)
-    const page = useAppSelector<number>(state => state.packs.page)
+    //const pageCount = useAppSelector<number>(state => state.packs.pageCount)
+    //const page = useAppSelector<number>(state => state.packs.page)
     const myId = useAppSelector<string>(state => state.app._id)
     const searchedName = useAppSelector<string>(state => state.packs.searchedName)
     const settingSlider = useAppSelector<{ min: number; max: number }>(state => state.packs.settingSlider)
 
 
     useEffect(() => {
-            dispatch(getPacksTC())
-    }, [pageCount, page, searchedName, settingSlider.min, settingSlider.max])
+        dispatch(getPacksTC())
+        console.log('Main useEffect(table)')
+    }, [searchedName, settingSlider.min, settingSlider.max])
+
+
 
     const onDeletePack = (id: string) => {
         dispatch(deletePackTC(id))
@@ -35,12 +38,12 @@ export const CardPacksTable = React.memo(() => {
     return (
         <div className={s.mainContainer}>
             <table className={s.table}>
-                <thead>
+                <thead className={s.tableHead}>
                 <tr >
                     {titles.map((title, index) => <th key={title + index} className={s.title}>{title}</th>)}
                 </tr>
                 </thead>
-                <tbody>
+                <tbody className={s.tableBody}>
                     {packs.map(pack =>
                         <tr className={s.dataRow} key={pack._id}>
                             <td>

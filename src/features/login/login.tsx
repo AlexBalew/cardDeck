@@ -32,7 +32,7 @@ export const Login = React.memo(() => {
     const [formValid, setFormValid] = useState(false);
 
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = () => {
         dispatch(loginTC(email, password, rememberMe))
     }
 
@@ -89,7 +89,7 @@ export const Login = React.memo(() => {
 
 
     if (isLoggedIn) {
-        return <Navigate to={PATH.PROFILE}/>
+      return <Navigate to={PATH.PROFILE}/>
     }
 
 
@@ -99,7 +99,7 @@ export const Login = React.memo(() => {
                 <div className={s.content}>
                     <h3 className={s.fromBlockTitle}>It-incubator</h3>
 
-                    <form className={s.formContent} onSubmit={handleSubmit}>
+                    <div className={s.formContent}>
                         <label>{(emailDirty || emailError) ? <div className={s.errorStyle}>{emailError}</div> : 'Email'}</label>
                         <div className={s.formInputBox}>
                             <input name="email"
@@ -135,12 +135,13 @@ export const Login = React.memo(() => {
 
                         <div className={s.formButtonBlock}>
 
-                            <SuperButton type="submit"
+                            <SuperButton
                                          className={s.btn}
                                          disabled={!formValid}
+                                         onClick={handleSubmit}
                             >LOGIN</SuperButton>
                         </div>
-                    </form>
+                    </div>
 
                     <div className={s.textBlock}>
                         <div>

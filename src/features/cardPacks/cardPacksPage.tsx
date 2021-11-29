@@ -3,32 +3,28 @@ import {CardPacksTable} from "./table";
 import s from './cardPacksPage.module.css';
 import Pagination from "../../common/components/pagination/pagination";
 import SuperButton from "../../common/elements/button/SuperButton";
-import {useDispatch} from "react-redux";
-import {
-    createPackTC,
-    getPacksTC,
-    setCardsCountAC,
-    setCurrentPageAC, setMaxCardsCountAC, setMinCardsCountAC,
-    setPageCountAC,
-    setSearchedNameAC
-} from "./cardPacks-reducer";
-import {useAppSelector} from "../../bll/store";
+import {useDispatch, useSelector} from "react-redux";
+import {createPackTC, getPacksTC, setPageCountAC, setSearchedNameAC} from "./cardPacks-reducer";
+import {AppStateType, useAppSelector} from "../../bll/store";
 import style from '../../common/elements/doubleRange/DoubleRange.module.css'
 import SuperDoubleRange from "../../common/elements/doubleRange/DoubleRange";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
 import {RequestStatusType} from "../../app/app-reducer";
+import {Navigate} from "react-router-dom";
+import {PATH} from "../../app/Routes";
 
 
 export const CardPacksPage = React.memo(() => {
 
     let dispatch = useDispatch()
 
+    const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
     const settingSlider = useAppSelector<{ min: number; max: number }>(state => state.packs.settingSlider)
     const myId = useAppSelector<string>(state => state.app._id)
     const status = useAppSelector<RequestStatusType>(state => state.app.status)
     const pageCount = useAppSelector<number>(state => state.packs.pageCount)
-    const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
-    const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
+    //const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
+    //const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
 
     const [newName, setNewName] = useState<string>('') //add new pack input state
     const [searchName, setSearchName] = useState<string>('') //search pack input state
@@ -40,11 +36,13 @@ export const CardPacksPage = React.memo(() => {
     const onSetNewName = (e: ChangeEvent<HTMLInputElement>) => {
         let newName = e.currentTarget.value
         setNewName(newName)
+        console.log('onSetNewName')
     }
 
     const onSetNewSearchName = (e: ChangeEvent<HTMLInputElement>) => {
         const search = e.currentTarget.value
         setSearchName(search)
+        console.log('onSetNewSearchName')
         }
 
     const onSetPageCount = (value: number) => {
@@ -56,26 +54,36 @@ export const CardPacksPage = React.memo(() => {
     const onClickNewName = (newName: string) => {
         dispatch(createPackTC(newName))
         setNewName('')
+        console.log('onClickNewName')
+    }
+
+    const onPageChange = (page: number) => {
+        dispatch(getPacksTC({page}))
     }
 
     const onGetPacks = () => {
-        /*dispatch(setMinCardsCountAC(0))
-        dispatch(setMaxCardsCountAC(0))*/
-        dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
-        dispatch(setCurrentPageAC(1))
-        setValue1(minCardsCount)
+        //dispatch(setCardsCountAC(0, 103))
+        //dispatch(getPacksTC())
+        //dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
+        /*setValue1(minCardsCount)
         setValue2(maxCardsCount)
-        setValue3([minCardsCount, maxCardsCount])
-        dispatch(getPacksTC())
+        setValue3([minCardsCount, maxCardsCount])*/
+       dispatch(getPacksTC({page: 1}))
+        /*console.log('setter: allPacks')
+        console.log('minCardsCount: ', minCardsCount)
+        console.log('maxCardsCount: ', maxCardsCount)*/
     }
 
     const onGetMyPacks = () => {
-        dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
-        dispatch(setCurrentPageAC(1))
-        setValue1(minCardsCount)
+        //dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
+       //dispatch(setCurrentPageAC(1))
+       /* setValue1(minCardsCount)
         setValue2(maxCardsCount)
-        setValue3([minCardsCount, maxCardsCount])
-        dispatch(getPacksTC(myId))
+        setValue3([minCardsCount, maxCardsCount])*/
+        dispatch(getPacksTC({ myId, page: 1 }))
+        /*console.log('setter: myPacks')
+        console.log('minCardsCount: ', minCardsCount)
+        console.log('maxCardsCount: ', maxCardsCount)*/
     }
 
     useEffect(() => {
@@ -83,6 +91,13 @@ export const CardPacksPage = React.memo(() => {
         console.log('сработал серч')
         return () => clearTimeout(searchTimer)
     }, [searchName])
+
+    if (!isLoggedIn) {
+        debugger
+        return <Navigate to={PATH.LOGIN}/>
+    }
+
+    //console.log('cardPacksPage isLoggedIn: ', isLoggedIn)
 
     return (
 
@@ -127,7 +142,7 @@ export const CardPacksPage = React.memo(() => {
                             value={pageCount}
                             disabled={status === "loading"}
                             description={'packs on page'}/>
-                <Pagination numberOfPagesInOnePortion={6}/>
+                <Pagination numberOfPagesInOnePortion={6} onPageChange={onPageChange}/>
                 </div>
             </div>
 

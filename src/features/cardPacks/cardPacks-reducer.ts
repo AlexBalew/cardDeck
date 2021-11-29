@@ -120,7 +120,6 @@ export const setSearchedNameAC = (searchName: string) => {
 
 
 export const setCardsCountAC = (minSliderCards: number, maxSliderCards: number) => {
-
     return {
         type: 'cardPacks/SET_CARDS_COUNT',
         payload: {minSliderCards, maxSliderCards}
@@ -129,11 +128,12 @@ export const setCardsCountAC = (minSliderCards: number, maxSliderCards: number) 
 
 
 
-export const getPacksTC = (myId?: string): AppThunkType => async (dispatch, getState) => { //затипизировать везде
+export const getPacksTC = (params?: {myId?: string, page?: number}): AppThunkType => async (dispatch, getState) => { //затипизировать везде
     let {pageCount, page, searchedName, settingSlider} = getState().packs
     try {
         dispatch(setAppStatusAC("loading"))
-        let response = await packsAPI.getPacks(pageCount, page, myId, searchedName, settingSlider)
+        const pageNumber = params?.page ? params.page : page
+        let response = await packsAPI.getPacks(pageCount, pageNumber, params?.myId, searchedName, settingSlider)
         dispatch(setCardPacksDataAC(response.data))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
@@ -141,6 +141,9 @@ export const getPacksTC = (myId?: string): AppThunkType => async (dispatch, getS
             ? e.response.data.error
             : (e.message + ', more details in the console');
         console.log('Error: ', {...e})
+       /* if(e.response.request.status === 401) {
+        dispatch(isLoggedInAC(false))
+        }*/
         dispatch(setErrorAC(error))
         dispatch(setAppStatusAC("succeeded"))
     }

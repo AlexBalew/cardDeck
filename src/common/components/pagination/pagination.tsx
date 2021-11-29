@@ -7,10 +7,11 @@ import {setCurrentPageAC} from "../../../features/cardPacks/cardPacks-reducer";
 
 type PaginationPropsType = {
     numberOfPagesInOnePortion: number
+    onPageChange: (page: number) => void
 }
 
 
-let Pagination = React.memo(({numberOfPagesInOnePortion}: PaginationPropsType) => {
+let Pagination = React.memo(({numberOfPagesInOnePortion, onPageChange}: PaginationPropsType) => {
 
     let dispatch = useDispatch()
     let [portionNumber, setPortionNumber] = useState<number>(1)
@@ -33,6 +34,7 @@ let Pagination = React.memo(({numberOfPagesInOnePortion}: PaginationPropsType) =
     let rightPortionPageNumber = portionNumber * numberOfPagesInOnePortion
 
     const onSetNewPage = (page: number) => {
+        onPageChange(page)
         dispatch(setCurrentPageAC(page))
     }
 
@@ -43,12 +45,14 @@ let Pagination = React.memo(({numberOfPagesInOnePortion}: PaginationPropsType) =
 
     const onSetNewPageByEnterKey = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
+            onPageChange(+inputPage)
             dispatch(setCurrentPageAC(+inputPage))
             setInputPage('')
         }
     }
 
     const onSetNewPageByButton = (inputPage: number) => {
+        onPageChange(inputPage)
         dispatch(setCurrentPageAC(inputPage))
         setInputPage('')
     }

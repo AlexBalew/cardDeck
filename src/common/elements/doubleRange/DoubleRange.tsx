@@ -48,8 +48,9 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = React.memo((
         }
     };
 
-     useEffect(() => {
+    useEffect(() => {
         let searchTimer = setTimeout(() => dispatch(setCardsCountAC(value1, value2)), 1500)
+        console.log('DoubleRange useEffect')
         return () => clearTimeout(searchTimer)
     }, [value1, value2])
 
