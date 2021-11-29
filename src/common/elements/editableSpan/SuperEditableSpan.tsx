@@ -18,7 +18,7 @@ type SuperEditableSpanType = DefaultInputPropsType & { // и + ещё пропс
     spanProps?: DefaultSpanPropsType // пропсы для спана
 }
 
-const SuperEditableSpan: React.FC<SuperEditableSpanType> = (
+const SuperEditableSpan: React.FC<SuperEditableSpanType> = React.memo((
     {
         autoFocus, // игнорировать изменение этого пропса
         onBlur,
@@ -69,6 +69,6 @@ const SuperEditableSpan: React.FC<SuperEditableSpanType> = (
             }
         </>
     )
-}
+})
 
 export default SuperEditableSpan

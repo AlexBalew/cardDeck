@@ -16,7 +16,7 @@ type SuperDoubleRangePropsType = {
 
 const minDistance = 1;
 
-const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
+const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = React.memo((
     {
         value1,
         value2,
@@ -70,7 +70,7 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = (
             />
         </Box>
     );
-}
+})
 
 export default SuperDoubleRange
 

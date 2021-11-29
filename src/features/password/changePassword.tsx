@@ -10,7 +10,7 @@ import SuperButton from "../../common/elements/button/SuperButton";
 import SuperInput from "../../common/elements/input/SuperInput";
 
 
-export const ChangePassword = () => {
+export const ChangePassword = React.memo(() => {
 
     let dispatch = useDispatch()
     let requestStatus = useSelector<AppStateType, boolean>(state => state.password.isSuccessfulRequest)
@@ -55,4 +55,4 @@ export const ChangePassword = () => {
             </div>
         </div>
     )
-}
+})

@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MouseEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from './Cards.module.css'
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,10 +9,9 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Card} from "./card/Card";
 import {RequestStatusType} from "../../app/app-reducer";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
-import {setSearchedNameAC} from "../cardPacks/cardPacks-reducer";
 
 
-export const Cards = () => {
+export const Cards = React.memo(() => {
     const dispatch = useDispatch()
 
     const cards = useSelector<AppStateType, Array<CardType>>(state => state.cards.cards)
@@ -133,6 +132,6 @@ export const Cards = () => {
         </div>)
 
 
-}
+})
 
 

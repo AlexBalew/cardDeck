@@ -10,7 +10,7 @@ import {PATH} from "../../app/Routes";
 import SuperButton from "../../common/elements/button/SuperButton";
 
 
-export const CardPacksTable = () => {
+export const CardPacksTable = React.memo(() => {
 
     let dispatch = useDispatch()
 
@@ -66,4 +66,4 @@ export const CardPacksTable = () => {
 
         </div>
     )
-}
+})

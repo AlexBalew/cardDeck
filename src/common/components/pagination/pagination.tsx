@@ -10,7 +10,7 @@ type PaginationPropsType = {
 }
 
 
-let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
+let Pagination = React.memo(({numberOfPagesInOnePortion}: PaginationPropsType) => {
 
     let dispatch = useDispatch()
     let [portionNumber, setPortionNumber] = useState<number>(1)
@@ -94,6 +94,6 @@ let Pagination = ({numberOfPagesInOnePortion}: PaginationPropsType) => {
             </button>
         </div>
     )
-}
+})
 
 export default Pagination

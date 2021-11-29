@@ -12,7 +12,7 @@ type CardPropsType = {
     packId: string
 }
 
-export const Card: React.FC<CardPropsType> = ({card, packId}) => {
+export const Card: React.FC<CardPropsType> = React.memo(({card, packId}) => {
     let dispatch = useDispatch()
 
     const authUserId = useSelector<AppStateType, string>(state => state.app._id)
@@ -40,5 +40,5 @@ export const Card: React.FC<CardPropsType> = ({card, packId}) => {
             </div>
         </div>
     )
-}
+})
 

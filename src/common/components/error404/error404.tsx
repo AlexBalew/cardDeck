@@ -6,7 +6,7 @@ import {Navigate} from "react-router-dom";
 import {PATH} from "../../../app/Routes";
 
 
-export const Error404 = () => {
+export const Error404 = React.memo(() => {
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
 
     if (!isLoggedIn) {
@@ -54,4 +54,4 @@ export const Error404 = () => {
             </a>
         </div>
     )
-}
+})

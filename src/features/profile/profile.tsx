@@ -8,7 +8,7 @@ import userDefaultImg from "../../assets/profile/userImg.png"
 import Preloader from "../../common/components/preloader/Preloader";
 import {RequestStatusType} from "../../app/app-reducer";
 
-export const Profile = () => {
+export const Profile = React.memo(() => {
     const dispatch = useDispatch()
 
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
@@ -48,4 +48,4 @@ export const Profile = () => {
 
         </div>
     )
-};
+});

@@ -9,7 +9,7 @@ type SelectPageProps = {
     onChangeOptions?: (option: number) => void
 }
 
-export const SelectPage: React.FC<SelectPageProps> = ({
+export const SelectPage: React.FC<SelectPageProps> = React.memo(({
                                                            onChangeOptions,
                                                            value,
                                                            disabled = false,
@@ -26,4 +26,4 @@ export const SelectPage: React.FC<SelectPageProps> = ({
                          disabled={disabled}/>
         </div>
     )
-}
+})

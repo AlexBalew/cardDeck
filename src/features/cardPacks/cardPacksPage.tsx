@@ -8,7 +8,7 @@ import {
     createPackTC,
     getPacksTC,
     setCardsCountAC,
-    setCurrentPageAC,
+    setCurrentPageAC, setMaxCardsCountAC, setMinCardsCountAC,
     setPageCountAC,
     setSearchedNameAC
 } from "./cardPacks-reducer";
@@ -19,7 +19,7 @@ import {SelectPage} from "../../common/components/selectPage/SelectPage";
 import {RequestStatusType} from "../../app/app-reducer";
 
 
-export const CardPacksPage = () => {
+export const CardPacksPage = React.memo(() => {
 
     let dispatch = useDispatch()
 
@@ -59,7 +59,9 @@ export const CardPacksPage = () => {
     }
 
     const onGetPacks = () => {
-        dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
+        dispatch(setMinCardsCountAC(0))
+        dispatch(setMaxCardsCountAC(0))
+        //dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
         dispatch(setCurrentPageAC(1))
         setValue1(minCardsCount)
         setValue2(maxCardsCount)
@@ -131,6 +133,6 @@ export const CardPacksPage = () => {
 
         </div>
     )
-}
+})
 
 export default CardPacksPage;

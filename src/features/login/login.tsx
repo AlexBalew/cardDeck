@@ -12,7 +12,7 @@ import {PATH} from "../../app/Routes";
 
 
 
-export const Login = () => {
+export const Login = React.memo(() => {
 
     const dispatch = useDispatch();
     const isLoggedIn = useSelector<AppStateType, boolean>((state) => state.login.isLoggedIn);
@@ -48,7 +48,7 @@ export const Login = () => {
     }
     const handleInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
-        const re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        const re = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/;
         if( re.test(String(e.currentTarget.value).toLowerCase())) {
             setEmailError('')
         } else {
@@ -158,4 +158,4 @@ export const Login = () => {
             </div>
         </div>
     )
-}
+})

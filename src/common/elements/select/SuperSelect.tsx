@@ -8,7 +8,7 @@ type SuperSelectPropsType = DefaultSelectPropsType & {
     onChangeOption?: (option: any) => void
 }
 
-const SuperSelect: React.FC<SuperSelectPropsType> = (
+const SuperSelect: React.FC<SuperSelectPropsType> = React.memo((
     {
         options,
         onChange, onChangeOption,
@@ -31,6 +31,6 @@ const SuperSelect: React.FC<SuperSelectPropsType> = (
             {mappedOptions}
         </select>
     )
-}
+})
 
 export default SuperSelect
