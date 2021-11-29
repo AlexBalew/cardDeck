@@ -65,8 +65,10 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): A
         dispatch(setAppStatusAC("loading"))
         let response = await loginAPI.login(email, password, rememberMe)
         dispatch(setAppStatusAC("succeeded"))
-        dispatch(logInAC(response.data, true))
+        dispatch(logInAC(response, true))
     } catch (e: any) {
+
+
         const error = e.response
             ? e.response.data.error
             : (e.message + ', more details in the console');

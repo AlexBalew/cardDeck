@@ -10,7 +10,7 @@ import SuperInput from "../../common/elements/input/SuperInput";
 import viewPassword from "../../assets/password/viewPassword.png";
 import hiddenPassword from "../../assets/password/hiddenPassword.png";
 
-export const Registration = () => {
+export const Registration = React.memo(() => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirm, setConfirm] = useState('')
@@ -29,7 +29,7 @@ export const Registration = () => {
 
     const handleInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
-        const re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        const re = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/;
         if( re.test(String(e.currentTarget.value).toLowerCase())) {
             setEmailError('')
         } else {
@@ -149,5 +149,5 @@ export const Registration = () => {
 
         </div>
     </div>
-}
+})
 

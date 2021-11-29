@@ -5,6 +5,7 @@ import {AppThunkType} from "../../bll/store";
 export type SettingType = {settingSlider: {min: number; max : number}}
 export type SearchedNameType = {searchedName: string}
 
+
 type stateType = GetPacksResponseType & SettingType & SearchedNameType
 
 let initState: stateType = {
@@ -21,7 +22,7 @@ let initState: stateType = {
     maxCardsCount: 0,
     minCardsCount: 0,
     page: 1,
-    pageCount: 4,
+    pageCount: 10,
     settingSlider: {
         min: 0,
         max: 103
@@ -45,11 +46,15 @@ export const cardPacksReducer = (state = initState, action: AllACType): stateTyp
         }
         case 'cardPacks/SET_CURRENT_PAGE' : {
             return {...state, page: action.payload}
-        } case 'cardPacks/DELETE_PACK' : {
+        }
+        case 'cardPacks/DELETE_PACK' : {
             return {...state, cardPacks: state.cardPacks.filter(cardPack => cardPack._id !== action.payload)}
         }
         case 'cardPacks/SEARCH_NAME' : {
             return {...state, searchedName: action.payload}
+        }
+        case 'cardPacks/SET_CARDS_COUNT' : {
+            return {...state, settingSlider: {min: action.payload.minSliderCards, max: action.payload.maxSliderCards}}
         }
         default:
             return state
@@ -114,11 +119,23 @@ export const setSearchedNameAC = (searchName: string) => {
 }
 
 
-export const getPacksTC = (myId?: string): AppThunkType => async (dispatch, getState) => { //затипизировать везде
-    let {pageCount, page, minCardsCount, maxCardsCount, searchedName} = getState().packs
+export const setCardsCountAC = (minSliderCards: number, maxSliderCards: number) => {
+    return {
+        type: 'cardPacks/SET_CARDS_COUNT',
+        payload: {minSliderCards, maxSliderCards}
+    } as const
+}
+
+
+
+export const getPacksTC = (params?: {myId?: string, page?: number, min?: number, max?: number}): AppThunkType => async (dispatch, getState) => { //затипизировать везде
+    let {pageCount, page, searchedName, settingSlider} = getState().packs
     try {
         dispatch(setAppStatusAC("loading"))
-        let response = await packsAPI.getPacks(pageCount, page, myId, minCardsCount, maxCardsCount, searchedName)
+        const pageNumber = params?.page ? params.page : page
+        let settingSliderMin = params?.min ? params?.min : settingSlider.min
+        let settingSliderMax = params?.max ? params?.max : settingSlider.max
+        let response = await packsAPI.getPacks(pageCount, pageNumber, params?.myId, searchedName, /*settingSlider,*/ settingSliderMin, settingSliderMax)
         dispatch(setCardPacksDataAC(response.data))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
@@ -126,6 +143,9 @@ export const getPacksTC = (myId?: string): AppThunkType => async (dispatch, getS
             ? e.response.data.error
             : (e.message + ', more details in the console');
         console.log('Error: ', {...e})
+       /* if(e.response.request.status === 401) {
+        dispatch(isLoggedInAC(false))
+        }*/
         dispatch(setErrorAC(error))
         dispatch(setAppStatusAC("succeeded"))
     }
@@ -180,4 +200,7 @@ type AllACType =
     ReturnType<typeof setMaxCardsCountAC> |
     ReturnType<typeof setCurrentPageAC> |
     ReturnType<typeof deletePackAC> |
-    ReturnType<typeof setSearchedNameAC>
+    ReturnType<typeof setSearchedNameAC> |
+    ReturnType<typeof setCardsCountAC>
+
+

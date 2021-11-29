@@ -11,13 +11,13 @@ import {RequestStatusType} from "../../app/app-reducer";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
 
 
-export const Cards = () => {
+export const Cards = React.memo(() => {
     const dispatch = useDispatch()
 
     const cards = useSelector<AppStateType, Array<CardType>>(state => state.cards.cards)
     const page = useSelector<AppStateType, number>(state => state.cards.page)
     const packName = useSelector<AppStateType, string>(state => state.cards.packName)
-    const userId = useSelector<AppStateType, string>(state => state.profile._id)
+    //const userId = useSelector<AppStateType, string>(state => state.profile._id)
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
     const pageCount = useSelector<AppStateType, number>(state => state.cards.pageCount)
     const {packId} = useParams<'packId'>()
@@ -53,10 +53,12 @@ export const Cards = () => {
 
     useEffect(() => {
         dispatch(getCards(packId!))
+        console.log('Cards useEffect: getCards')
     }, [dispatch, packId, page, pageCount])
 
     useEffect(() => {
         let searchTimer = setTimeout(() => dispatch(setSearchedQuestionAC(searchQuestion)), 3000)
+        console.log('Cards useEffect: search')
         return () => clearTimeout(searchTimer)
     }, [searchQuestion])
 
@@ -140,6 +142,6 @@ export const Cards = () => {
         </div>)
 
 
-}
+})
 
 

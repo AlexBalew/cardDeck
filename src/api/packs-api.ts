@@ -19,22 +19,12 @@ export type GetPacksResponseType = {
     pageCount: number
 }
 
+   /* ?pageCount=${pageCount}&page=${page}&user_id=${user_id}*/
+
 export const packsAPI = {
-    getPacks(pageCount: number, page: number, user_id?: string, minCardsCount?: number, maxCardsCount?:number, searchedName?: string) {
-        if (user_id) {
-            return instance.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&user_id=${user_id}`, {})
-        }
-        if(searchedName) {
-            return instance.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&packName=${searchedName}`, {})
-        }
-        if (minCardsCount||maxCardsCount) {
-            return instance.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}&min=${minCardsCount}&max=${maxCardsCount}`, {})
-        }
-         else {
-            return instance.get<GetPacksResponseType>(`/cards/pack?pageCount=${pageCount}&page=${page}`, {})
-        }
-
-
+    getPacks(pageCount: number, page: number, user_id?: string, searchedName?: string, /*settingSlider?:{min: number, max: number},*/ settingSliderMin?: number, settingSliderMax?: number) {
+            return instance.get<GetPacksResponseType>(`/cards/pack?min=${settingSliderMin}&max=${settingSliderMax}&packName=${searchedName}`,
+                {params: {pageCount, page, user_id,}})
     },
     createPack(name: string) {
         return instance.post<GetPacksResponseType>(`/cards/pack`, {cardsPack: {name}}, {})

@@ -8,7 +8,7 @@ type SuperRadioPropsType = DefaultRadioPropsType & {
     onChangeOption: (option: string) => void
 }
 
-const SuperRadio: React.FC<SuperRadioPropsType> = (
+const SuperRadio: React.FC<SuperRadioPropsType> = React.memo((
     {
         type, name,
         options, value,
@@ -41,6 +41,6 @@ const SuperRadio: React.FC<SuperRadioPropsType> = (
             {mappedOptions}
         </div>
     )
-}
+})
 
 export default SuperRadio

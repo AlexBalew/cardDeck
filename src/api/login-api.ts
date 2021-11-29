@@ -35,6 +35,7 @@ export const loginAPI = {
     },
     login(email: string, password: string, rememberMe: boolean) {
         return instance.post<LoginResponseType>(`/auth/login`, {email, password, rememberMe}, {})
+            .then(res => res.data)
     },
     changeData(userData: UserData) {
         return instance.put('auth/me', userData)

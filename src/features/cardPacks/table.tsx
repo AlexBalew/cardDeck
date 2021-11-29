@@ -10,43 +10,42 @@ import {PATH} from "../../app/Routes";
 import SuperButton from "../../common/elements/button/SuperButton";
 
 
-export const CardPacksTable = () => {
+export const CardPacksTable = React.memo(() => {
 
     let dispatch = useDispatch()
+
     let titles = ['Name', 'Cards count', 'Last updated', 'Created by', 'Actions']
+
     const packs = useAppSelector<CardPackType[]>(state => state.packs.cardPacks)
     const pageCount = useAppSelector<number>(state => state.packs.pageCount)
-    const page = useAppSelector<number>(state => state.packs.page)
+    //const page = useAppSelector<number>(state => state.packs.page)
     const myId = useAppSelector<string>(state => state.app._id)
-    const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
-    const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
     const searchedName = useAppSelector<string>(state => state.packs.searchedName)
+    const settingSlider = useAppSelector<{ min: number; max: number }>(state => state.packs.settingSlider)
 
 
     useEffect(() => {
-        //setTimeout(() => {
-            dispatch(getPacksTC())
-       // }, 3000)
-    }, [pageCount, page, searchedName/*minCardsCount, maxCardsCount*/])
+        dispatch(getPacksTC())
+        console.log('Main useEffect(table)')
+    }, [pageCount, searchedName, settingSlider.min, settingSlider.max])
+
 
 
     const onDeletePack = (id: string) => {
         dispatch(deletePackTC(id))
     }
-    /*console.log('minCardsCount, ' , minCardsCount)
-    console.log('maxCardsCount, ' , maxCardsCount)*/
 
     return (
         <div className={s.mainContainer}>
             <table className={s.table}>
-                <thead>
-                <tr >
-                    {titles.map(title => <th key={Math.floor(Math.random()*100000)} className={s.title}>{title}</th>)}
-                </tr>
+                <thead className={s.tableHead}>
+
+                    {titles.map((title, index) => <th key={title + index} className={s.title}>{title}</th>)}
+
                 </thead>
-                <tbody>
+                <tbody className={s.tableBody}>
                     {packs.map(pack =>
-                        <tr className={s.dataRow} key={Math.floor(Math.random()*100000)}>
+                        <tr className={s.dataRow} key={pack._id}>
                             <td>
                                 <NavLink to={PATH.CARDS + `/${pack._id}`}>{pack.name}</NavLink>
                             </td>
@@ -70,4 +69,4 @@ export const CardPacksTable = () => {
 
         </div>
     )
-}
+})
