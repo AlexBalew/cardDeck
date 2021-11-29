@@ -21,7 +21,7 @@ let Pagination = React.memo(({numberOfPagesInOnePortion}: PaginationPropsType) =
     let currentPage = useAppSelector<number>(state => state.packs.page)
 
     let totalAmountOfPages = Math.ceil(cardPacksTotalCount / pageCount)
-    let pages = []
+    let pages: number[] = []
     for (let i = 1; i <= totalAmountOfPages; i++) {
         pages.push(i)
     }
@@ -72,6 +72,14 @@ let Pagination = React.memo(({numberOfPagesInOnePortion}: PaginationPropsType) =
                                          onSetNewPage(page)
                                      }}>{page} </span>
                     })}
+                {currentPage !== pages[pages.length - 1]
+                    ?
+                    <span className={currentPage === pages[pages.length - 1] ? s.selectedPage : s.pageNumber}
+                          onClick={() => {
+                              onSetNewPage(pages[pages.length - 1])
+                          }}>...{pages[pages.length - 1]}</span>
+                    : ''
+                }
                 {numberOfPortions > portionNumber &&
                 <button onClick={() => {
                     setPortionNumber(portionNumber + 1)
