@@ -1,12 +1,18 @@
 .mainContainer {
-overflow: auto;
+
+}
+
+table thead, table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 
 .table {
+    padding: 10px;
     border-spacing: 0;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 15px rgb(0 0 0 / 10%);
-
+    margin: 20px 10px;
+    box-shadow: 0 1px 15px rgb(0 0 0 / 10%)
 }
 
 tr:nth-child(2n) {
@@ -22,7 +28,7 @@ tr:nth-child(2n) {
 }
 
 .dataRow {
-    width: 150px;
+    /*width: 150px;*/
     height: 30px;
     text-align: center;
     border-collapse: collapse;
@@ -47,7 +53,9 @@ tr:nth-child(2n) {
 }
 
 .tableBody {
-
+    display: block;
+    max-height: 400px;
+    overflow: auto;
 }
 
 .tableHead {

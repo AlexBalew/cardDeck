@@ -23,8 +23,8 @@ export const CardPacksPage = React.memo(() => {
     const myId = useAppSelector<string>(state => state.app._id)
     const status = useAppSelector<RequestStatusType>(state => state.app.status)
     const pageCount = useAppSelector<number>(state => state.packs.pageCount)
-    //const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
-    //const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
+    const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
+    const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
 
     const [newName, setNewName] = useState<string>('') //add new pack input state
     const [searchName, setSearchName] = useState<string>('') //search pack input state
@@ -65,10 +65,10 @@ export const CardPacksPage = React.memo(() => {
         //dispatch(setCardsCountAC(0, 103))
         //dispatch(getPacksTC())
         //dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
-        /*setValue1(minCardsCount)
-        setValue2(maxCardsCount)
-        setValue3([minCardsCount, maxCardsCount])*/
-       dispatch(getPacksTC({page: 1}))
+        //setValue1(minCardsCount)
+        //setValue2(maxCardsCount)
+        setValue3([minCardsCount, maxCardsCount])
+       dispatch(getPacksTC({page: 1, min: 0, max: 103}))
         /*console.log('setter: allPacks')
         console.log('minCardsCount: ', minCardsCount)
         console.log('maxCardsCount: ', maxCardsCount)*/

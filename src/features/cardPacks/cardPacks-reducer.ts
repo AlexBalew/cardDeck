@@ -128,12 +128,14 @@ export const setCardsCountAC = (minSliderCards: number, maxSliderCards: number) 
 
 
 
-export const getPacksTC = (params?: {myId?: string, page?: number}): AppThunkType => async (dispatch, getState) => { //затипизировать везде
+export const getPacksTC = (params?: {myId?: string, page?: number, min?: number, max?: number}): AppThunkType => async (dispatch, getState) => { //затипизировать везде
     let {pageCount, page, searchedName, settingSlider} = getState().packs
     try {
         dispatch(setAppStatusAC("loading"))
         const pageNumber = params?.page ? params.page : page
-        let response = await packsAPI.getPacks(pageCount, pageNumber, params?.myId, searchedName, settingSlider)
+        let settingSliderMin = params?.min ? params?.min : settingSlider.min
+        let settingSliderMax = params?.max ? params?.max : settingSlider.max
+        let response = await packsAPI.getPacks(pageCount, pageNumber, params?.myId, searchedName, /*settingSlider,*/ settingSliderMin, settingSliderMax)
         dispatch(setCardPacksDataAC(response.data))
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {

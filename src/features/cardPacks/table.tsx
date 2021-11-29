@@ -17,7 +17,7 @@ export const CardPacksTable = React.memo(() => {
     let titles = ['Name', 'Cards count', 'Last updated', 'Created by', 'Actions']
 
     const packs = useAppSelector<CardPackType[]>(state => state.packs.cardPacks)
-    //const pageCount = useAppSelector<number>(state => state.packs.pageCount)
+    const pageCount = useAppSelector<number>(state => state.packs.pageCount)
     //const page = useAppSelector<number>(state => state.packs.page)
     const myId = useAppSelector<string>(state => state.app._id)
     const searchedName = useAppSelector<string>(state => state.packs.searchedName)
@@ -27,7 +27,7 @@ export const CardPacksTable = React.memo(() => {
     useEffect(() => {
         dispatch(getPacksTC())
         console.log('Main useEffect(table)')
-    }, [searchedName, settingSlider.min, settingSlider.max])
+    }, [pageCount, searchedName, settingSlider.min, settingSlider.max])
 
 
 
@@ -39,9 +39,9 @@ export const CardPacksTable = React.memo(() => {
         <div className={s.mainContainer}>
             <table className={s.table}>
                 <thead className={s.tableHead}>
-                <tr >
+
                     {titles.map((title, index) => <th key={title + index} className={s.title}>{title}</th>)}
-                </tr>
+
                 </thead>
                 <tbody className={s.tableBody}>
                     {packs.map(pack =>
