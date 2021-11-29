@@ -67,6 +67,7 @@ form.searchForm button {
     font-size: 17px;
     border: none;
     cursor: pointer;
+    padding-top: 3px;
 }
 
 form.searchForm button:hover {

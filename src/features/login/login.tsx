@@ -48,7 +48,7 @@ export const Login = React.memo(() => {
     }
     const handleInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
-        const re = /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/;
+        const re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         if( re.test(String(e.currentTarget.value).toLowerCase())) {
             setEmailError('')
         } else {

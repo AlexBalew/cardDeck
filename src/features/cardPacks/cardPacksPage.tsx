@@ -93,7 +93,6 @@ export const CardPacksPage = React.memo(() => {
     }, [searchName])
 
     if (!isLoggedIn) {
-        debugger
         return <Navigate to={PATH.LOGIN}/>
     }
 

@@ -1,7 +1,7 @@
 .select {
-    width: 42px;
+    width: 40px;
     height: 100%;
-    padding: 2px;
+    padding: 1px;
     cursor: pointer;
     margin: 0 10px;
     background-color: rgba(255, 255, 255, 0.4);
@@ -12,6 +12,7 @@
     outline: none;
     border: 1px solid #b4b3b3;
     border-radius: 3px;
+    font-size: 13px;
 }
 
 .select:hover {

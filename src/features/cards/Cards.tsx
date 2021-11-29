@@ -9,6 +9,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Card} from "./card/Card";
 import {RequestStatusType} from "../../app/app-reducer";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
+import SuperInput from "../../common/elements/input/SuperInput";
+import {log} from "util";
 
 
 export const Cards = React.memo(() => {
@@ -26,7 +28,7 @@ export const Cards = React.memo(() => {
 
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
-    const [searchQuestion, setSearchQuestion] = useState<string>('')
+    const [searchValue, setSearchValue] = useState<string>('')
 
 
     const onSetQuestion = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,26 +43,28 @@ export const Cards = React.memo(() => {
             dispatch(setPageCountAC(value))
         }
     }
-    const onSetSearchQuestion = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearchQuestion(e.currentTarget.value)
-    }
+
     const handlerCreateCard = (packId: string, question: string, answer: string) => {
         dispatch(createCards(packId!, question, answer))
         setQuestion('')
         setAnswer('')
     }
 
+    const onSetSearchValue = (value: string) => {
+        setSearchValue(value)
+        console.log('setSearchValue')
+    }
+    const searchCards = () => {
+        dispatch(setSearchedQuestionAC(searchValue))
+        dispatch(getCards(packId!))
+        setSearchValue('')
+        console.log('send search request to the server')
+    }
+
 
     useEffect(() => {
         dispatch(getCards(packId!))
-        console.log('Cards useEffect: getCards')
     }, [dispatch, packId, page, pageCount])
-
-    useEffect(() => {
-        let searchTimer = setTimeout(() => dispatch(setSearchedQuestionAC(searchQuestion)), 3000)
-        console.log('Cards useEffect: search')
-        return () => clearTimeout(searchTimer)
-    }, [searchQuestion])
 
 
     return (
@@ -75,12 +79,16 @@ export const Cards = React.memo(() => {
                 <div className={s.search}>
                     <div className={s.searchBlock}>
                         <form className={s.searchForm}>
-                            <input type="text" placeholder="Search.." name="search"/>
-                            <button className={s.searchBtn} type="submit">&#8617;</button>
+                            <SuperInput type="text"
+                                        placeholder="Search.."
+                                        onChangeText={onSetSearchValue}
+                                        value={searchValue}
+                                        onEnter={searchCards}/>
+                            <button className={s.searchBtn}
+                                    onClick={searchCards}
+                                    disabled={status === "loading"}
+                                    type="submit">&#8617;</button>
                         </form>
-                        {/*<input onChange={onSetSearchQuestion}
-                                value={searchQuestion}
-                                placeholder={'Search...'}/>*/}
                     </div>
                     <div className={s.addCard}>
                         <div>
