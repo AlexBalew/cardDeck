@@ -9,6 +9,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Card} from "./card/Card";
 import {RequestStatusType} from "../../app/app-reducer";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
+import SuperInput from "../../common/elements/input/SuperInput";
 
 
 export const Cards = React.memo(() => {
@@ -17,7 +18,7 @@ export const Cards = React.memo(() => {
     const cards = useSelector<AppStateType, Array<CardType>>(state => state.cards.cards)
     const page = useSelector<AppStateType, number>(state => state.cards.page)
     const packName = useSelector<AppStateType, string>(state => state.cards.packName)
-    //const userId = useSelector<AppStateType, string>(state => state.profile._id)
+    const authUserId = useSelector<AppStateType, string>(state => state.app._id)
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
     const pageCount = useSelector<AppStateType, number>(state => state.cards.pageCount)
     const {packId} = useParams<'packId'>()
@@ -26,7 +27,7 @@ export const Cards = React.memo(() => {
 
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
-    const [searchQuestion, setSearchQuestion] = useState<string>('')
+    const [searchValue, setSearchValue] = useState<string>('')
 
 
     const onSetQuestion = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,31 +36,37 @@ export const Cards = React.memo(() => {
     const onSetAnswer = (e: ChangeEvent<HTMLInputElement>) => {
         setAnswer(e.currentTarget.value)
     }
-    const handlerCreateCard = (packId: string, question: string, answer: string) => {
-        dispatch(createCards(packId!, question, answer))
-        setQuestion('')
-        setAnswer('')
-    }
+
     const onSetPageCount = (value: number) => {
         if (value) {
             dispatch(setPageCountAC(value))
         }
     }
 
-    const onSetNewSearchQuestion = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearchQuestion(e.currentTarget.value)
+    const handlerCreateCard = (packId: string, question: string, answer: string) => {
+
+        dispatch(createCards(packId!, question, answer))
+        setQuestion('')
+        setAnswer('')
     }
+
+    const onSetSearchValue = (value: string) => {
+        setSearchValue(value)
+        console.log('setSearchValue')
+    }
+    const searchCards = () => {
+        dispatch(setSearchedQuestionAC(searchValue))
+        dispatch(getCards(packId!))
+        setSearchValue('')
+        console.log('send search request to the server')
+    }
+
 
     useEffect(() => {
         dispatch(getCards(packId!))
-        console.log('Cards useEffect: getCards')
     }, [dispatch, packId, page, pageCount])
 
-    useEffect(() => {
-        let searchTimer = setTimeout(() => dispatch(setSearchedQuestionAC(searchQuestion)), 3000)
-        console.log('Cards useEffect: search')
-        return () => clearTimeout(searchTimer)
-    }, [searchQuestion])
+
     return (
         <div className={s.container}>
             <div className={s.cardsContainer}>
@@ -70,9 +77,18 @@ export const Cards = React.memo(() => {
 
 
                 <div className={s.search}>
-                    <div className={s.addDataCard}><input onChange={onSetNewSearchQuestion}
-                                                          value={searchQuestion}
-                                                          placeholder={'search for pack names here'}/>
+                    <div className={s.searchBlock}>
+                        <form className={s.searchForm}>
+                            <SuperInput type="text"
+                                        placeholder="Search.."
+                                        onChangeText={onSetSearchValue}
+                                        value={searchValue}
+                                        onEnter={searchCards}/>
+                            <button className={s.searchBtn}
+                                    onClick={searchCards}
+                                    disabled={status === "loading"}
+                                    type="submit">&#8617;</button>
+                        </form>
                     </div>
                     <div className={s.addCard}>
                         <div>
@@ -114,7 +130,9 @@ export const Cards = React.memo(() => {
                             <div>
                                 {cards.map(el =>
                                     <div key={el._id}>
-                                        <Card card={el} packId={packId!}/>
+                                        <Card card={el} packId={packId!}
+                                              question={question} answer={answer} setQuestion={setQuestion} setAnswer={setAnswer}
+                                              onSetQuestion={onSetQuestion} onSetAnswer={onSetAnswer}/>
                                     </div>)}
                             </div>
                         </div>
@@ -125,7 +143,7 @@ export const Cards = React.memo(() => {
                         <SelectPage onChangeOptions={onSetPageCount}
                                     value={pageCount}
                                     disabled={status === "loading"}
-                                    description={'cards on page'}/>
+                                    description={'Cards on page'}/>
                     </div>
 
                 </div>

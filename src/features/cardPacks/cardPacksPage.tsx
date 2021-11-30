@@ -89,7 +89,6 @@ export const CardPacksPage = React.memo(() => {
     }, [searchName])
 
     if (!isLoggedIn) {
-        debugger
         return <Navigate to={PATH.LOGIN}/>
     }
 
@@ -99,8 +98,8 @@ export const CardPacksPage = React.memo(() => {
 
         <div className={s.container}>
             <div className={s.filterContainer}>
-                <SuperButton onClick={onGetMyPacks}>My packs</SuperButton>
-                <SuperButton onClick={onGetPacks}>All packs</SuperButton>
+                <SuperButton className={s.btn} onClick={onGetMyPacks}>My packs</SuperButton>
+                <SuperButton className={s.btn} onClick={onGetPacks}>All packs</SuperButton>
                 <div className={style.doubleRangeBlock}>
                     <span className={style.choose}>Choose the the amount of cards:</span>
                     <span className={style.span}>{value2}</span>

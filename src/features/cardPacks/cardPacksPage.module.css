@@ -45,6 +45,9 @@
     margin: 30px 10px;
 }
 
+.btn {
+    margin-top: 10px;
+}
 .selectPagination {
     display: inherit;
     align-items: center;

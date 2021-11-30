@@ -17,22 +17,21 @@ const initState = {
     token: '',
     tokenDeathTime: 0,
     activeModal: false,
-    searchQuestion: '',
+    cardAnswer: '',
+    cardQuestion: '',
+    sortCards: undefined as string | undefined,
 }
 
 
 export const cardsReducer = (state: stateType = initState, action: AllActionsType): stateType => {
     switch (action.type) {
         case 'cardsReducer/SET_CARDS':
-            return {
-                ...state,
-                cards: action.cards
-            }
+            return {...state, cards: action.cards}
         case 'cardsReducer/SET_PAGE_COUNT' : {
             return {...state, pageCount: action.pageCount}
         }
-        case 'cardsReducer/SEARCH_QUESTION' : {
-            return {...state, searchQuestion: action.searchQuestion}
+        case 'cardsReducer/SEARCH_CARDS' : {
+            return {...state, cardQuestion: action.cardQuestion}
         }
         default:
             return state
@@ -50,7 +49,7 @@ type AllActionsType = setCardsACType | setPageCountACType | setSearchedQuestionA
 //* Action Creators --------------------------------------------------------->
 export const setCardsAC = (cards: Array<CardType>) => ({type: 'cardsReducer/SET_CARDS', cards} as const)
 export const setPageCountAC = (pageCount: number) =>( {type: 'cardsReducer/SET_PAGE_COUNT', pageCount} as const)
-export const setSearchedQuestionAC = (searchQuestion: string) => ({type: 'cardsReducer/SEARCH_QUESTION', searchQuestion } as const)
+export const setSearchedQuestionAC = (cardQuestion: string) => ({type: 'cardsReducer/SEARCH_CARDS', cardQuestion } as const)
 
 
 
@@ -61,10 +60,12 @@ export const getCards = (packId: string): AppThunkType =>
         dispatch(setAppStatusAC("loading"))
 
         const cards = getState().cards
+
         const currentPage = cards.page
         const packsOnPage = cards.pageCount
+        const cardQuestion = cards.cardQuestion
 
-        cardsAPI.getCards(packId, packsOnPage, currentPage)
+        cardsAPI.getCards(packId, packsOnPage, currentPage, cardQuestion)
             .then(response => {
                 dispatch(setCardsAC(response.data.cards))
                 dispatch(setAppStatusAC("succeeded"))

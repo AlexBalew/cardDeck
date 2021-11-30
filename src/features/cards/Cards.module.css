@@ -32,26 +32,66 @@
 .arrowBack {
     cursor: pointer;
     font-size: 25px;
-    margin: 0 15px;
+    margin-left:30px;
     text-decoration: none;
 }
 
 .search {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 950px;
-    margin: 5px 30px;
+    height: 40px;
+    margin: 10px 30px;
 }
+.searchForm {
+    width: 550px;
+    display: flex;
+    border: 1px solid #dedede;
+}
+
+form.searchForm input {
+    padding: 5px;
+    font-size: 17px;
+    width: 92%;
+    background: #f1f1f1;
+}
+form.searchForm input:focus {
+    border: 1px solid #c4d9e5;
+}
+form.searchForm button {
+    float: left;
+    width: 8%;
+    background: #c4d9e5;
+    color: white;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    padding-top: 3px;
+}
+
+form.searchForm button:hover {
+    background: #97b0ce;
+}
+
+form.searchForm::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 
 .addCard {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .addDataCard {
     border: 1px solid #C7A5A5;
     height: 20px;
-    margin: 10px;
+    width: 100px;
+    margin: 5px;
 }
 
 .addDataCard:focus {
@@ -62,7 +102,7 @@
     width: 950px;
     min-height: 450px;
     border-radius: 3px;
-    margin: 10px auto;
+    margin: 0 auto;
     box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1);
 }
 .cards {

@@ -15,7 +15,7 @@ export const SelectPage: React.FC<SelectPageProps> = React.memo(({
                                                            disabled = false,
                                                            description
                                                        }) => {
-    const arrOptions = [10, 15, 20, 40]
+    const arrOptions = [5, 10, 15, 20, 40]
     return (
         <div className={s.selectPage}>
             <span></span>

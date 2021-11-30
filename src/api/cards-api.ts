@@ -2,9 +2,9 @@ import {instance} from "./api";
 
 
 export const cardsAPI = {
-    getCards(cardsPack_id: string, pageCount: number = 5, page: number = 1) {
+    getCards(cardsPack_id: string, pageCount: number = 5, page: number = 1, cardQuestion: string) {
         return instance.get<CardsResponseType>
-        (`cards/card?cardsPack_id=${cardsPack_id}&pageCount=${pageCount}&page=${page}&max=5`)
+        (`cards/card?cardsPack_id=${cardsPack_id}&pageCount=${pageCount}&page=${page}&max=5&cardQuestion=${cardQuestion}`)
     },
     createCard(cardsPack_id: string, question: string, answer: string) {
         return instance.post<CardsResponseType>
@@ -70,4 +70,6 @@ export type RequestParamsType = {
     sortCards?: string
     page?: number
     pageCount?: number
+    min?: string
+    max?: string
 }
