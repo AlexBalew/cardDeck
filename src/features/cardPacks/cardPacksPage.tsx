@@ -12,7 +12,7 @@ import {SelectPage} from "../../common/components/selectPage/SelectPage";
 import {RequestStatusType} from "../../app/app-reducer";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/Routes";
-import {Modal} from "../../common/components/modal/Modal";
+import {AddNewPackModal} from "../../common/components/modal/addNewPack/AddNewPackModal";
 
 
 export const CardPacksPage = React.memo(() => {
@@ -121,7 +121,7 @@ export const CardPacksPage = React.memo(() => {
                         onClickNewName(newName)
                     }*/}>add new pack</SuperButton>
                 </div>
-                <Modal
+                <AddNewPackModal
                     message="hey hey"
                     isOpen={open}
                     onClose={() => setOpen(false)}

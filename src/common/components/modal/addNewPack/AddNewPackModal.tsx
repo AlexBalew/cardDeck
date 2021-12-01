@@ -1,9 +1,9 @@
 import React, {ChangeEvent, useState} from "react";
 import ReactDOM from "react-dom";
-import s from './Modal.module.css'
-import {createPackTC} from "../../../features/cardPacks/cardPacks-reducer";
+import s from './AddNewPackModal.module.css'
+import {createPackTC} from "../../../../features/cardPacks/cardPacks-reducer";
 import {useDispatch} from "react-redux";
-import SuperButton from "../../elements/button/SuperButton";
+import SuperButton from "../../../elements/button/SuperButton";
 
 type ModalPropsType = {
     message: string
@@ -11,7 +11,7 @@ type ModalPropsType = {
     onClose: () => void
 }
 
-export const Modal = ({message, isOpen, onClose, /*children*/}: ModalPropsType) => {
+export const AddNewPackModal = ({message, isOpen, onClose, /*children*/}: ModalPropsType) => {
 
     let dispatch = useDispatch()
 

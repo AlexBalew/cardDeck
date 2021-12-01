@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Modal} from "./Modal";
+import {AddNewPackModal} from "./addNewPack/AddNewPackModal";
 import s from './Component.module.css'
 
 function Component() {
@@ -7,7 +7,7 @@ function Component() {
     return (
         <div className={s.component}>
             <button onClick={() => setOpen(true)}>Open Modal</button>
-            <Modal
+            <AddNewPackModal
                 message="hey hey"
                 isOpen={open}
                 onClose={() => setOpen(false)}
