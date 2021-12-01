@@ -12,7 +12,7 @@ import {SelectPage} from "../../common/components/selectPage/SelectPage";
 import {RequestStatusType} from "../../app/app-reducer";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/Routes";
-import {AddNewPackModal} from "../../common/components/modal/addNewPack/AddNewPackModal";
+import {TitleModal} from "../../common/components/modal/addNewPack/TitleModal";
 
 
 export const CardPacksPage = React.memo(() => {
@@ -31,7 +31,7 @@ export const CardPacksPage = React.memo(() => {
     const [value1, setValue1] = useState(settingSlider.min) //slider's state
     const [value2, setValue2] = useState(settingSlider.max) //slider's state
     const [value3, setValue3] = React.useState<number[]>([value1, value2]); //slider's state
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false) //modal state
 
 
     const onSetNewSearchName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -117,9 +117,10 @@ export const CardPacksPage = React.memo(() => {
                     <SuperButton onClick={() => setOpen(true)
                        }>add new pack</SuperButton>
                 </div>
-                <AddNewPackModal
-                    message="hey hey"
+                <TitleModal
+                    message="Create a new pack of cards"
                     isOpen={open}
+                    setOpen={setOpen}
                     onClose={() => setOpen(false)}
                 />
                 <CardPacksTable/>

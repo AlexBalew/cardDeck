@@ -143,7 +143,7 @@ export const getPacksTC = (params?: {myId?: string, page?: number, min?: number,
             ? e.response.data.error
             : (e.message + ', more details in the console');
         console.log('Error: ', {...e})
-       /* if(e.response.request.status === 401) {
+       /* if(e.response.request.status === 401) { раскомментировать 03.12
         dispatch(isLoggedInAC(false))
         }*/
         dispatch(setErrorAC(error))
@@ -176,6 +176,25 @@ export const deletePackTC = (id: string): AppThunkType => async (dispatch) => { 
         dispatch(setAppStatusAC("loading"))
         let response = await packsAPI.deletePack(id)
         dispatch(setCardPacksDataAC(response.data))
+        dispatch(setAppStatusAC("succeeded"))
+    } catch (e: any) {
+        const error = e.response
+            ? e.response.data.error
+            : (e.message + ', more details in the console');
+        console.log('Error: ', {...e})
+        dispatch(setErrorAC(error))
+        dispatch(setAppStatusAC("succeeded"))
+    } finally {
+        dispatch(getPacksTC())
+    }
+
+}
+
+export const updatePackTC = (id: string, name?: string): AppThunkType => async (dispatch) => {
+    try {
+        dispatch(setAppStatusAC("loading"))
+        let response = await packsAPI.updatePack(id, name)
+        dispatch(setCardPacksDataAC(response.data)) //проверить на ликвидность
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         const error = e.response
