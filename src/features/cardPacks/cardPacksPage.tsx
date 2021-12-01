@@ -34,18 +34,16 @@ export const CardPacksPage = React.memo(() => {
     const [open, setOpen] = useState(false)
 
 
-
     const onSetNewSearchName = (e: ChangeEvent<HTMLInputElement>) => {
         const search = e.currentTarget.value
         setSearchName(search)
-        }
+    }
 
     const onSetPageCount = (value: number) => {
-        if(value){
+        if (value) {
             dispatch(setPageCountAC(value))
         }
     }
-
 
 
     const onPageChange = (page: number) => {
@@ -59,7 +57,7 @@ export const CardPacksPage = React.memo(() => {
         //setValue1(minCardsCount)
         //setValue2(maxCardsCount)
         setValue3([minCardsCount, maxCardsCount])
-       dispatch(getPacksTC({page: 1, min: 0, max: 103}))
+        dispatch(getPacksTC({page: 1, min: 0, max: 103}))
         /*console.log('setter: allPacks')
         console.log('minCardsCount: ', minCardsCount)
         console.log('maxCardsCount: ', maxCardsCount)*/
@@ -67,11 +65,11 @@ export const CardPacksPage = React.memo(() => {
 
     const onGetMyPacks = () => {
         //dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
-       //dispatch(setCurrentPageAC(1))
-       /* setValue1(minCardsCount)
-        setValue2(maxCardsCount)
-        setValue3([minCardsCount, maxCardsCount])*/
-        dispatch(getPacksTC({ myId, page: 1 }))
+        //dispatch(setCurrentPageAC(1))
+        /* setValue1(minCardsCount)
+         setValue2(maxCardsCount)
+         setValue3([minCardsCount, maxCardsCount])*/
+        dispatch(getPacksTC({myId, page: 1}))
         /*console.log('setter: myPacks')
         console.log('minCardsCount: ', minCardsCount)
         console.log('maxCardsCount: ', maxCardsCount)*/
@@ -117,9 +115,7 @@ export const CardPacksPage = React.memo(() => {
                 </div>
                 <div className={s.addNewPackButton}>
                     <SuperButton onClick={() => setOpen(true)
-                    /*{
-                        onClickNewName(newName)
-                    }*/}>add new pack</SuperButton>
+                       }>add new pack</SuperButton>
                 </div>
                 <AddNewPackModal
                     message="hey hey"
@@ -128,11 +124,11 @@ export const CardPacksPage = React.memo(() => {
                 />
                 <CardPacksTable/>
                 <div className={s.selectPagination}>
-                <SelectPage onChangeOptions={onSetPageCount}
-                            value={pageCount}
-                            disabled={status === "loading"}
-                            description={'packs on page'}/>
-                <Pagination numberOfPagesInOnePortion={6} onPageChange={onPageChange}/>
+                    <SelectPage onChangeOptions={onSetPageCount}
+                                value={pageCount}
+                                disabled={status === "loading"}
+                                description={'packs on page'}/>
+                    <Pagination numberOfPagesInOnePortion={6} onPageChange={onPageChange}/>
                 </div>
             </div>
 

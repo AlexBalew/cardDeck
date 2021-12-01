@@ -1,7 +1,6 @@
 .modalContainer {
     height: 100vh;
     width: 100vw;
-    background-color: #888888;
     position: fixed;
     overflow: auto;
     transform: translate(0%, -100%);
