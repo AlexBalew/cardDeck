@@ -19,8 +19,8 @@
     align-items: center;
     justify-content: space-evenly;
     background: white;
-    width: 350px;
-    height: 300px;
+    width: 300px;
+    height: 250px;
     border-radius: 4px;
     padding: 20px;
     text-align: center;
@@ -40,3 +40,7 @@
     height: 33px;
 }
 
+.modalBtn {
+    width: 80px;
+    margin: 0 10px;
+}

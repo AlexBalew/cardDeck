@@ -6,13 +6,13 @@ import SuperInput from "../../../elements/input/SuperInput";
 import SuperButton from "../../../elements/button/SuperButton";
 
 
-type CreatePacksType = {
+type CreateCardsType = {
     showModal: boolean
-    setShowModal: (active: boolean) => void
+    setShowModal: (show: boolean) => void
     packId: string
 }
 
-export const CreateModal = (props: CreatePacksType) => {
+export const CreateModal = (props: CreateCardsType) => {
     const dispatch = useDispatch();
 
     const [question, setQuestion] = useState('')
