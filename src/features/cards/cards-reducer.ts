@@ -1,6 +1,7 @@
-import {CardType, cardsAPI} from "../../api/cards-api";
+import {CardType, cardsAPI, RequestParamsType} from "../../api/cards-api";
 import {AppThunkType} from "../../bll/store";
 import {setAppStatusAC} from "../../app/app-reducer";
+
 
 
 type stateType = typeof initState
@@ -19,7 +20,7 @@ const initState = {
     activeModal: false,
     cardAnswer: '',
     cardQuestion: '',
-    sortCards: undefined as string | undefined,
+    sortCards: '',
 }
 
 
@@ -33,6 +34,10 @@ export const cardsReducer = (state: stateType = initState, action: AllActionsTyp
         case 'cardsReducer/SEARCH_CARDS' : {
             return {...state, cardQuestion: action.cardQuestion}
         }
+        case 'cardsReducer/SET_GET_REQUEST_PARAMS':
+            return {...state, ...action.payload}
+        case 'cardsReducer/SET_PACK_USER_ID':
+            return {...state, packUserId: action.packUserId}
         default:
             return state
     }
@@ -42,15 +47,18 @@ export const cardsReducer = (state: stateType = initState, action: AllActionsTyp
 type setCardsACType = ReturnType<typeof setCardsAC>
 type setPageCountACType = ReturnType<typeof setPageCountAC>
 type setSearchedQuestionACType = ReturnType<typeof setSearchedQuestionAC>
+type setGetRequestParamsACType = ReturnType<typeof setGetRequestParamsAC>
+type setPackUserIdACType = ReturnType<typeof setPackUserIdAC>
 
-type AllActionsType = setCardsACType | setPageCountACType | setSearchedQuestionACType
+type AllActionsType = setCardsACType | setPageCountACType | setSearchedQuestionACType | setGetRequestParamsACType | setPackUserIdACType
 
 
 //* Action Creators --------------------------------------------------------->
 export const setCardsAC = (cards: Array<CardType>) => ({type: 'cardsReducer/SET_CARDS', cards} as const)
 export const setPageCountAC = (pageCount: number) =>( {type: 'cardsReducer/SET_PAGE_COUNT', pageCount} as const)
 export const setSearchedQuestionAC = (cardQuestion: string) => ({type: 'cardsReducer/SEARCH_CARDS', cardQuestion } as const)
-
+export const setGetRequestParamsAC = (payload:  RequestParamsType) => ({type: 'cardsReducer/SET_GET_REQUEST_PARAMS', payload} as const)
+export const setPackUserIdAC = (packUserId: string) => ({type: 'cardsReducer/SET_PACK_USER_ID', packUserId} as const)
 
 
 //* Thunk Creators --------------------------------------------------------->
@@ -64,9 +72,13 @@ export const getCards = (packId: string): AppThunkType =>
         const currentPage = cards.page
         const packsOnPage = cards.pageCount
         const cardQuestion = cards.cardQuestion
+        const cardAnswer = cards.cardAnswer
+        const sortCards = cards.sortCards
 
-        cardsAPI.getCards(packId, packsOnPage, currentPage, cardQuestion)
+
+        cardsAPI.getCards(packId, packsOnPage, currentPage, cardQuestion, cardAnswer, sortCards)
             .then(response => {
+                dispatch(setPackUserIdAC(response.data.packUserId))
                 dispatch(setCardsAC(response.data.cards))
                 dispatch(setAppStatusAC("succeeded"))
             })

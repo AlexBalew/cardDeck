@@ -2,14 +2,15 @@ import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from './Cards.module.css'
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
-import {createCards, getCards, setPageCountAC, setSearchedQuestionAC} from "./cards-reducer";
+import {createCards, getCards, setGetRequestParamsAC, setPageCountAC, setSearchedQuestionAC} from "./cards-reducer";
 import {AppStateType} from "../../bll/store";
-import {CardType} from "../../api/cards-api";
+import {CardType, RequestParamsType} from "../../api/cards-api";
 import {useNavigate, useParams} from "react-router-dom";
 import {Card} from "./card/Card";
 import {RequestStatusType} from "../../app/app-reducer";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
 import SuperInput from "../../common/elements/input/SuperInput";
+import {SortArrow} from "../../common/components/sortArrow/SortArrow";
 
 
 export const Cards = React.memo(() => {
@@ -18,9 +19,13 @@ export const Cards = React.memo(() => {
     const cards = useSelector<AppStateType, Array<CardType>>(state => state.cards.cards)
     const page = useSelector<AppStateType, number>(state => state.cards.page)
     const packName = useSelector<AppStateType, string>(state => state.cards.packName)
-    const authUserId = useSelector<AppStateType, string>(state => state.app._id)
+
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
     const pageCount = useSelector<AppStateType, number>(state => state.cards.pageCount)
+
+    const packUserId = useSelector<AppStateType, string>(state => state.cards.packUserId)
+    const authUserId = useSelector<AppStateType, string>(state => state.app._id)
+
     const {packId} = useParams<'packId'>()
     const navigate = useNavigate()
 
@@ -61,12 +66,18 @@ export const Cards = React.memo(() => {
         console.log('send search request to the server')
     }
 
+    const setGetRequestParams = (requestParams: RequestParamsType) => {
+        dispatch(setGetRequestParamsAC(requestParams))
+        dispatch(getCards(packId!))
+    }
+    const sortCards = (param: string) => setGetRequestParams({sortCards: param})
 
     useEffect(() => {
         dispatch(getCards(packId!))
     }, [dispatch, packId, page, pageCount])
 
 
+    console.log('packName', packName)
     return (
         <div className={s.container}>
             <div className={s.cardsContainer}>
@@ -122,9 +133,15 @@ export const Cards = React.memo(() => {
                                 <div className={s.cardsHeader}>
                                     <div className={s.infoItem}>Question</div>
                                     <div className={s.infoItem}>Answer</div>
-                                    <div><span>Last updated</span></div>
-                                    <div><span style={{marginLeft: '5px'}}>Grade</span></div>
-                                    <div>Actions</div>
+                                    <div>
+                                        <span>Last updated</span>
+                                        <SortArrow onClick={sortCards} sortValue={'updated'} status={status}/>
+                                    </div>
+                                    <div>
+                                        <span style={{marginLeft: '5px'}}>Grade</span>
+                                        <SortArrow onClick={sortCards} sortValue={'grade'} status={status}/>
+                                    </div>
+                                    { (packUserId === authUserId) && <div className={s.gradeTitle}>Actions</div>}
                                 </div>
                             </div>
                             <div>
