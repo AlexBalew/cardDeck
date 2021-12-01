@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {setCardsCountAC} from "../../../features/cardPacks/cardPacks-reducer";
 import {useAppSelector} from "../../../bll/store";
 
+let test;
 
 type SuperDoubleRangePropsType = {
     value1: number
@@ -30,6 +31,8 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = React.memo((
 
     const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
     const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
+   // const maxC = useAppSelector<number>(state => state.packs.maxCardsCount)
+
 
     const handleChange1 = (
         event: Event,

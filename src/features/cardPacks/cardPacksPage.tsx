@@ -12,6 +12,7 @@ import {SelectPage} from "../../common/components/selectPage/SelectPage";
 import {RequestStatusType} from "../../app/app-reducer";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../app/Routes";
+import {Modal} from "../../common/components/modal/Modal";
 
 
 export const CardPacksPage = React.memo(() => {
@@ -31,7 +32,7 @@ export const CardPacksPage = React.memo(() => {
     const [value1, setValue1] = useState(settingSlider.min) //slider's state
     const [value2, setValue2] = useState(settingSlider.max) //slider's state
     const [value3, setValue3] = React.useState<number[]>([value1, value2]); //slider's state
-
+    const [open, setOpen] = useState(false)
 
     const onSetNewName = (e: ChangeEvent<HTMLInputElement>) => {
         let newName = e.currentTarget.value
@@ -127,10 +128,16 @@ export const CardPacksPage = React.memo(() => {
 
                 </div>
                 <div className={s.addNewPackButton}>
-                    <SuperButton onClick={() => {
+                    <SuperButton onClick={() => setOpen(true)
+                    /*{
                         onClickNewName(newName)
-                    }}>add new pack</SuperButton>
+                    }*/}>add new pack</SuperButton>
                 </div>
+                <Modal
+                    message="hey hey"
+                    isOpen={open}
+                    onClose={() => setOpen(false)}
+                />
                 <CardPacksTable/>
                 <div className={s.selectPagination}>
                 <SelectPage onChangeOptions={onSetPageCount}

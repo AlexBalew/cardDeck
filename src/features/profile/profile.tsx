@@ -49,6 +49,7 @@ export const Profile = React.memo(() => {
 
     return (
         <div className={s.profileContainer}>
+
             <div className={s.profileBlock}>
                 <div className={s.content}>
                     <div className={s.profileAvatar}>
