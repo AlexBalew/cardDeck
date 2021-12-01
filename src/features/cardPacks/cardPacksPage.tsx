@@ -4,7 +4,7 @@ import s from './cardPacksPage.module.css';
 import Pagination from "../../common/components/pagination/pagination";
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
-import {createPackTC, getPacksTC, setPageCountAC, setSearchedNameAC} from "./cardPacks-reducer";
+import {getPacksTC, setPageCountAC, setSearchedNameAC} from "./cardPacks-reducer";
 import {AppStateType, useAppSelector} from "../../bll/store";
 import style from '../../common/elements/doubleRange/DoubleRange.module.css'
 import SuperDoubleRange from "../../common/elements/doubleRange/DoubleRange";
@@ -27,17 +27,13 @@ export const CardPacksPage = React.memo(() => {
     const minCardsCount = useAppSelector<number>(state => state.packs.minCardsCount)
     const maxCardsCount = useAppSelector<number>(state => state.packs.maxCardsCount)
 
-    const [newName, setNewName] = useState<string>('') //add new pack input state
     const [searchName, setSearchName] = useState<string>('') //search pack input state
     const [value1, setValue1] = useState(settingSlider.min) //slider's state
     const [value2, setValue2] = useState(settingSlider.max) //slider's state
     const [value3, setValue3] = React.useState<number[]>([value1, value2]); //slider's state
     const [open, setOpen] = useState(false)
 
-    const onSetNewName = (e: ChangeEvent<HTMLInputElement>) => {
-        let newName = e.currentTarget.value
-        setNewName(newName)
-    }
+
 
     const onSetNewSearchName = (e: ChangeEvent<HTMLInputElement>) => {
         const search = e.currentTarget.value
@@ -50,10 +46,7 @@ export const CardPacksPage = React.memo(() => {
         }
     }
 
-    const onClickNewName = (newName: string) => {
-        dispatch(createPackTC(newName))
-        setNewName('')
-    }
+
 
     const onPageChange = (page: number) => {
         dispatch(getPacksTC({page}))
@@ -121,11 +114,6 @@ export const CardPacksPage = React.memo(() => {
                                                           onChange={onSetNewSearchName}
                                                           value={searchName}
                                                           placeholder={'search for pack names here'}/>
-                    <input style={{border: '1px solid #C7A5A5'}}
-                           onChange={onSetNewName}
-                           value={newName}
-                           placeholder={'insert title here'}/>
-
                 </div>
                 <div className={s.addNewPackButton}>
                     <SuperButton onClick={() => setOpen(true)
