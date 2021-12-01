@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from 'react'
 import s from './Cards.module.css'
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
-import {createCards, getCards, setGetRequestParamsAC, setPageCountAC, setSearchedQuestionAC} from "./cards-reducer";
+import {getCards, setGetRequestParamsAC, setPageCountAC, setSearchedQuestionAC} from "./cards-reducer";
 import {AppStateType} from "../../bll/store";
 import {CardType, RequestParamsType} from "../../api/cards-api";
 import {useNavigate, useParams} from "react-router-dom";
@@ -11,28 +11,41 @@ import {RequestStatusType} from "../../app/app-reducer";
 import {SelectPage} from "../../common/components/selectPage/SelectPage";
 import SuperInput from "../../common/elements/input/SuperInput";
 import {SortArrow} from "../../common/components/sortArrow/SortArrow";
+import {CreateModal} from "../../common/components/modalWindows/cardsModal/CreateModal";
 
 
 export const Cards = React.memo(() => {
+
+//* Data -------------------------------------------------------------------------------------->
     const dispatch = useDispatch()
 
     const cards = useSelector<AppStateType, Array<CardType>>(state => state.cards.cards)
     const page = useSelector<AppStateType, number>(state => state.cards.page)
     const packName = useSelector<AppStateType, string>(state => state.cards.packName)
-
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
     const pageCount = useSelector<AppStateType, number>(state => state.cards.pageCount)
-
     const packUserId = useSelector<AppStateType, string>(state => state.cards.packUserId)
     const authUserId = useSelector<AppStateType, string>(state => state.app._id)
 
     const {packId} = useParams<'packId'>()
     const navigate = useNavigate()
 
-
+//* Local state --------------------------------------------------------------------------------->
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
     const [searchValue, setSearchValue] = useState<string>('')
+    const [showModal, setShowModal] = useState(false)
+
+    const isUsersPack = packUserId === authUserId
+
+
+
+
+//* Callbacks -- --------------------------------------------------------------------------------->
+
+    const openModalWindow = () => {
+        setShowModal(true)
+    }
 
 
     const onSetQuestion = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,12 +61,11 @@ export const Cards = React.memo(() => {
         }
     }
 
-    const handlerCreateCard = (packId: string, question: string, answer: string) => {
-
+   /* const handlerCreateCard = (packId: string, question: string, answer: string) => {
         dispatch(createCards(packId!, question, answer))
         setQuestion('')
         setAnswer('')
-    }
+    }*/
 
     const onSetSearchValue = (value: string) => {
         setSearchValue(value)
@@ -72,16 +84,25 @@ export const Cards = React.memo(() => {
     }
     const sortCards = (param: string) => setGetRequestParams({sortCards: param})
 
+
+
     useEffect(() => {
         dispatch(getCards(packId!))
     }, [dispatch, packId, page, pageCount])
 
-
     console.log('packName', packName)
+
+
+//* JSX ------------------------------------------------------------------------------------------->
     return (
         <div className={s.container}>
             <div className={s.cardsContainer}>
 
+                {showModal && <CreateModal
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                    packId={packId!}
+                />}
                 <div className={s.backLink}>
                     <div onClick={() => navigate('/packs-list')} className={s.arrowBack}>&larr;{packName}</div>
                 </div>
@@ -102,7 +123,7 @@ export const Cards = React.memo(() => {
                         </form>
                     </div>
                     <div className={s.addCard}>
-                        <div>
+                        {/*<div>
                             <input
                                 className={s.addDataCard}
                                 onChange={onSetQuestion}
@@ -115,10 +136,12 @@ export const Cards = React.memo(() => {
                                 value={answer}
                                 placeholder={'insert answer'}
                             />
-                        </div>
-                        <SuperButton onClick={() => handlerCreateCard(packId!, question, answer)}
-                                     disabled={status === "loading"}
-                        >ADD CARD</SuperButton>
+                        </div>*/}
+
+                        { (isUsersPack) ? <SuperButton onClick={openModalWindow}
+                                     disabled={status === "loading"}>ADD CARD</SuperButton>
+                        : <SuperButton disabled>ADD CARD</SuperButton>
+                        }
                     </div>
                 </div>
 
@@ -141,7 +164,7 @@ export const Cards = React.memo(() => {
                                         <span style={{marginLeft: '5px'}}>Grade</span>
                                         <SortArrow onClick={sortCards} sortValue={'grade'} status={status}/>
                                     </div>
-                                    { (packUserId === authUserId) && <div className={s.gradeTitle}>Actions</div>}
+                                    { (isUsersPack) && <div className={s.gradeTitle}>Actions</div>}
                                 </div>
                             </div>
                             <div>

@@ -39,16 +39,12 @@ export const Card: React.FC<CardPropsType> = React.memo(({card, packId, question
 
 
 
-
-
-
-
     return (
         <div className={s.cardContainer}>
             <div className={s.col}>{card.question}</div>
             <div>{card.answer}</div>
-            <div>update</div>
-            <div>grade</div>
+            <div>{card.updated}</div>
+            <div>{card.grade}</div>
             <div>
                 {authUserId !== card.user_id
                     ? null

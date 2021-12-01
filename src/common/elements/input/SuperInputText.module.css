@@ -40,20 +40,17 @@
     font-family: inherit;
     width: 200px;
     height: 13px;
-    border: 0;
     outline: 0;
     font-size: 100%;
-    color: rgba(2, 37, 47, 0.86);
+    color: rgba(10, 10, 10, 0.86);
     padding: 8px 10px;
-    background: rgba(199, 165, 165, 0.45);
-
+    background: rgb(199, 165, 165);
 }
 
 
 .inputField:focus {
     font-weight: 500;
-    border-width: 3px;
-
+    border: none;
 }
 
 .classname {

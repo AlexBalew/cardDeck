@@ -48,6 +48,7 @@
     width: 550px;
     display: flex;
     border: 1px solid #dedede;
+    height: 100%;
 }
 
 form.searchForm input {
@@ -114,7 +115,7 @@ form.searchForm::after {
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: 3fr 4fr 1fr 1fr 2fr;
+    grid-template-columns: 3fr 4fr 2fr 1fr 2fr;
     grid-gap: 10px;
     margin-left: 5px;
     font-weight: bold;
