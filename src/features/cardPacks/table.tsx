@@ -31,23 +31,20 @@ export const CardPacksTable = React.memo(() => {
         console.log('Main useEffect(table)')
     }, [pageCount, searchedName, settingSlider.min, settingSlider.max])
 
-    console.log(packs)
-
     return (
         <div className={s.mainContainer}>
             <table className={s.table}>
                 <thead className={s.tableHead}>
-
-                {titles.map((title, index) => <th key={title + index} className={s.title}>{title}</th>)}
+                <tr>
+                    {titles.map((title, index) => <th key={title + index} className={s.title}>{title}</th>)}
+                </tr>
                 </thead>
                 <tbody className={s.tableBody}>
                 {packs.map(pack => {
-                    const onDeletePack = () => {
-                        dispatch(deletePackTC(pack._id))
-                        console.log('delete: ', pack._id)
-                        setOpen('')
-                    }
-                    console.log(pack.name, pack._id)
+                        const onDeletePack = () => {
+                            dispatch(deletePackTC(pack._id))
+                            setOpen('')
+                        }
                         return <tr className={s.dataRow} key={pack._id}>
                             <td>
                                 <NavLink to={PATH.CARDS + `/${pack._id}`}>{pack.name}</NavLink>
