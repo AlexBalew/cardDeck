@@ -2,13 +2,14 @@ import React, {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../bll/store";
 import {CardPackType} from "../../api/packs-api";
-import {deletePackTC, getPacksTC} from "./cardPacks-reducer";
+import {deletePackTC, getPacksTC, updatePackTC} from "./cardPacks-reducer";
 import s from './table.module.css'
 import btn from '../cards/card/Card.module.css'
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../app/Routes";
 import SuperButton from "../../common/elements/button/SuperButton";
 import {DeleteModal} from "../../common/components/modal/deleteModal/deleteModal";
+import {UpdatePackTitleModal} from "../../common/components/modal/updatePackTitleModal/updatePackTitleModal";
 
 
 export const CardPacksTable = React.memo(() => {
@@ -25,6 +26,7 @@ export const CardPacksTable = React.memo(() => {
     const settingSlider = useAppSelector<{ min: number; max: number }>(state => state.packs.settingSlider)
 
     const [open, setOpen] = useState<string>('')
+    const [openT, setOpenT] = useState<string>('')
 
     useEffect(() => {
         dispatch(getPacksTC())
@@ -45,6 +47,9 @@ export const CardPacksTable = React.memo(() => {
                             dispatch(deletePackTC(pack._id))
                             setOpen('')
                         }
+                        const onUpdatePack = (newPackName?: string) => {
+                            dispatch(updatePackTC(pack._id, newPackName))
+                        }
                         return <tr className={s.dataRow} key={pack._id}>
                             <td>
                                 <NavLink to={PATH.CARDS + `/${pack._id}`}>{pack.name}</NavLink>
@@ -61,6 +66,11 @@ export const CardPacksTable = React.memo(() => {
                                                  packId={pack._id}
                                                  onDelete={onDeletePack}
                                     />
+                                    <UpdatePackTitleModal message={'Change the title of the pack'}
+                                                          isOpen={openT === pack._id}
+                                                          onClose={() => setOpenT('')}
+                                                          onEdit={onUpdatePack}
+                                    />
                                     <td>
                                         <SuperButton
                                             className={btn.btn}
@@ -68,7 +78,11 @@ export const CardPacksTable = React.memo(() => {
                                             value={pack._id}>
                                             delete
                                         </SuperButton>
-                                        <SuperButton className={btn.btn}>edit</SuperButton>
+                                        <SuperButton
+                                            className={btn.btn}
+                                            onClick={() => setOpenT(pack._id)}
+                                            value={pack._id}>
+                                            edit</SuperButton>
                                         <SuperButton className={btn.btn}>learn</SuperButton>
                                     </td>
                                 </>

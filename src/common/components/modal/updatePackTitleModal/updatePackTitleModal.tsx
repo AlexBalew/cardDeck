@@ -1,32 +1,22 @@
-import React, {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import ReactDOM from "react-dom";
 import s from '../Modal.module.css'
-import {createPackTC} from "../../../../features/cardPacks/cardPacks-reducer";
-import {useDispatch} from "react-redux";
 import SuperButton from "../../../elements/button/SuperButton";
 
 type ModalPropsType = {
     message: string
     isOpen: boolean
     onClose: () => void
-    setOpen: Dispatch<SetStateAction<boolean>>
+    onEdit: (newName?: string) => void
 }
 
-export const AddNewPackModal = ({message, isOpen, onClose, setOpen}: ModalPropsType) => {
-
-    let dispatch = useDispatch()
+export const UpdatePackTitleModal = ({message, isOpen, onClose, onEdit}: ModalPropsType) => {
 
     const [newName, setNewName] = useState<string>('') //add new pack input state
 
     const onSetNewName = (e: ChangeEvent<HTMLInputElement>) => {
         let newName = e.currentTarget.value
         setNewName(newName)
-    }
-
-    const onClickNewName = (newName: string) => {
-        dispatch(createPackTC(newName))
-        setNewName('')
-        setOpen(false)
     }
 
     if (!isOpen) return null;
@@ -45,8 +35,8 @@ export const AddNewPackModal = ({message, isOpen, onClose, setOpen}: ModalPropsT
                        value={newName}
                        placeholder={'insert title here'}/>
                 <SuperButton onClick={() => {
-                    onClickNewName(newName)
-                }}>add new pack</SuperButton>
+                    onEdit(newName)
+                }}>add new pack's title</SuperButton>
             </div>
         </div>
         , document.body);
