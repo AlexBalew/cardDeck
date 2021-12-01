@@ -14,27 +14,30 @@ import {SortArrow} from "../../common/components/sortArrow/SortArrow";
 
 
 export const Cards = React.memo(() => {
+
+//* Data -------------------------------------------------------------------------------------->
     const dispatch = useDispatch()
 
     const cards = useSelector<AppStateType, Array<CardType>>(state => state.cards.cards)
     const page = useSelector<AppStateType, number>(state => state.cards.page)
     const packName = useSelector<AppStateType, string>(state => state.cards.packName)
-
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
     const pageCount = useSelector<AppStateType, number>(state => state.cards.pageCount)
-
     const packUserId = useSelector<AppStateType, string>(state => state.cards.packUserId)
     const authUserId = useSelector<AppStateType, string>(state => state.app._id)
 
     const {packId} = useParams<'packId'>()
     const navigate = useNavigate()
 
-
+//* Local state --------------------------------------------------------------------------------->
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
     const [searchValue, setSearchValue] = useState<string>('')
+    const [shownModal, setShownModal] = useState(false)
+    const [shownDeleteModal, setShownDeleteModal] = useState(false)
+    const [shownUpdateModal, setShownUpdateModal] = useState(false)
 
-
+//* Callbacks -- --------------------------------------------------------------------------------->
     const onSetQuestion = (e: ChangeEvent<HTMLInputElement>) => {
         setQuestion(e.currentTarget.value)
     }
@@ -49,7 +52,6 @@ export const Cards = React.memo(() => {
     }
 
     const handlerCreateCard = (packId: string, question: string, answer: string) => {
-
         dispatch(createCards(packId!, question, answer))
         setQuestion('')
         setAnswer('')
@@ -72,12 +74,14 @@ export const Cards = React.memo(() => {
     }
     const sortCards = (param: string) => setGetRequestParams({sortCards: param})
 
+
+
     useEffect(() => {
         dispatch(getCards(packId!))
     }, [dispatch, packId, page, pageCount])
 
-
     console.log('packName', packName)
+
     return (
         <div className={s.container}>
             <div className={s.cardsContainer}>
@@ -116,9 +120,10 @@ export const Cards = React.memo(() => {
                                 placeholder={'insert answer'}
                             />
                         </div>
-                        <SuperButton onClick={() => handlerCreateCard(packId!, question, answer)}
-                                     disabled={status === "loading"}
-                        >ADD CARD</SuperButton>
+                        { (packUserId === authUserId) ? <SuperButton onClick={() => handlerCreateCard(packId!, question, answer)}
+                                     disabled={status === "loading"}>ADD CARD</SuperButton>
+                        : <SuperButton disabled>ADD CARD</SuperButton>
+                        }
                     </div>
                 </div>
 
