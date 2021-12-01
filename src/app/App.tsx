@@ -34,7 +34,7 @@ function App() {
             {status === 'loading' && <Preloader/>}
             {isLoggedIn ? <CardDeckRoutes/> : <CardDeckRoutesUnauthorized/>}
             {isLoggedIn && <div style={{position: "absolute", marginLeft: '90%', top: '20px'}}>
-                <SuperButton onClick={onLogOut}>Log out</SuperButton>
+                <SuperButton onClick={onLogOut} style={{backgroundColor: '#f6f3f4'}}>Log out</SuperButton>
             </div>}
 
         </div>

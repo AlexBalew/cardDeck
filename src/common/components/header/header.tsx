@@ -1,24 +1,33 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import s from './header.module.css'
+import {PATH} from "../../../app/Routes";
+import CardsImg from '../../../assets/profile/cards.png'
+import UserImg from '../../../assets/profile/user.png'
+
 
 function Header() {
 
-
     return (
-        <div className={s.body}>
-            <div className={s.main}>
-                <input type="checkbox"/>
-                <div>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <nav className={s.menu}>
-                    <Link to='/profile'>profile</Link>
-                    <Link to='/change-password'>change password</Link>
-                    <Link to='/packs-list'>packs</Link>
-                </nav>
+        <div className={s.headerContainer}>
+            <div className={s.title}>
+                <b>It-incubator</b>
+            </div>
+            <div className={s.navContainer}>
+                <NavLink to={PATH.PACKS_LIST} className={s.navLink}>
+                    <div className={s.navLinkContext}>
+                        <img src={CardsImg} className={s.cardsImg}/>
+                        <span>Packs list</span>
+                    </div>
+                </NavLink>
+
+
+                <NavLink to={PATH.PROFILE} className={s.navLink}>
+                    <div className={s.navLinkContext}>
+                        <img src={UserImg} className={s.useImg}/>
+                        <span>Profile</span>
+                    </div>
+                </NavLink>
             </div>
         </div>
     )
