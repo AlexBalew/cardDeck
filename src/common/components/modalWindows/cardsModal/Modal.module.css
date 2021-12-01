@@ -1,0 +1,42 @@
+.modalContainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(12, 12, 12, 0.6);
+    z-index: 1000;
+}
+
+.modalContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background: white;
+    width: 350px;
+    height: 300px;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+}
+
+.title {
+    font-size: 16px;
+    color: #0e0e0e;
+    margin-top: 10px;
+    width:260px;
+    line-height: initial;
+
+}
+
+.inputModal {
+    background: rgb(198, 218, 230);
+    height: 33px;
+}
+
