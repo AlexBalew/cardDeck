@@ -45,7 +45,7 @@ export const CardPacksTable = React.memo(() => {
                     const onDeletePack = () => {
                         dispatch(deletePackTC(pack._id))
                         console.log('delete: ', pack._id)
-                        //setOpen(false)
+                        setOpen('')
                     }
                     console.log(pack.name, pack._id)
                         return <tr className={s.dataRow} key={pack._id}>

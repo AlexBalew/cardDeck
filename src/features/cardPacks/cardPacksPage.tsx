@@ -31,7 +31,7 @@ export const CardPacksPage = React.memo(() => {
     const [value1, setValue1] = useState(settingSlider.min) //slider's state
     const [value2, setValue2] = useState(settingSlider.max) //slider's state
     const [value3, setValue3] = React.useState<number[]>([value1, value2]); //slider's state
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false) //modal state
 
 
     const onSetNewSearchName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -118,8 +118,9 @@ export const CardPacksPage = React.memo(() => {
                        }>add new pack</SuperButton>
                 </div>
                 <AddNewPackModal
-                    message="hey hey"
+                    message="Create a new pack of cards"
                     isOpen={open}
+                    setOpen={setOpen}
                     onClose={() => setOpen(false)}
                 />
                 <CardPacksTable/>

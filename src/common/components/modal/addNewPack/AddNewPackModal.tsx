@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
 import ReactDOM from "react-dom";
 import s from '../Modal.module.css'
 import {createPackTC} from "../../../../features/cardPacks/cardPacks-reducer";
@@ -9,9 +9,10 @@ type ModalPropsType = {
     message: string
     isOpen: boolean
     onClose: () => void
+    setOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export const AddNewPackModal = ({message, isOpen, onClose}: ModalPropsType) => {
+export const AddNewPackModal = ({message, isOpen, onClose, setOpen}: ModalPropsType) => {
 
     let dispatch = useDispatch()
 
@@ -25,6 +26,7 @@ export const AddNewPackModal = ({message, isOpen, onClose}: ModalPropsType) => {
     const onClickNewName = (newName: string) => {
         dispatch(createPackTC(newName))
         setNewName('')
+        setOpen(false)
     }
 
     if (!isOpen) return null;
