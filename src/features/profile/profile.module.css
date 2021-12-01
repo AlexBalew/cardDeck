@@ -28,8 +28,9 @@
 }
 
 .profileAvatar {
-    width: 100px;
-    height: 100px;
+    width: 250px;
+    height: 330px;
+    margin-top: 20px;
 
 }
 .profileAvatar img {

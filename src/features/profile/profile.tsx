@@ -55,9 +55,14 @@ export const Profile = React.memo(() => {
                     <div className={s.profileAvatar}>
                         <img src={avatar ? avatar : userDefaultImg}  alt="ava"/>
                     </div>
-                    <label>Change image <input type="text" onChange={changeImageHandler} onBlur={setUserDataHandler}/></label>
+                    <label>Change image <input type="text"
+                                               onChange={changeImageHandler}
+                                               onBlur={setUserDataHandler}/></label>
                     {/*<div className={s.profileName}>{myName}</div>*/}
-                    <SuperEditableSpan className={s.profileName} value={myName} onChange={changeNameHandle} onBlur={setUserDataHandler}/>
+                    <SuperEditableSpan className={s.profileName}
+                                       value={myName}
+                                       onChange={changeNameHandle}
+                                       onBlur={setUserDataHandler}/>
                     <div>{email ? email : "email not write"}</div>
                 </div>
             </div>

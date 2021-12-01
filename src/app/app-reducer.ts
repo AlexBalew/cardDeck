@@ -4,6 +4,7 @@ import {setErrorAC} from "../features/password/password-reducer";
 import {isLoggedInAC} from "../features/login/login-reducer";
 import {setProfileData} from "../features/profile/profile-reducer";
 
+
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 export type InitialStateType = {
