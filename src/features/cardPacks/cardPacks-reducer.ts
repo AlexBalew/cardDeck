@@ -174,8 +174,7 @@ export const createPackTC = (name: string): AppThunkType => async (dispatch) => 
 export const deletePackTC = (id: string): AppThunkType => async (dispatch) => { //затипизировать везде
     try {
         dispatch(setAppStatusAC("loading"))
-        let response = await packsAPI.deletePack(id)
-        dispatch(setCardPacksDataAC(response.data))
+        await packsAPI.deletePack(id)
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         const error = e.response
@@ -193,8 +192,7 @@ export const deletePackTC = (id: string): AppThunkType => async (dispatch) => { 
 export const updatePackTC = (id: string, name?: string): AppThunkType => async (dispatch) => {
     try {
         dispatch(setAppStatusAC("loading"))
-        let response = await packsAPI.updatePack(id, name)
-        dispatch(setCardPacksDataAC(response.data)) //проверить на ликвидность
+        await packsAPI.updatePack(id, name)
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         const error = e.response
