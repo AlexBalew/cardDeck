@@ -26,7 +26,7 @@ function App() {
         if (location.pathname !== '/restore-password') {
             dispatch(initializeAppTC())
         }
-    }, [])
+    }, [location])
 
 
     return (
