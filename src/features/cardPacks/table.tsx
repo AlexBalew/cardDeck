@@ -10,6 +10,7 @@ import {PATH} from "../../app/Routes";
 import SuperButton from "../../common/elements/button/SuperButton";
 import {DeleteModal} from "../../common/components/modal/deleteModal/deleteModal";
 import {UpdatePackTitleModal} from "../../common/components/modal/updatePackTitleModal/updatePackTitleModal";
+import {LearningPageModal} from "../../common/components/modal/learningPage/learningPageModal";
 
 
 export const CardPacksTable = React.memo(() => {
@@ -27,6 +28,7 @@ export const CardPacksTable = React.memo(() => {
 
     const [open, setOpen] = useState<string>('')
     const [openT, setOpenT] = useState<string>('')
+    const [openL, setOpenL] = useState<string>('')
 
     useEffect(() => {
         dispatch(getPacksTC())
@@ -71,22 +73,49 @@ export const CardPacksTable = React.memo(() => {
                                                           onClose={() => setOpenT('')}
                                                           onEdit={onUpdatePack}
                                     />
+                                    {openL === pack._id && <LearningPageModal isOpen={openL === pack._id}
+                                                                              onClose={() => setOpenL('')}
+                                                                              packId={pack._id}
+                                    />}
                                     <td>
                                         <SuperButton
                                             className={btn.btn}
                                             onClick={() => setOpen(pack._id)}
-                                            value={pack._id}>
+                                            value={pack._id}
+                                        >
                                             delete
                                         </SuperButton>
                                         <SuperButton
                                             className={btn.btn}
                                             onClick={() => setOpenT(pack._id)}
-                                            value={pack._id}>
-                                            edit</SuperButton>
-                                        <SuperButton className={btn.btn}>learn</SuperButton>
+                                            value={pack._id}
+                                        >
+                                            edit
+                                        </SuperButton>
+                                        <SuperButton className={btn.btn}
+                                                     onClick={() => setOpenL(pack._id)}
+                                                     value={pack._id}
+                                        >
+                                            learn
+                                        </SuperButton>
                                     </td>
                                 </>
-                                : <td><SuperButton className={btn.btn}>learn</SuperButton></td>}
+                                :
+                                <>
+                                    {openL === pack._id && <LearningPageModal isOpen={openL === pack._id}
+                                                                              onClose={() => setOpenL('')}
+                                                                              packId={pack._id}
+                                    />}
+                                    <td>
+                                        <SuperButton className={btn.btn}
+                                                     onClick={() => setOpenL(pack._id)}
+                                                     value={pack._id}
+                                        >
+                                            learn
+                                        </SuperButton>
+                                    </td>
+                                </>
+                            }
                         </tr>
                     }
                 )}
