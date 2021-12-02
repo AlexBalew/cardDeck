@@ -40,7 +40,7 @@ export const Profile = React.memo(() => {
         dispatch(changeUserData({name: myName, avatar: myAvatar}))
     }
     const changeImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      setMyAvatar(e.currentTarget.value)
+        setMyAvatar(e.currentTarget.value)
     }
 
     if (!isLoggedIn) {
@@ -49,11 +49,10 @@ export const Profile = React.memo(() => {
 
     return (
         <div className={s.profileContainer}>
-
             <div className={s.profileBlock}>
                 <div className={s.content}>
                     <div className={s.profileAvatar}>
-                        <img src={avatar ? avatar : userDefaultImg}  alt="ava"/>
+                        <img src={avatar ? avatar : userDefaultImg} alt="ava"/>
                     </div>
                     <label>Change image <input type="text"
                                                onChange={changeImageHandler}
