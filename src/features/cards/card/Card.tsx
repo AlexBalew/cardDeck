@@ -1,10 +1,12 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {CardType} from "../../../api/cards-api";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store";
 import s from "./Card.module.css";
 import SuperButton from "../../../common/elements/button/SuperButton";
-import {deleteCard, updateCard} from "../cards-reducer";
+import {DeleteCardModal} from "../../../common/components/modalWindows/cardsModal/DeleteModal";
+import {RequestStatusType} from "../../../app/app-reducer";
+
 
 
 type CardPropsType = {
@@ -12,51 +14,77 @@ type CardPropsType = {
     packId: string
     question: string
     answer: string
-    setQuestion: (value: string) => void
-    setAnswer: (value: string) => void
-    onSetQuestion: (e: ChangeEvent<HTMLInputElement>) => void
-    onSetAnswer: (e: ChangeEvent<HTMLInputElement>) => void
+    isUsersPack: boolean
 }
 
-export const Card: React.FC<CardPropsType> = React.memo(({card, packId, question, answer,  setQuestion,  setAnswer}) => {
+export const Card: React.FC<CardPropsType> = React.memo(({
+                                                             card,
+                                                             packId,
+                                                             question,
+                                                             answer,
+                                                             isUsersPack,
+                                                         }) => {
+//* Data -------------------------------------------------------------------------------------->
     let dispatch = useDispatch()
+    const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
 
-    const authUserId = useSelector<AppStateType, string>(state => state.app._id)
+//* Local state ------------------------------------------------------------------------------->
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [showUpdateModal, setShowUpdateModal] = useState(false)
 
-    const handlerDeleteCard = (packId: string, cardId: string) => {
-        dispatch(deleteCard(cardId, packId))
+
+//* Callbacks ---------------------------------------------------------------------------------->
+    const openDeleteModalWindow = () => {
+        setShowDeleteModal(true)
     }
-
-    const updateCardHandler = () => {
-        dispatch(updateCard(packId, card._id, question, answer))
-        if (question !== '') {
-            setQuestion('')
-        }
-        if (answer !== '') {
-            setAnswer('')
-        }
+    const openUpdateModalWindow = () => {
+        setShowUpdateModal(true)
     }
+    /* const deleteCardHandler = (packId: string, cardId: string) => {
+         dispatch(deleteCard(cardId, packId))
+     }*/
 
+    /*   const updateCardHandler = () => {
+           dispatch(updateCard(packId, card._id, question, answer))
+           if (question !== '') {
+               setQuestion('')
+           }
+           if (answer !== '') {
+               setAnswer('')
+           }
+       }*/
 
 
     return (
-        <div className={s.cardContainer}>
-            <div className={s.col}>{card.question}</div>
-            <div>{card.answer}</div>
-            <div>{card.updated}</div>
-            <div>{card.grade}</div>
-            <div>
-                {authUserId !== card.user_id
-                    ? null
-                    : <div>
-                        <SuperButton className={s.btn} onClick={updateCardHandler}>EDIT</SuperButton>
-                        <SuperButton className={s.btn}
-                                     onClick={() => handlerDeleteCard(packId, card._id)}
-                        >DELETE</SuperButton>
-                    </div>
-                }
+        <>
+            {showDeleteModal &&
+            <DeleteCardModal
+                cardId={card._id}
+                packId={packId}
+                showDeleteModal={showDeleteModal}
+                setShowModal={setShowDeleteModal}
+            />}
+
+
+            <div className={s.cardContainer}>
+                <div>{card.question}</div>
+                <div>{card.answer}</div>
+                <div>{card.updated}</div>
+                <div>{card.grade}</div>
+                <div>
+                    {!isUsersPack
+                        ? null
+                        : <div>
+                            <SuperButton className={s.btn} onClick={openUpdateModalWindow}>EDIT</SuperButton>
+                            <SuperButton className={s.btn}
+                                         disabled={status === "loading"}
+                                         onClick={openDeleteModalWindow}
+                            >DELETE</SuperButton>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
+        </>
     )
 })
 

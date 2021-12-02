@@ -1,93 +1,62 @@
 
-.body, .main, .menu {
+.headerContainer {
     display: flex;
-    justify-content: left;
+    justify-content: flex-start;
     align-items: center;
-    background-color: transparent;
+    background-color: rgb(199, 218, 230);
+    height: 60px;
+    width: 100vw;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1)
 }
 
-.main {
-    margin-left: -18px;
-    position: relative;
-    background-color: #cbe0e7;
-    transition: 0.5s;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 12px rgba(0, 0, 0, .15);
+.title {
+    margin-left: 20px;
+    font-size: 18px;
+}
+.navContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    margin-left: 40px;
+
 }
 
-.menu {
-    margin: 0;
-    padding: 10px;
-    width: 0;
-    overflow: hidden;
-    transition: 0.5s;
+.navLink {
+    width: 173px;
+    height: 60px;
     text-decoration: none;
-    white-space: nowrap;
+    color: #282626;
+    transition-delay: 0.1s;
+    opacity: 0.4;
 }
 
-.main input:checked ~ .menu {
-    width: 280px;
+.navLink:hover {
+    color: #0e0e11;
+    border-bottom: 3px solid #c9a9a9;
 }
 
-.menu a {
-    padding: 5px;
-    text-decoration: none;
-    color: #666;
-    font-weight: 600;
-    transition: 0.5s;
-    margin: 0 10px;
+.navLink.active {
+    color: #0e0e0e;
+    background-color: #c9a9a9;
+    border-bottom: 3px solid #21268F;
+    opacity: 1;
+}
+.navLinkContext {
+    height: 57px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.menu a:hover {
-    color: #161919;
+.cardsImg {
+    width: 25px;
+    height: 27px;
+    margin-right: 4px;
 }
 
-.main input {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    opacity: 0;
-}
-
-.main span {
-    position: absolute;
-    left: 20px;
+.useImg {
     width: 20px;
-    height: 4px;
-    border-radius: 50px;
-    background-color: #666;
-    pointer-events: none;
-    transition: 0.5s;
-}
-
-.main input:checked ~ span {
-    background-color: #FF4D50;
-}
-
-.main span:nth-child(2) {
-    transform: translateY(-8px);
-}
-
-.main input:checked ~ span:nth-child(2) {
-    transform: translateY(0) rotate(-45deg);
-}
-
-.main span:nth-child(3) {
-    transform: translateY(8px);
-}
-
-.main input:checked ~ span:nth-child(3) {
-    transform: translateY(0) rotate(45deg);
-}
-
-.main input:checked ~ span:nth-child(4) {
-    display: none;
-}
-
-@media (max-width: 650px) {
-    .body, .main, .menu {
-        zoom: .7;
-        font-size: 1.1rem;
-    }
+    height: 20px;
+    margin-right: 4px;
 }

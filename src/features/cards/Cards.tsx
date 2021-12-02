@@ -30,18 +30,17 @@ export const Cards = React.memo(() => {
     const {packId} = useParams<'packId'>()
     const navigate = useNavigate()
 
+    const isUsersPack = packUserId === authUserId
+
 //* Local state --------------------------------------------------------------------------------->
     const [question, setQuestion] = useState<string>('')
     const [answer, setAnswer] = useState<string>('')
     const [searchValue, setSearchValue] = useState<string>('')
+
     const [showModal, setShowModal] = useState(false)
 
-    const isUsersPack = packUserId === authUserId
 
-
-
-
-//* Callbacks -- --------------------------------------------------------------------------------->
+//* Callbacks ----------------------------------------------------------------------------------->
 
     const openModalWindow = () => {
         setShowModal(true)
@@ -60,12 +59,6 @@ export const Cards = React.memo(() => {
             dispatch(setPageCountAC(value))
         }
     }
-
-   /* const handlerCreateCard = (packId: string, question: string, answer: string) => {
-        dispatch(createCards(packId!, question, answer))
-        setQuestion('')
-        setAnswer('')
-    }*/
 
     const onSetSearchValue = (value: string) => {
         setSearchValue(value)
@@ -170,9 +163,8 @@ export const Cards = React.memo(() => {
                             <div>
                                 {cards.map(el =>
                                     <div key={el._id}>
-                                        <Card card={el} packId={packId!}
-                                              question={question} answer={answer} setQuestion={setQuestion} setAnswer={setAnswer}
-                                              onSetQuestion={onSetQuestion} onSetAnswer={onSetAnswer}/>
+                                        <Card card={el} packId={packId!} isUsersPack={isUsersPack}
+                                              question={question} answer={answer}/>
                                     </div>)}
                             </div>
                         </div>
