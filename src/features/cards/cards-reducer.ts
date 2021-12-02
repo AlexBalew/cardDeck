@@ -134,16 +134,18 @@ export const updateCard = (cardsPack_id: string, cardId: string, question: strin
         dispatch(setAppStatusAC("loading"))
         const cards = getState().cards
         const updateCard = {_id: cardId, question, answer}
-        cardsAPI.updateCard(updateCard)
+       return cardsAPI.updateCard(updateCard)
             .then(response => {
                 dispatch(getCards(cardsPack_id))
                 dispatch(setAppStatusAC("succeeded"))
+                return true
             })
             .catch((e) => {
                 const error = e.response
                     ? e.response.data.error
                     : (e.message + ', more details in the console');
                 dispatch(setAppStatusAC("failed"))
+                return false
             })
     }
 

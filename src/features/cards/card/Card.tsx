@@ -6,22 +6,19 @@ import s from "./Card.module.css";
 import SuperButton from "../../../common/elements/button/SuperButton";
 import {DeleteCardModal} from "../../../common/components/modalWindows/cardsModal/DeleteModal";
 import {RequestStatusType} from "../../../app/app-reducer";
+import {UpdateCardModal} from "../../../common/components/modalWindows/cardsModal/UpdateModal";
 
 
 
 type CardPropsType = {
     card: CardType
     packId: string
-    question: string
-    answer: string
     isUsersPack: boolean
 }
 
 export const Card: React.FC<CardPropsType> = React.memo(({
                                                              card,
                                                              packId,
-                                                             question,
-                                                             answer,
                                                              isUsersPack,
                                                          }) => {
 //* Data -------------------------------------------------------------------------------------->
@@ -61,10 +58,18 @@ export const Card: React.FC<CardPropsType> = React.memo(({
             <DeleteCardModal
                 cardId={card._id}
                 packId={packId}
-                showDeleteModal={showDeleteModal}
+                showModal={showDeleteModal}
                 setShowModal={setShowDeleteModal}
             />}
-
+            {showUpdateModal &&
+            <UpdateCardModal
+                card={card}
+                packId={packId}
+                answer={card.answer}
+                question={card.question}
+                showModal={showUpdateModal}
+                setShowModal={setShowUpdateModal}
+            />}
 
             <div className={s.cardContainer}>
                 <div>{card.question}</div>

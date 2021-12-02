@@ -6,7 +6,7 @@ import SuperButton from "../../../elements/button/SuperButton";
 
 
 type DeleteCardsType = {
-    showDeleteModal: boolean
+    showModal: boolean
     setShowModal: (show: boolean) => void
     cardId: string
     packId: string
