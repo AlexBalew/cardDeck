@@ -116,20 +116,6 @@ export const Cards = React.memo(() => {
                         </form>
                     </div>
                     <div className={s.addCard}>
-                        {/*<div>
-                            <input
-                                className={s.addDataCard}
-                                onChange={onSetQuestion}
-                                value={question}
-                                placeholder={'insert question'}
-                            />
-                            <input
-                                className={s.addDataCard}
-                                onChange={onSetAnswer}
-                                value={answer}
-                                placeholder={'insert answer'}
-                            />
-                        </div>*/}
 
                         { (isUsersPack) ? <SuperButton onClick={openModalWindow}
                                      disabled={status === "loading"}>ADD CARD</SuperButton>
@@ -163,8 +149,7 @@ export const Cards = React.memo(() => {
                             <div>
                                 {cards.map(el =>
                                     <div key={el._id}>
-                                        <Card card={el} packId={packId!} isUsersPack={isUsersPack}
-                                              question={question} answer={answer}/>
+                                        <Card card={el} packId={packId!} isUsersPack={isUsersPack}/>
                                     </div>)}
                             </div>
                         </div>

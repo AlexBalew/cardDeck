@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, FormEvent, KeyboardEvent, useEffect, useState} from "react";
 import {Navigate, NavLink} from "react-router-dom";
 import s from "./login.module.css"
 import viewPassword from "../../assets/password/viewPassword.png"
@@ -45,6 +45,10 @@ export const Login = React.memo(() => {
                 setPasswordDirty(true)
                 break
         }
+    }
+
+    const onPressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') handleSubmit();
     }
     const handleInputEmail = (e: ChangeEvent<HTMLInputElement>) => {
         setEmail(e.currentTarget.value)
@@ -120,6 +124,7 @@ export const Login = React.memo(() => {
                                    className={s.formInput}
                                    onChange={handleInputPassword}
                                    onBlur={handlerBlur}
+                                   onKeyPress={onPressEnter}
                             />
                             <img className={s.inputPasswordView}
                                  src={showPassword ? viewPassword : hiddenPassword}
