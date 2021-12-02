@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useState} from 'react';
 import {CardType} from "../../../api/cards-api";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../bll/store";
@@ -22,7 +22,6 @@ export const Card: React.FC<CardPropsType> = React.memo(({
                                                              isUsersPack,
                                                          }) => {
 //* Data -------------------------------------------------------------------------------------->
-    let dispatch = useDispatch()
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
 
 //* Local state ------------------------------------------------------------------------------->
@@ -37,21 +36,6 @@ export const Card: React.FC<CardPropsType> = React.memo(({
     const openUpdateModalWindow = () => {
         setShowUpdateModal(true)
     }
-    /* const deleteCardHandler = (packId: string, cardId: string) => {
-         dispatch(deleteCard(cardId, packId))
-     }*/
-
-    /*   const updateCardHandler = () => {
-           dispatch(updateCard(packId, card._id, question, answer))
-           if (question !== '') {
-               setQuestion('')
-           }
-           if (answer !== '') {
-               setAnswer('')
-           }
-       }*/
-
-
     return (
         <>
             {showDeleteModal &&
