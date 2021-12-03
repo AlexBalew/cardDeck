@@ -4,6 +4,7 @@ import s from '../Modal.module.css'
 import {createPackTC} from "../../../../features/cardPacks/cardPacks-reducer";
 import {useDispatch} from "react-redux";
 import SuperButton from "../../../elements/button/SuperButton";
+import SuperInput from "../../../elements/input/SuperInput";
 
 type ModalPropsType = {
     message: string
@@ -36,17 +37,18 @@ export const TitleModal = ({message, isOpen, onClose, setOpen}: ModalPropsType) 
             <div className={s.modal} onClick={(e) => {
                 e.stopPropagation()
             }}>
-                <div >
-                    <span>{message}</span>
-                    <button onClick={onClose}>Close</button>
+                <h2 className={s.title}>{message}</h2>
+                <div>
+                    <SuperButton className={s.modalBtnClose} onClick={onClose}>Close</SuperButton>
                 </div>
-                <input style={{border: '1px solid #C7A5A5'}}
-                       onChange={onSetNewName}
-                       value={newName}
-                       placeholder={'insert title here'}/>
+                <SuperInput className={s.modalInput}
+                            onChange={onSetNewName}
+                            value={newName}
+                            placeholder={'insert title here'}
+                            autoFocus/>
                 <SuperButton onClick={() => {
                     onClickNewName(newName)
-                }}>add new pack</SuperButton>
+                }}>add pack</SuperButton>
             </div>
         </div>
         , document.body);

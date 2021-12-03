@@ -14,8 +14,7 @@ type ModalPropsType = {
     packId?: string
 }
 
-const grades = ['what is it??', 'not my day', 'got it wrong', 'forgot the answer', 'a good one', 'figured it out!', 'easy peasy'];
-
+const grades = ['Did not know', 'Forgot', 'A lot of thought ', 'Сonfused', 'Knew the answer'];
 const getCard = (cards: CardType[]) => {
 
     //const weight = [/*0, 1, 2,*/ 3, 4, /*5, 6*/]
@@ -102,28 +101,19 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
         setIsGraded(true)
         let grade = 0
         if (e.currentTarget.textContent === grades[0]) {
-            grade = 0.7
+            grade = 1
         }
         if (e.currentTarget.textContent === grades[1]) {
-            grade = 1.4
+            grade = 2
         }
         if (e.currentTarget.textContent === grades[2]) {
-            grade = 2.8
+            grade = 3
         }
         if (e.currentTarget.textContent === grades[3]) {
-            grade = 3.5
+            grade = 4
         }
         if (e.currentTarget.textContent === grades[4]) {
-            grade = 4.2
-        }
-        if (e.currentTarget.textContent === grades[5]) {
-            grade = 4.9
-        }
-        if (e.currentTarget.textContent === grades[6]) {
-            grade = 5.6
-        }
-        if (JSON.stringify(e.currentTarget.childNodes[0]) == grades[7]) {
-            grade = 6.3
+            grade = 5
         }
         dispatch(setGradeTC(grade, card._id))
 
@@ -136,20 +126,19 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
             <div className={s.modal} onClick={(e) => {
                 e.stopPropagation()
             }}>
-                Try your knowledge!
                 {cards.length === 0
                     ?
-                    <div>there are no cards here yet</div>
+                    <div className={s.noCards}>There are no cards here yet</div>
                     :
                 <>
-                <div>{card.question}</div>
+                <div className={s.learnQuestion}>{card.question}</div>
                 <div>
                     <SuperButton onClick={() => setIsChecked(true)} disabled={isChecked}>check</SuperButton>
                 </div>
                 {isChecked && (
                     <>
-                        <div>{card.answer}</div>
-                        <div className={s.buttons}>
+                        <div className={s.learnQuestion}>{card.answer}</div>
+                        <div className={s.btnContainer}>
                             {grades.map((grade, i) => (
                                 <SuperButton key={'grade-' + i} onClick={setGradeHandler}
                                              disabled={isGraded}>{grade}</SuperButton>

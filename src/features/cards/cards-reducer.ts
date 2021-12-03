@@ -64,7 +64,6 @@ export const setPageCountAC = (pageCount: number) =>( {type: 'cardsReducer/SET_P
 export const setSearchedQuestionAC = (cardQuestion: string) => ({type: 'cardsReducer/SEARCH_CARDS', cardQuestion } as const)
 export const setGetRequestParamsAC = (payload:  RequestParamsType) => ({type: 'cardsReducer/SET_GET_REQUEST_PARAMS', payload} as const)
 export const setPackUserIdAC = (packUserId: string) => ({type: 'cardsReducer/SET_PACK_USER_ID', packUserId} as const)
-//export const setPackNameAC = (packName: string) => ({type: 'cardsReducer/SET_PACK_NAME', packName} as const)
 export const setPackNameAC = (packName: string ) => ({type: 'cardsReducer/SET_PACK_NAME', packName} as const)
 
 //* Thunk Creators --------------------------------------------------------->

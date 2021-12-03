@@ -2,6 +2,7 @@ import React, {ChangeEvent, useState} from "react";
 import ReactDOM from "react-dom";
 import s from '../Modal.module.css'
 import SuperButton from "../../../elements/button/SuperButton";
+import SuperInput from "../../../elements/input/SuperInput";
 
 type ModalPropsType = {
     message: string
@@ -26,14 +27,15 @@ export const UpdatePackTitleModal = ({message, isOpen, onClose, onEdit}: ModalPr
             <div className={s.modal} onClick={(e) => {
                 e.stopPropagation()
             }}>
-                <div >
-                    <span>{message}</span>
-                    <button onClick={onClose}>Close</button>
+                <h2>{message}</h2>
+                <div>
+                    <SuperButton className={s.modalBtnClose} onClick={onClose}>Close</SuperButton>
                 </div>
-                <input style={{border: '1px solid #C7A5A5'}}
-                       onChange={onSetNewName}
-                       value={newName}
-                       placeholder={'insert title here'}/>
+                <SuperInput className={s.modalInput}
+                            onChange={onSetNewName}
+                            value={newName}
+                            placeholder={'insert title here'}
+                            autoFocus/>
                 <SuperButton onClick={() => {
                     onEdit(newName)
                 }}>add new pack's title</SuperButton>

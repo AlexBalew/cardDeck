@@ -20,9 +20,9 @@ export const DeleteModal = ({message, isOpen, onClose,onDelete}: ModalPropsType)
             <div className={s.modal} onClick={(e) => {
                 e.stopPropagation()
             }}>
+                <h2>{message}</h2>
                 <div>
-                    <span>{message}</span>
-                    <button onClick={onClose}>Close</button>
+                    <SuperButton className={s.modalBtnClose} onClick={onClose}>Close</SuperButton>
                 </div>
                 <SuperButton onClick={onDelete}>Delete</SuperButton>
                 <SuperButton onClick={onClose}
