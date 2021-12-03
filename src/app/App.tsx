@@ -26,7 +26,7 @@ function App() {
         if (location.pathname !== '/packs-list') {
             dispatch(initializeAppTC())
         }
-    }, [])
+    }, [location])
 
 
     return (

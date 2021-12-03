@@ -9,7 +9,7 @@ export type SearchedNameType = { searchedName: string }
 type stateType = GetPacksResponseType & SettingType & SearchedNameType
 
 let initState: stateType = {
-    cardPacks: [{
+    cardPacks: [/*{
         _id: '',
         user_id: '',
         name: '',
@@ -17,7 +17,7 @@ let initState: stateType = {
         created: '',
         updated: '',
         user_name: '',
-    }],
+    }*/],
     cardPacksTotalCount: 0,
     maxCardsCount: 0,
     minCardsCount: 0,
