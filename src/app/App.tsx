@@ -23,10 +23,10 @@ function App() {
     }
 
     useEffect(() => {
-        if (location.pathname !== '/restore-password') {
+        if (location.pathname !== '/packs-list') {
             dispatch(initializeAppTC())
         }
-    }, [])
+    }, [location])
 
 
     return (

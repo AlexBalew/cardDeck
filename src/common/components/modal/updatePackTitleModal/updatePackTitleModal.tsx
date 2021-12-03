@@ -20,7 +20,7 @@ export const UpdatePackTitleModal = ({message, isOpen, onClose, onEdit}: ModalPr
     }
 
     if (!isOpen) return null;
-
+    console.log('update modal is rendered')
     return ReactDOM.createPortal(
         <div className={s.modalContainer} onClick={onClose}>
             <div className={s.modal} onClick={(e) => {

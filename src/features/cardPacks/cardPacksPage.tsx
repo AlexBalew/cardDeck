@@ -93,7 +93,7 @@ export const CardPacksPage = React.memo(() => {
                 <SuperButton className={s.btn} onClick={onGetMyPacks}>My packs</SuperButton>
                 <SuperButton className={s.btn} onClick={onGetPacks}>All packs</SuperButton>
                 <div className={style.doubleRangeBlock}>
-                    <span className={style.choose}>Choose the the amount of cards:</span>
+                    <span className={style.choose}>Choose the amount of cards:</span>
                     <span className={style.span}>{value2}</span>
                     <SuperDoubleRange
                         value1={value1}

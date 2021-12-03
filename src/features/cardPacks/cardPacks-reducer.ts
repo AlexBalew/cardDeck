@@ -2,14 +2,14 @@ import {setAppStatusAC} from "../../app/app-reducer";
 import {GetPacksResponseType, packsAPI} from "../../api/packs-api";
 import {AppThunkType} from "../../bll/store";
 
-export type SettingType = {settingSlider: {min: number; max : number}}
-export type SearchedNameType = {searchedName: string}
+export type SettingType = { settingSlider: { min: number; max: number } }
+export type SearchedNameType = { searchedName: string }
 
 
 type stateType = GetPacksResponseType & SettingType & SearchedNameType
 
 let initState: stateType = {
-    cardPacks: [{
+    cardPacks: [/*{
         _id: '',
         user_id: '',
         name: '',
@@ -17,7 +17,7 @@ let initState: stateType = {
         created: '',
         updated: '',
         user_name: '',
-    }],
+    }*/],
     cardPacksTotalCount: 0,
     maxCardsCount: 0,
     minCardsCount: 0,
@@ -127,8 +127,7 @@ export const setCardsCountAC = (minSliderCards: number, maxSliderCards: number) 
 }
 
 
-
-export const getPacksTC = (params?: {myId?: string, page?: number, min?: number, max?: number}): AppThunkType => async (dispatch, getState) => { //затипизировать везде
+export const getPacksTC = (params?: { myId?: string, page?: number, min?: number, max?: number }): AppThunkType => async (dispatch, getState) => { //затипизировать везде
     let {pageCount, page, searchedName, settingSlider} = getState().packs
     try {
         dispatch(setAppStatusAC("loading"))
@@ -143,9 +142,9 @@ export const getPacksTC = (params?: {myId?: string, page?: number, min?: number,
             ? e.response.data.error
             : (e.message + ', more details in the console');
         console.log('Error: ', {...e})
-       /* if(e.response.request.status === 401) { раскомментировать 03.12
-        dispatch(isLoggedInAC(false))
-        }*/
+        /* if(e.response.request.status === 401) { раскомментировать 03.12
+         dispatch(isLoggedInAC(false))
+         }*/
         dispatch(setErrorAC(error))
         dispatch(setAppStatusAC("succeeded"))
     }
@@ -193,6 +192,23 @@ export const updatePackTC = (id: string, name?: string): AppThunkType => async (
     try {
         dispatch(setAppStatusAC("loading"))
         await packsAPI.updatePack(id, name)
+        dispatch(setAppStatusAC("succeeded"))
+    } catch (e: any) {
+        const error = e.response
+            ? e.response.data.error
+            : (e.message + ', more details in the console');
+        console.log('Error: ', {...e})
+        dispatch(setErrorAC(error))
+        dispatch(setAppStatusAC("succeeded"))
+    } finally {
+        dispatch(getPacksTC())
+    }
+
+}
+export const setGradeTC = (grade: number, cardId: string): AppThunkType => async (dispatch) => {
+    try {
+        dispatch(setAppStatusAC("loading"))
+        await packsAPI.sendGrade(grade, cardId)
         dispatch(setAppStatusAC("succeeded"))
     } catch (e: any) {
         const error = e.response

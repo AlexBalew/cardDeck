@@ -34,5 +34,8 @@ export const packsAPI = {
     },
     updatePack(_id: string, name?: string) {
         return instance.put<GetPacksResponseType>(`/cards/pack`, {cardsPack: {_id, name}}, {})
+    },
+    sendGrade(grade: number, cardId: string) {
+        return instance.put<GetPacksResponseType>(`/cards/grade`, {grade, card_id: cardId}, {})
     }
 }

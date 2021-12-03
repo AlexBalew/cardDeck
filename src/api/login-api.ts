@@ -21,7 +21,7 @@ export type LoginUserType = {
 
 }
 
-export interface UserData {
+export interface IUserData {
     name?: string
     avatar?: string
 }
@@ -37,7 +37,7 @@ export const loginAPI = {
         return instance.post<LoginResponseType>(`/auth/login`, {email, password, rememberMe}, {})
             .then(res => res.data)
     },
-    changeData(userData: UserData) {
+    changeData(userData: IUserData) {
         return instance.put('auth/me', userData)
     },
 }
