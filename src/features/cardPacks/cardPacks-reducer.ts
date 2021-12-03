@@ -1,6 +1,7 @@
 import {setAppStatusAC} from "../../app/app-reducer";
 import {GetPacksResponseType, packsAPI} from "../../api/packs-api";
 import {AppThunkType} from "../../bll/store";
+import {isLoggedInAC} from "../login/login-reducer";
 
 export type SettingType = { settingSlider: { min: number; max: number } }
 export type SearchedNameType = { searchedName: string }
@@ -142,9 +143,9 @@ export const getPacksTC = (params?: { myId?: string, page?: number, min?: number
             ? e.response.data.error
             : (e.message + ', more details in the console');
         console.log('Error: ', {...e})
-        /* if(e.response.request.status === 401) { раскомментировать 03.12
+         if(e.response.request.status === 401) {
          dispatch(isLoggedInAC(false))
-         }*/
+         }
         dispatch(setErrorAC(error))
         dispatch(setAppStatusAC("succeeded"))
     }
