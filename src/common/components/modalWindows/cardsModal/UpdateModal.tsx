@@ -2,7 +2,7 @@ import {useDispatch} from "react-redux";
 import s from "./Modal.module.css";
 import SuperInput from "../../../elements/input/SuperInput";
 import SuperButton from "../../../elements/button/SuperButton";
-import {ChangeEvent, KeyboardEvent, MouseEvent, useState} from "react";
+import {ChangeEvent, MouseEvent, useState} from "react";
 import {updateCard} from "../../../../features/cards/cards-reducer";
 import {CardType} from "../../../../api/cards-api";
 

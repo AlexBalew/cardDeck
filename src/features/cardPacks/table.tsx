@@ -11,6 +11,7 @@ import SuperButton from "../../common/elements/button/SuperButton";
 import {DeleteModal} from "../../common/components/modal/deleteModal/deleteModal";
 import {UpdatePackTitleModal} from "../../common/components/modal/updatePackTitleModal/updatePackTitleModal";
 import {LearningPageModal} from "../../common/components/modal/learningPage/learningPageModal";
+import {setPackNameAC} from "../cards/cards-reducer";
 
 
 export const CardPacksTable = React.memo(() => {
@@ -35,6 +36,7 @@ export const CardPacksTable = React.memo(() => {
         console.log('Main useEffect(table)')
     }, [pageCount, searchedName, settingSlider.min, settingSlider.max])
 
+
     return (
         <div className={s.mainContainer}>
             <table className={s.table}>
@@ -52,9 +54,14 @@ export const CardPacksTable = React.memo(() => {
                         const onUpdatePack = (newPackName?: string) => {
                             dispatch(updatePackTC(pack._id, newPackName))
                         }
+                    const onBackLinkNameClick = () => {
+                        dispatch(setPackNameAC(pack.name))
+                    }
                         return <tr className={s.dataRow} key={pack._id}>
                             <td>
-                                <NavLink to={PATH.CARDS + `/${pack._id}`}>{pack.name}</NavLink>
+                                <NavLink to={PATH.CARDS + `/${pack._id}`}
+                                         onClick={onBackLinkNameClick}
+                                         className={s.backlinkName}>{pack.name}</NavLink>
                             </td>
                             <td>{pack.cardsCount}</td>
                             <td>{pack.updated}</td>

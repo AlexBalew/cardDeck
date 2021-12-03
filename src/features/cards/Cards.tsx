@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react'
+import React, {ChangeEvent, useCallback, useEffect, useState} from 'react'
 import s from './Cards.module.css'
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -14,12 +14,15 @@ import {SortArrow} from "../../common/components/sortArrow/SortArrow";
 import {CreateModal} from "../../common/components/modalWindows/cardsModal/CreateModal";
 
 
+
+
 export const Cards = React.memo(() => {
 
 //* Data -------------------------------------------------------------------------------------->
     const dispatch = useDispatch()
 
     const cards = useSelector<AppStateType, Array<CardType>>(state => state.cards.cards)
+    //const cardsTotalCount = useSelector<AppStateType, number>(state => state.cards.cardsTotalCount)
     const page = useSelector<AppStateType, number>(state => state.cards.page)
     const packName = useSelector<AppStateType, string>(state => state.cards.packName)
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
@@ -31,12 +34,10 @@ export const Cards = React.memo(() => {
     const navigate = useNavigate()
 
     const isUsersPack = packUserId === authUserId
+    //const totalPages = Math.ceil(cardsTotalCount / pageCount)
 
 //* Local state --------------------------------------------------------------------------------->
-    const [question, setQuestion] = useState<string>('')
-    const [answer, setAnswer] = useState<string>('')
     const [searchValue, setSearchValue] = useState<string>('')
-
     const [showModal, setShowModal] = useState(false)
 
 
@@ -45,21 +46,11 @@ export const Cards = React.memo(() => {
     const openModalWindow = () => {
         setShowModal(true)
     }
-
-
-    const onSetQuestion = (e: ChangeEvent<HTMLInputElement>) => {
-        setQuestion(e.currentTarget.value)
-    }
-    const onSetAnswer = (e: ChangeEvent<HTMLInputElement>) => {
-        setAnswer(e.currentTarget.value)
-    }
-
     const onSetPageCount = (value: number) => {
         if (value) {
             dispatch(setPageCountAC(value))
         }
     }
-
     const onSetSearchValue = (value: string) => {
         setSearchValue(value)
         console.log('setSearchValue')
@@ -71,12 +62,11 @@ export const Cards = React.memo(() => {
         console.log('send search request to the server')
     }
 
-    const setGetRequestParams = (requestParams: RequestParamsType) => {
+    const setGetRequestParams =useCallback((requestParams: RequestParamsType) => {
         dispatch(setGetRequestParamsAC(requestParams))
         dispatch(getCards(packId!))
-    }
+    }, [dispatch])
     const sortCards = (param: string) => setGetRequestParams({sortCards: param})
-
 
 
     useEffect(() => {
@@ -97,7 +87,8 @@ export const Cards = React.memo(() => {
                     packId={packId!}
                 />}
                 <div className={s.backLink}>
-                    <div onClick={() => navigate('/packs-list')} className={s.arrowBack}>&larr;{packName}</div>
+                    <div onClick={() => navigate('/packs-list')}
+                         className={s.arrowBack}>&larr;<span>{packName}</span></div>
                 </div>
 
 
@@ -162,6 +153,15 @@ export const Cards = React.memo(() => {
                                     disabled={status === "loading"}
                                     description={'Cards on page'}/>
                     </div>
+                    {/*<div>
+                        {totalPages < 8
+                                ? null
+                                : <Pagination
+                                onPageChange={onSetPageCount}
+                                numberOfPagesInOnePortion={6}/>
+                        }
+                    </div>*/}
+
 
                 </div>
 

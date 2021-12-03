@@ -38,6 +38,8 @@ export const cardsReducer = (state: stateType = initState, action: AllActionsTyp
             return {...state, ...action.payload}
         case 'cardsReducer/SET_PACK_USER_ID':
             return {...state, packUserId: action.packUserId}
+        case 'cardsReducer/SET_PACK_NAME':
+            return {...state, packName: action.packName}
         default:
             return state
     }
@@ -49,8 +51,11 @@ type setPageCountACType = ReturnType<typeof setPageCountAC>
 type setSearchedQuestionACType = ReturnType<typeof setSearchedQuestionAC>
 type setGetRequestParamsACType = ReturnType<typeof setGetRequestParamsAC>
 type setPackUserIdACType = ReturnType<typeof setPackUserIdAC>
+type setPackNameACType = ReturnType<typeof setPackNameAC>
 
-type AllActionsType = setCardsACType | setPageCountACType | setSearchedQuestionACType | setGetRequestParamsACType | setPackUserIdACType
+
+type AllActionsType = setCardsACType | setPageCountACType | setSearchedQuestionACType
+    | setGetRequestParamsACType | setPackUserIdACType | setPackNameACType
 
 
 //* Action Creators --------------------------------------------------------->
@@ -59,7 +64,8 @@ export const setPageCountAC = (pageCount: number) =>( {type: 'cardsReducer/SET_P
 export const setSearchedQuestionAC = (cardQuestion: string) => ({type: 'cardsReducer/SEARCH_CARDS', cardQuestion } as const)
 export const setGetRequestParamsAC = (payload:  RequestParamsType) => ({type: 'cardsReducer/SET_GET_REQUEST_PARAMS', payload} as const)
 export const setPackUserIdAC = (packUserId: string) => ({type: 'cardsReducer/SET_PACK_USER_ID', packUserId} as const)
-
+//export const setPackNameAC = (packName: string) => ({type: 'cardsReducer/SET_PACK_NAME', packName} as const)
+export const setPackNameAC = (packName: string ) => ({type: 'cardsReducer/SET_PACK_NAME', packName} as const)
 
 //* Thunk Creators --------------------------------------------------------->
 
@@ -149,3 +155,20 @@ export const updateCard = (cardsPack_id: string, cardId: string, question: strin
             })
     }
 
+/*
+export const gradeCardUpdate = (id: string, grade: number): AppThunkType =>
+    (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
+    cardsAPI.updateGrade(grade, id)
+        .then(() => {
+            dispatch(getCards('100'))
+            dispatch(setAppStatusAC("succeeded"))
+        })
+        .catch((e) => {
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console');
+            dispatch(setAppStatusAC("failed"))
+            return false
+        })
+}*/

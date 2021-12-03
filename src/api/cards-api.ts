@@ -18,6 +18,9 @@ export const cardsAPI = {
         return instance.put<CardsResponseType>
         (`cards/card`, {card: updateCard})
     },
+    /*updateGrade(grade: number, card_id: string) {
+        return instance.put<updateGradeResponseType>('cards/grade', {grade, card_id})
+    }*/
 }
 
 //* types --------------------------------------------------------->
@@ -73,3 +76,13 @@ export type RequestParamsType = {
     min?: string
     max?: string
 }
+
+/*
+export type updateGradeResponseType = {
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
+}*/
