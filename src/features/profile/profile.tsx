@@ -2,11 +2,11 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 import s from "./profile.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
-import {Navigate} from "react-router-dom";
+import {Navigate, useLocation} from "react-router-dom";
 import {PATH} from "../../app/Routes";
 import userDefaultImg from "../../assets/profile/userDefaultImg.png"
 import Preloader from "../../common/components/preloader/Preloader";
-import {RequestStatusType} from "../../app/app-reducer";
+import {initializeAppTC, RequestStatusType} from "../../app/app-reducer";
 import SuperEditableSpan from "../../common/elements/editableSpan/SuperEditableSpan";
 import {changeUserData} from "./profile-reducer";
 
@@ -21,6 +21,14 @@ export const Profile = React.memo(() => {
 
     const [myName, setMyName] = useState('')
     const [myAvatar, setMyAvatar] = useState<string | undefined>(undefined)
+
+    const location = useLocation()
+
+    useEffect(() => {
+        if(location.pathname === '/profile') {
+            dispatch(initializeAppTC())
+        }
+    }, [location])
 
     useEffect(() => {
         setMyName(name)
