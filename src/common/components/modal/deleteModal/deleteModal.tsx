@@ -14,7 +14,7 @@ type ModalPropsType = {
 export const DeleteModal = ({message, isOpen, onClose,onDelete}: ModalPropsType) => {
 
     if (!isOpen) return null;
-
+    console.log('delete modal is rendered')
     return ReactDOM.createPortal(
         <div className={s.modalContainer} onClick={onClose}>
             <div className={s.modal} onClick={(e) => {

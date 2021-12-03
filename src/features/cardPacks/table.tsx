@@ -73,10 +73,10 @@ export const CardPacksTable = React.memo(() => {
                                                           onClose={() => setOpenT('')}
                                                           onEdit={onUpdatePack}
                                     />
-                                    {openL === pack._id && <LearningPageModal isOpen={openL === pack._id}
+                                    {openL === pack._id ? <LearningPageModal isOpen={openL === pack._id}
                                                                               onClose={() => setOpenL('')}
                                                                               packId={pack._id}
-                                    />}
+                                    /> : null}
                                     <td>
                                         <SuperButton
                                             className={btn.btn}
@@ -102,10 +102,11 @@ export const CardPacksTable = React.memo(() => {
                                 </>
                                 :
                                 <>
-                                    {openL === pack._id && <LearningPageModal isOpen={openL === pack._id}
+                                    {openL === pack._id ? <LearningPageModal isOpen={openL === pack._id}
                                                                               onClose={() => setOpenL('')}
                                                                               packId={pack._id}
-                                    />}
+                                    /> : null
+                                    }
                                     <td>
                                         <SuperButton className={btn.btn}
                                                      onClick={() => setOpenL(pack._id)}

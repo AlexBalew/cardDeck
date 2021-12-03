@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import SuperButton from "../../../elements/button/SuperButton";
 import {CardType} from "../../../../api/cards-api";
 import {useDispatch} from "react-redux";
-import {useParams} from "react-router-dom";
 import {useAppSelector} from "../../../../bll/store";
 import ReactDOM from "react-dom";
 import s from './learningPageModal.module.css'
@@ -38,8 +37,6 @@ const getCard = (cards: CardType[]) => {
         }
         , {sum: 0, id: -1});
     console.log('test: ', sum, rand, res)
-
-
     return cards[res.id + 1];
 }
 
@@ -48,9 +45,7 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
 
     const [isChecked, setIsChecked] = useState<boolean>(false);
     const [first, setFirst] = useState<boolean>(true);
-    // const [first, setFirst] = useState<boolean>(0);
     const cards = useAppSelector<CardType[]>(state => state.cards.cards);
-    /*const {id} = useParams();*/
 
     const [card, setCard] = useState<CardType>({
         answer: '',
@@ -84,7 +79,6 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
             setCard(getCard(cards)!)
         }
 
-
         return () => {
             console.log('LearnContainer useEffect off');
         }
@@ -97,7 +91,7 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
             // dispatch
             setCard(getCard(cards)!);
         } else {
-            return <div>this was the last card</div>
+            return
         }
     }
 
@@ -109,6 +103,11 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
                 e.stopPropagation()
             }}>
                 Try your knowledge!
+                {cards.length === 0
+                    ?
+                    <div>there are no cards here yet</div>
+                    :
+                <>
                 <div>{card.question}</div>
                 <div>
                     <SuperButton onClick={() => setIsChecked(true)}>check</SuperButton>
@@ -125,6 +124,8 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
                         <div><SuperButton onClick={onNext}>next</SuperButton></div>
                     </>
                 )}
+                </>
+                }
             </div>
         </div>
         , document.body)
