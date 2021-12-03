@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {AppThunkType} from "../../bll/store";
-import {loginAPI, LoginResponseType, UserData} from "../../api/login-api";
+import {loginAPI, LoginResponseType, IUserData} from "../../api/login-api";
 import {setAppStatusAC, setAppStatusACType} from "../../app/app-reducer";
 import {setErrorAC, setErrorACType} from "../password/password-reducer";
 
@@ -49,7 +49,7 @@ type AllACType = setUserDataACType | setAppStatusACType | setErrorACType | setPr
 export const setUserData = (data: UserDataType) => ({type: 'profileReducer/SET_USER_DATA', data} as const)
 export const setProfileData = (data: LoginResponseType) => ({type: 'profileReducer/SET_PROFILE_DATA', data} as const )
 //* Thunk Creator ---------------------------------------------------------------->
-export const changeUserData = (userData: UserData): AppThunkType => async (dispatch: Dispatch<AllACType>) => {
+export const changeUserData = (userData: IUserData): AppThunkType => async (dispatch: Dispatch<AllACType>) => {
     try {
         dispatch(setAppStatusAC("loading"))
         let response = await loginAPI.changeData(userData)

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {FormEvent, useEffect, useState} from "react";
 import SuperButton from "../../../elements/button/SuperButton";
 import {CardType} from "../../../../api/cards-api";
 import {useDispatch} from "react-redux";
@@ -6,6 +6,7 @@ import {useAppSelector} from "../../../../bll/store";
 import ReactDOM from "react-dom";
 import s from './learningPageModal.module.css'
 import {getCards} from "../../../../features/cards/cards-reducer";
+import {setGradeTC} from "../../../../features/cardPacks/cardPacks-reducer";
 
 type ModalPropsType = {
     isOpen: boolean
@@ -44,6 +45,7 @@ const getCard = (cards: CardType[]) => {
 export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => {
 
     const [isChecked, setIsChecked] = useState<boolean>(false);
+    const [isGraded, setIsGraded] = useState(false)
     const [first, setFirst] = useState<boolean>(true);
     const cards = useAppSelector<CardType[]>(state => state.cards.cards);
 
@@ -85,6 +87,7 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
     }, [dispatch, packId, cards, first]);
 
     const onNext = () => {
+        setIsGraded(false)
         setIsChecked(false);
 
         if (cards.length > 0) {
@@ -93,6 +96,37 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
         } else {
             return
         }
+    }
+
+    const setGradeHandler = (e: FormEvent<HTMLButtonElement>) => {
+        setIsGraded(true)
+        let grade = 0
+        if (e.currentTarget.textContent === grades[0]) {
+            grade = 0.7
+        }
+        if (e.currentTarget.textContent === grades[1]) {
+            grade = 1.4
+        }
+        if (e.currentTarget.textContent === grades[2]) {
+            grade = 2.8
+        }
+        if (e.currentTarget.textContent === grades[3]) {
+            grade = 3.5
+        }
+        if (e.currentTarget.textContent === grades[4]) {
+            grade = 4.2
+        }
+        if (e.currentTarget.textContent === grades[5]) {
+            grade = 4.9
+        }
+        if (e.currentTarget.textContent === grades[6]) {
+            grade = 5.6
+        }
+        if (JSON.stringify(e.currentTarget.childNodes[0]) == grades[7]) {
+            grade = 6.3
+        }
+        dispatch(setGradeTC(grade, card._id))
+
     }
 
     if (!isOpen) return null;
@@ -110,15 +144,15 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
                 <>
                 <div>{card.question}</div>
                 <div>
-                    <SuperButton onClick={() => setIsChecked(true)}>check</SuperButton>
+                    <SuperButton onClick={() => setIsChecked(true)} disabled={isChecked}>check</SuperButton>
                 </div>
                 {isChecked && (
                     <>
                         <div>{card.answer}</div>
                         <div className={s.buttons}>
                             {grades.map((grade, i) => (
-                                <SuperButton key={'grade-' + i} onClick={() => {
-                                }}>{grade}</SuperButton>
+                                <SuperButton key={'grade-' + i} onClick={setGradeHandler}
+                                             disabled={isGraded}>{grade}</SuperButton>
                             ))}
                         </div>
                         <div><SuperButton onClick={onNext}>next</SuperButton></div>
