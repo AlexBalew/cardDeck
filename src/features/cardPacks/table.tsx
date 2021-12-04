@@ -33,7 +33,7 @@ export const CardPacksTable = React.memo(() => {
 
     useEffect(() => {
         dispatch(getPacksTC())
-        console.log('Main useEffect(table)')
+        /*console.log('Main useEffect(table)')*/
     }, [pageCount, searchedName, settingSlider.min, settingSlider.max])
 
 

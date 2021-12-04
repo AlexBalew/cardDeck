@@ -69,7 +69,7 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
 
     useEffect(() => {
 
-        console.log('LearnContainer useEffect');
+       /* console.log('LearnContainer useEffect');*/
 
         if (first) {
             dispatch(getCards(packId!));
@@ -81,7 +81,7 @@ export const LearningPageModal = ({isOpen, onClose, packId}: ModalPropsType) => 
         }
 
         return () => {
-            console.log('LearnContainer useEffect off');
+           /* console.log('LearnContainer useEffect off');*/
         }
     }, [dispatch, packId, cards, first]);
 

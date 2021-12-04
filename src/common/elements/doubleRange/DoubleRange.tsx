@@ -4,8 +4,6 @@ import {useDispatch} from "react-redux";
 import {setCardsCountAC} from "../../../features/cardPacks/cardPacks-reducer";
 import {useAppSelector} from "../../../bll/store";
 
-let test;
-
 type SuperDoubleRangePropsType = {
     value1: number
     value2: number
@@ -53,7 +51,7 @@ const SuperDoubleRange: React.FC<SuperDoubleRangePropsType> = React.memo((
 
     useEffect(() => {
         let searchTimer = setTimeout(() => dispatch(setCardsCountAC(value1, value2)), 1500)
-        console.log('DoubleRange useEffect')
+        /*console.log('DoubleRange useEffect')*/
         return () => clearTimeout(searchTimer)
     }, [value1, value2])
 
