@@ -5,7 +5,6 @@ import {Login} from '../features/login/login'
 import {Registration} from '../features/registration/registration'
 import {PasswordRestore} from "../features/password/passwordRestore";
 import {NewPassword} from "../features/password/newPassword";
-import {Profile} from "../features/profile/profile";
 
 export const PATH = {
     LOGIN: '/login',
@@ -14,7 +13,6 @@ export const PATH = {
     NEW_PASSWORD: '/new-password',
     NEW_PASSWORD_WITH_TOKEN: '/new-password/:token',
     NOT_FOUND: '/404',
-    PROFILE: '/profile',
 }
 
 function CardDeckRoutesUnauthorized() {
@@ -25,10 +23,8 @@ function CardDeckRoutesUnauthorized() {
                 <Route path={'/cardDeck'} element={<Navigate to={PATH.LOGIN}/>}/>
                 <Route path={'/'} element={<Navigate to={PATH.LOGIN}/>}/>
                 <Route path={PATH.LOGIN} element={<Login/>}/>
-                <Route path={PATH.PROFILE} element={<Profile/>}/>
                 <Route path={PATH.REGISTRATION} element={<Registration/>}/>
                 <Route path={PATH.RESTORE_PASSWORD} element={<PasswordRestore/>}/>
-              {/*  <Route path={PATH.NEW_PASSWORD} element={<NewPasswordWithoutToken/>}/>*/}
                 <Route path={PATH.NEW_PASSWORD_WITH_TOKEN} element={<NewPassword/>}/>
                 <Route path={PATH.NOT_FOUND} element={<Error404/>}/>
                 <Route path={'*'} element={<Navigate to={PATH.NOT_FOUND}/>}/>
