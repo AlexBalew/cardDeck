@@ -1,17 +1,18 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useRef, useState} from "react";
 import s from "./profile.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../bll/store";
 import {Navigate, useLocation} from "react-router-dom";
 import {PATH} from "../../app/Routes";
-import userDefaultImg from "../../assets/profile/userDefaultImg.png"
 import Preloader from "../../common/components/preloader/Preloader";
 import {initializeAppTC, RequestStatusType} from "../../app/app-reducer";
 import SuperEditableSpan from "../../common/elements/editableSpan/SuperEditableSpan";
 import {changeUserData} from "./profile-reducer";
+import userDefaultImg from "../../assets/profile/userDefaultImg.png"
 
 export const Profile = React.memo(() => {
     const dispatch = useDispatch()
+    const inRef = useRef<HTMLInputElement>(null);
 
     const isLoggedIn = useSelector<AppStateType, boolean>(state => state.login.isLoggedIn)
     const status = useSelector<AppStateType, RequestStatusType>(state => state.app.status)
@@ -19,24 +20,23 @@ export const Profile = React.memo(() => {
     const avatar = useSelector<AppStateType, string>(state => state.profile.avatar)
     const email = useSelector<AppStateType, string | null>(state => state.profile.email)
 
-    const [myName, setMyName] = useState('')
-    const [myAvatar, setMyAvatar] = useState<string | undefined>(undefined)
+    const [myName, setMyName] = useState<string>(name)
 
     const location = useLocation()
 
     useEffect(() => {
-        if(location.pathname === '/profile') {
+        if (location.pathname === '/profile') {
             dispatch(initializeAppTC())
         }
     }, [location])
 
-    useEffect(() => {
-        setMyName(name)
-        if (avatar) {
-            setMyAvatar(avatar)
-        }
+    // useEffect(() => {
+    //     setMyName(name)
+    //     if (avatar) {
+    //         setMyAvatar(avatar)
+    //     }
+    // }, [name, avatar])
 
-    }, [name, avatar])
     if (status === 'loading') {
         return <Preloader/>
     }
@@ -45,10 +45,24 @@ export const Profile = React.memo(() => {
         setMyName(e.currentTarget.value)
     }
     const setUserDataHandler = () => {
-        dispatch(changeUserData({name: myName, avatar: myAvatar}))
+        dispatch(changeUserData({name: myName, avatar: avatar}))
     }
     const changeImageHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setMyAvatar(e.currentTarget.value)
+
+        const reader = new FileReader();
+
+        const newFile = e.target.files && e.target.files[0]
+
+        reader.onloadend = () => {
+
+            dispatch(changeUserData({name: myName, avatar: reader.result}))
+        };
+        if (newFile) {
+            reader.readAsDataURL(newFile)
+        }
+        // dispatch(changeUserData({name: myName, avatar: myAvatar}))
+
+
     }
 
     if (!isLoggedIn) {
@@ -62,10 +76,12 @@ export const Profile = React.memo(() => {
                     <div className={s.profileAvatar}>
                         <img src={avatar ? avatar : userDefaultImg} alt="ava"/>
                     </div>
-                    <label>Change image <input type="text"
-                                               onChange={changeImageHandler}
-                                               onBlur={setUserDataHandler}/></label>
-                    {/*<div className={s.profileName}>{myName}</div>*/}
+                    {/*<label>Change image <input type="text"*/}
+                    {/*                           onChange={changeImageHandler}*/}
+                    {/*                           onBlur={setUserDataHandler}/></label>*/}
+                    <input type="file" ref={inRef} style={{display: 'none'}} onChange={changeImageHandler}/>
+                    <button onClick={() => inRef && inRef.current && inRef.current.click()}>add</button>
+
                     <SuperEditableSpan className={s.profileName}
                                        value={myName}
                                        onChange={changeNameHandle}

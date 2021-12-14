@@ -23,7 +23,7 @@ export type LoginUserType = {
 
 export interface IUserData {
     name?: string
-    avatar?: string
+    avatar?: string | ArrayBuffer | null
 }
 
 export const loginAPI = {
