@@ -22,7 +22,6 @@ export const CardPacksTable = React.memo(() => {
 
     const packs = useAppSelector<CardPackType[]>(state => state.packs.cardPacks)
     const pageCount = useAppSelector<number>(state => state.packs.pageCount)
-    //const page = useAppSelector<number>(state => state.packs.page)
     const myId = useAppSelector<string>(state => state.app._id)
     const searchedName = useAppSelector<string>(state => state.packs.searchedName)
     const settingSlider = useAppSelector<{ min: number; max: number }>(state => state.packs.settingSlider)
@@ -33,7 +32,6 @@ export const CardPacksTable = React.memo(() => {
 
     useEffect(() => {
         dispatch(getPacksTC())
-        /*console.log('Main useEffect(table)')*/
     }, [pageCount, searchedName, settingSlider.min, settingSlider.max])
 
 
@@ -54,9 +52,9 @@ export const CardPacksTable = React.memo(() => {
                         const onUpdatePack = (newPackName?: string) => {
                             dispatch(updatePackTC(pack._id, newPackName))
                         }
-                    const onBackLinkNameClick = () => {
-                        dispatch(setPackNameAC(pack.name))
-                    }
+                        const onBackLinkNameClick = () => {
+                            dispatch(setPackNameAC(pack.name))
+                        }
                         return <tr className={s.dataRow} key={pack._id}>
                             <td>
                                 <NavLink to={PATH.CARDS + `/${pack._id}`}
@@ -81,8 +79,8 @@ export const CardPacksTable = React.memo(() => {
                                                           onEdit={onUpdatePack}
                                     />
                                     {(openL === pack._id) && <LearningPageModal isOpen={openL === pack._id}
-                                                                              onClose={() => setOpenL('')}
-                                                                              packId={pack._id}
+                                                                                onClose={() => setOpenL('')}
+                                                                                packId={pack._id}
                                     />}
                                     <td>
                                         <SuperButton
@@ -110,8 +108,8 @@ export const CardPacksTable = React.memo(() => {
                                 :
                                 <>
                                     {openL === pack._id ? <LearningPageModal isOpen={openL === pack._id}
-                                                                              onClose={() => setOpenL('')}
-                                                                              packId={pack._id}
+                                                                             onClose={() => setOpenL('')}
+                                                                             packId={pack._id}
                                     /> : null
                                     }
                                     <td>

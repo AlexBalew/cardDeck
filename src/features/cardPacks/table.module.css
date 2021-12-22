@@ -1,5 +1,6 @@
 .mainContainer {
-
+    display: inherit;
+    overflow-x: auto
 }
 
 table thead, table tbody tr {

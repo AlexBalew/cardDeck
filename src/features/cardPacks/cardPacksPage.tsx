@@ -45,34 +45,17 @@ export const CardPacksPage = React.memo(() => {
         }
     }
 
-
     const onPageChange = (page: number) => {
         dispatch(getPacksTC({page}))
     }
 
     const onGetPacks = () => {
-        //dispatch(setCardsCountAC(0, 103))
-        //dispatch(getPacksTC())
-        //dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
-        //setValue1(minCardsCount)
-        //setValue2(maxCardsCount)
         setValue3([minCardsCount, maxCardsCount])
         dispatch(getPacksTC({page: 1, min: 0, max: 103}))
-        /*console.log('setter: allPacks')
-        console.log('minCardsCount: ', minCardsCount)
-        console.log('maxCardsCount: ', maxCardsCount)*/
     }
 
     const onGetMyPacks = () => {
-        //dispatch(setCardsCountAC(minCardsCount, maxCardsCount))
-        //dispatch(setCurrentPageAC(1))
-        /* setValue1(minCardsCount)
-         setValue2(maxCardsCount)
-         setValue3([minCardsCount, maxCardsCount])*/
         dispatch(getPacksTC({myId, page: 1}))
-        /*console.log('setter: myPacks')
-        console.log('minCardsCount: ', minCardsCount)
-        console.log('maxCardsCount: ', maxCardsCount)*/
     }
 
     useEffect(() => {
@@ -83,8 +66,6 @@ export const CardPacksPage = React.memo(() => {
     if (!isLoggedIn) {
         return <Navigate to={PATH.LOGIN}/>
     }
-
-    //console.log('cardPacksPage isLoggedIn: ', isLoggedIn)
 
     return (
 
@@ -108,14 +89,14 @@ export const CardPacksPage = React.memo(() => {
             </div>
             <div className={s.packsContainer}>
                 <h1>Packs</h1>
-                <div className={s.addNewPackInput}><input style={{border: '1px solid #C7A5A5'}}
+                <div className={s.addNewPackInput}><input style={{border: '1px solid #C7A5A5', width: '200px'}}
                                                           onChange={onSetNewSearchName}
                                                           value={searchName}
                                                           placeholder={'search for pack names here'}/>
                 </div>
                 <div className={s.addNewPackButton}>
                     <SuperButton onClick={() => setOpen(true)
-                       }>add new pack</SuperButton>
+                    }>add new pack</SuperButton>
                 </div>
                 <TitleModal
                     message="Create a new pack of cards"
