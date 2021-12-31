@@ -34,7 +34,6 @@ export const CardPacksTable = React.memo(() => {
         dispatch(getPacksTC())
     }, [pageCount, searchedName, settingSlider.min, settingSlider.max])
 
-
     return (
         <div className={s.mainContainer}>
             <table className={s.table}>

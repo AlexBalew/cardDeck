@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {CardPacksTable} from "./table";
 import s from './cardPacksPage.module.css';
-import Pagination from "../../common/components/pagination/pagination";
+import {Pagination} from "../../common";
 import SuperButton from "../../common/elements/button/SuperButton";
 import {useDispatch, useSelector} from "react-redux";
 import {getPacksTC, setPageCountAC, setSearchedNameAC} from "./cardPacks-reducer";

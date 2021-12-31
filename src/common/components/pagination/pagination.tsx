@@ -11,7 +11,7 @@ type PaginationPropsType = {
 }
 
 
-let Pagination = React.memo(({numberOfPagesInOnePortion, onPageChange}: PaginationPropsType) => {
+export const Pagination = React.memo(({numberOfPagesInOnePortion, onPageChange}: PaginationPropsType) => {
 
     let dispatch = useDispatch()
     let [portionNumber, setPortionNumber] = useState<number>(1)
@@ -107,5 +107,3 @@ let Pagination = React.memo(({numberOfPagesInOnePortion, onPageChange}: Paginati
         </div>
     )
 })
-
-export default Pagination
